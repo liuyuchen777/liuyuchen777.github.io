@@ -1,4 +1,8 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ERROR 1698 (28000): Access denied for user &#x27;root&#x27;@&#x27;localhost&#x27;</title><style>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>ERROR 1698 (28000): Access denied for user &#x27;root&#x27;@&#x27;localhost&#x27;</title>
+	<style>
 /* webkit printing magic: print all background colors */
 html {
 	-webkit-print-color-adjust: exact;
@@ -624,7 +628,12 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="35aba2d3-8a50-43ca-bf4c-19b6655ffd6a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎭</span></div><h1 class="page-title">ERROR 1698 (28000): Access denied for user &#x27;root&#x27;@&#x27;localhost&#x27;</h1></header><div class="page-body"><hr id="24e9b7d0-4aa4-4815-b1de-7c3968469fc6"/><p id="b97b26be-f0cd-45ac-be5d-5266808819d1" class="">The final error when I install MySQL on WSL ubuntu</p><pre id="a10d6ecd-07fc-464e-b9df-83a3e5754536" class="code"><code># sudo is work
+	</style>
+</head>
+<body>
+	<article id="35aba2d3-8a50-43ca-bf4c-19b6655ffd6a" class="page sans">
+		<header><div class="page-header-icon undefined"><span class="icon">🎭</span></div><h1 class="page-title">ERROR 1698 (28000): Access denied for user &#x27;root&#x27;@&#x27;localhost&#x27;</h1></header><div class="page-body"><hr id="24e9b7d0-4aa4-4815-b1de-7c3968469fc6"/><p id="b97b26be-f0cd-45ac-be5d-5266808819d1" class="">The final error when I install MySQL on WSL ubuntu</p><pre id="a10d6ecd-07fc-464e-b9df-83a3e5754536" class="code">
+		<code># sudo is work
 sudo mysql -u root -p -h localhost
 # but none without sudo
 mysql -u root -p -h localhost</code></pre><h1 id="0201a3eb-b980-4d9a-8367-9a8b0435c9d6" class="">reason</h1><p id="b40dea6d-4282-4880-b866-779385b5482d" class="">Some systems like Ubuntu, mysql is using by default the <a href="https://dev.mysql.com/doc/mysql-security-excerpt/5.5/en/socket-pluggable-authentication.html">UNIX auth_socket plugin</a>.</p><p id="aede7133-bbbb-4dce-9339-6910fa30889b" class="">Basically means that: <em>db_users using it, will be &quot;auth&quot; by </em><em><strong>the system user credentias.</strong></em> You can see if your <code>root</code> user is set up like this by doing the following:</p><pre id="83d64840-a133-4778-a2af-79016a5b53fd" class="code"><code>$ sudo mysql -u root # I had to use &quot;sudo&quot; since is new installation
