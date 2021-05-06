@@ -2,9 +2,9 @@
  * @Author: Liu Yuchen
  * @Date: 2021-04-28 21:28:26
  * @LastEditors: Liu Yuchen
- * @LastEditTime: 2021-05-03 19:55:23
+ * @LastEditTime: 2021-05-06 03:17:15
  * @Description: 
- * @FilePath: \liuyuchen777.github.io\blog\blog5\blog5.html
+ * @FilePath: /liuyuchen777.github.io/blog/blog5/blog5.html
  * @GitHub: https://github.com/liuyuchen777
 -->
 <!DOCTYPE html>
@@ -173,6 +173,25 @@
                       </div>
                     </div>
                     <!-- You May Also Like End -->
+
+                    <!-- comment start -->
+                    <div id="gitalk-container"></div> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+                    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> 
+                    <script>
+                        var gitalk  = new Gitalk ({
+                            id: window.location.pathname,   // Ensure uniqueness and length less than 50
+                            clientID: '8e1d9ed9c65d6df32019',
+                            clientSecret: '4f446e929381fcfe6e983af0485224ea2edd2553',
+                            repo: 'liuyuchen777.github.io',
+                            owner: 'liuyuchen777',
+                            admin: ['liuyuchen777'],
+                            distractionFreeMode: false  // Facebook-like distraction free mode
+                        })
+                        gitalk.render('gitalk-container')
+                    </script> 
+                    </div>
+                    <!-- comment end -->
+                    
                   </div>    
                 </div>
               </div>
