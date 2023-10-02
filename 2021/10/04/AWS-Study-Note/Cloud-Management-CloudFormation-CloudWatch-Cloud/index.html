@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="IaC: CloudFormationInfrastructure as Code A templating Language that defines AWS resources to be provisioned. Automating the creation of resource via code. Intro to CloudFormation Template FormatsWwo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Cloud Management: CloudFormation, CloudWatch, CloudTrail, ConfigRule">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Cloud-Management-CloudFormation-CloudWatch-Cloud/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="IaC: CloudFormationInfrastructure as Code A templating Language that defines AWS resources to be provisioned. Automating the creation of resource via code. Intro to CloudFormation Template FormatsWwo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2022.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.658Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Cloud Management: CloudFormation, CloudWatch, CloudTrail, ConfigRule - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Cloud Management: CloudFormation, CloudWatch, CloudTrail, ConfigRule">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Cloud Management: CloudFormation, CloudWatch, CloudTrail, ConfigRule</h1>
+            
+            <div class="markdown-body">
+              <h1 id="IaC-CloudFormation"><a href="#IaC-CloudFormation" class="headerlink" title="IaC: CloudFormation"></a>IaC: CloudFormation</h1><p>Infrastructure as Code</p>
+<p>A templating Language that defines AWS resources to be provisioned.</p>
+<p>Automating the creation of resource via code.</p>
+<h2 id="Intro-to-CloudFormation"><a href="#Intro-to-CloudFormation" class="headerlink" title="Intro to CloudFormation"></a>Intro to CloudFormation</h2><p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Template-Formats"><a href="#Template-Formats" class="headerlink" title="Template Formats"></a>Template Formats</h2><p>Wwo different formats:</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%201.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Template-Anatomy"><a href="#Template-Anatomy" class="headerlink" title="Template Anatomy"></a>Template Anatomy</h2><p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%202.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%203.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="AWS-Quick-Start"><a href="#AWS-Quick-Start" class="headerlink" title="AWS Quick Start"></a>AWS Quick Start</h2><p>AWS Quick Start are a collection of pre-built CloudFormation templates.</p>
+<p>Learning resource:</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%204.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="CloudFormation-Cheat-Sheet"><a href="#CloudFormation-Cheat-Sheet" class="headerlink" title="CloudFormation Cheat Sheet"></a>CloudFormation Cheat Sheet</h2><p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%205.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="CloudWatch"><a href="#CloudWatch" class="headerlink" title="CloudWatch"></a>CloudWatch</h1><p>A collection of monitoring services for logging, reacting and visualizing data</p>
+<p>AWS CloudWatch is a monitoring solution for your AWS resources.</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%206.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="CloudWatch-Logs"><a href="#CloudWatch-Logs" class="headerlink" title="CloudWatch Logs"></a>CloudWatch Logs</h2><p>Use to monitor, store and access your log files</p>
+<p>A Log Group is a collection of logs. Log files must belong to a log group.</p>
+<p>A Log in a Log Group is called a Log Stream.</p>
+<p>By default, logs are kept indefinitely and never expire.</p>
+<p>Most AWS service is integrated with CloudWatch Logs. Logging of services sometimes needs to be turned on or requires IAM permissions to write to CloudWatch Logs.</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%207.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="CloudWatch-Metrics"><a href="#CloudWatch-Metrics" class="headerlink" title="CloudWatch Metrics"></a>CloudWatch Metrics</h2><p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%208.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="CloudWatch-Events"><a href="#CloudWatch-Events" class="headerlink" title="CloudWatch Events"></a>CloudWatch Events</h2><p>Trigger an event based on a condition or on schedule</p>
+<p>event source (how to trigger the event) → targets (what to trigger)</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%209.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="CloudWatch-Custom-Metrics"><a href="#CloudWatch-Custom-Metrics" class="headerlink" title="CloudWatch Custom Metrics"></a>CloudWatch Custom Metrics</h2><p>Using AWS CLI or SDK you can create and publish your own custom metrics</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2010.png" srcset="/img/loading.gif" lazyload></p>
+<p>High Resolution Metrics</p>
+<p>When you publish a custom metric, you can define it as either standard resolution or higher resolution.</p>
+<p>High resolution lets you track under 1 minute down to 1 second.</p>
+<p>The higher resolution cost more.</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2011.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="CloudWatch-Alarms"><a href="#CloudWatch-Alarms" class="headerlink" title="CloudWatch Alarms"></a>CloudWatch Alarms</h2><p>Triggers a notifications based on metrics which breach a defined threshold</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2012.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="CloudWatch-Dashboard"><a href="#CloudWatch-Dashboard" class="headerlink" title="CloudWatch Dashboard"></a>CloudWatch Dashboard</h2><p>Create custom dashboards from CloudWatch Metrics</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2013.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Availiability-of-Data"><a href="#Availiability-of-Data" class="headerlink" title="Availiability of Data"></a>Availiability of Data</h2><p>How often CW will collect and make available data</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2014.png" srcset="/img/loading.gif" lazyload></p>
+<p>Basic is free, detailed cost money</p>
+<h2 id="Agent-amp-Host-Level-Metrics"><a href="#Agent-amp-Host-Level-Metrics" class="headerlink" title="Agent &amp; Host Level Metrics"></a>Agent &amp; Host Level Metrics</h2><p>Some metric you might think are tracked by default for EC2 instances are not, and require install the CloudWatch Agent.</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2015.png" srcset="/img/loading.gif" lazyload></p>
+<p>CW will track at Host Level by default:</p>
+<ul>
+<li>CPU Usage</li>
+<li>Network Usage</li>
+<li>Disck Usage</li>
+<li>Status Check (Underlying Hypervisor status, Underlying EC2 instance status)</li>
+</ul>
+<p>Following require the Agent to get detailed metrics for:</p>
+<ul>
+<li>Memory utilization</li>
+<li>Disk swap utilization</li>
+<li>Disk space utilization</li>
+<li>Page file utilization</li>
+<li>Log collection</li>
+</ul>
+<h2 id="CW-Cheat-Sheet"><a href="#CW-Cheat-Sheet" class="headerlink" title="CW Cheat Sheet"></a>CW Cheat Sheet</h2><p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2016.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="CloudTrail"><a href="#CloudTrail" class="headerlink" title="CloudTrail"></a>CloudTrail</h1><p>Logs API calls between AWS services. When you need to know who to blame.</p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>AWS CT is a service that enables governance, compliance, operational auditing, and risk auditing of your AWS account.</p>
+<p>AWS CT is used to monitor API calls and Actions made on AWS account.</p>
+<p>Easily identify which users and accounts made the call to AWS, ex:</p>
+<ul>
+<li>Where Source IP address</li>
+<li>When EventTime</li>
+<li>Who User, UserAgent</li>
+<li>What Region, Resource, Action</li>
+</ul>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2017.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Event-History"><a href="#Event-History" class="headerlink" title="Event History"></a>Event History</h2><p>CT is already logging by default and will collect logs for last 90 days via Event History</p>
+<p>If you need more than 90 days, you need to create a Trail.</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2018.png" srcset="/img/loading.gif" lazyload></p>
+<p>Trail are output to S3 and do not have GUI like Event History. To analyze a Trail you’d have to use Amazon Athena.</p>
+<h2 id="Trail-Options"><a href="#Trail-Options" class="headerlink" title="Trail Options"></a>Trail Options</h2><p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2019.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="CloudTrail-to-CloudWatch"><a href="#CloudTrail-to-CloudWatch" class="headerlink" title="CloudTrail to CloudWatch"></a>CloudTrail to CloudWatch</h2><p>CT can be set to deliver to CW log.</p>
+<p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2020.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Management-Event-and-Data-Event"><a href="#Management-Event-and-Data-Event" class="headerlink" title="Management Event and Data Event"></a>Management Event and Data Event</h2><p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2021.png" srcset="/img/loading.gif" lazyload></p>
+<p>90% events in CT is management events</p>
+<p>new insight event: Identify unusual activity, errors, or user behavior in your account.</p>
+<h2 id="CT-Cheat-Sheet"><a href="#CT-Cheat-Sheet" class="headerlink" title="CT Cheat Sheet"></a>CT Cheat Sheet</h2><p><img src="/img/AWS/Cloud-Management-CloudFormation-CloudWatch-Cloud/Untitled%2022.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="AWS-System-Manager"><a href="#AWS-System-Manager" class="headerlink" title="AWS System Manager"></a>AWS System Manager</h1><h2 id="AWS-Systems-Manager-Parameter-Store"><a href="#AWS-Systems-Manager-Parameter-Store" class="headerlink" title="AWS Systems Manager Parameter Store"></a>AWS Systems Manager Parameter Store</h2><p>Parameter Store, a capability of AWS Systems Manager, provides secure, hierarchical storage for <strong>configuration data management and secrets management</strong>. You can store data such as passwords, database strings, Amazon Machine Image (AMI) IDs, and license codes as parameter values. You can store values as plain text or encrypted data. You can reference Systems Manager parameters in your scripts, commands, SSM documents, and configuration and automation workflows by using the unique name that you specified when you created the parameter.</p>
+<h1 id="Config-Rule"><a href="#Config-Rule" class="headerlink" title="Config Rule"></a>Config Rule</h1><p>An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS Config managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/AWS-CP-Study-Note/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS CP Study Note] Intro</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Computing/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Computing: EC2, ELB, AMI, ASG</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Cloud-Management-CloudFormation-CloudWatch-Cloud/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Cloud-Management-CloudFormation-CloudWatch-Cloud/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

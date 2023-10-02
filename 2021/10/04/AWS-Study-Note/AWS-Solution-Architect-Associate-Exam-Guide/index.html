@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="写在前面首先分享自己记的SAA-C02备考笔记以及各种备考资源，刷题的时候可以做以参考。 AWS SAA Note 我去年写过一篇关于AWS的入门资格AWS Cloud Practitioner的考试心得，时隔快一年，我又抽出时间考了这个AWS认证中可能是最多人考的资格——AWS Solution Architect: Associate（统称SAA）。SAA非常像云从业者的超集，考过SAA，云从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS] Solution Architect: Associate考试指南">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/AWS-Solution-Architect-Associate-Exam-Guide/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="写在前面首先分享自己记的SAA-C02备考笔记以及各种备考资源，刷题的时候可以做以参考。 AWS SAA Note 我去年写过一篇关于AWS的入门资格AWS Cloud Practitioner的考试心得，时隔快一年，我又抽出时间考了这个AWS认证中可能是最多人考的资格——AWS Solution Architect: Associate（统称SAA）。SAA非常像云从业者的超集，考过SAA，云从">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-3ab822e6825ff3e178b103f27827774e_b.png">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-6d3f2bcfa096ad7608202b43e9251ee4_b.png">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-24bcf1c4c3d5b7971da539af9d8de9f6_b.png">
+<meta property="article:published_time" content="2021-10-04T01:23:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.658Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic3.zhimg.com/v2-3ab822e6825ff3e178b103f27827774e_b.png">
+  
+  
+  <title>[AWS] Solution Architect: Associate考试指南 - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS] Solution Architect: Associate考试指南">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 10:23" pubdate>
+        October 4, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS] Solution Architect: Associate考试指南</h1>
+            
+            <div class="markdown-body">
+              <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>首先分享自己记的SAA-C02备考笔记以及各种备考资源，刷题的时候可以做以参考。</p>
+<p><a href="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/AWS-SAA-C02/">AWS SAA Note</a></p>
+<p>我去年写过一篇关于AWS的入门资格AWS Cloud Practitioner的考试心得，时隔快一年，我又抽出时间考了这个AWS认证中可能是最多人考的资格——AWS Solution Architect: Associate（统称SAA）。SAA非常像云从业者的超集，考过SAA，云从业者资格也失去了意义了。</p>
+<p><a href="https://liuyuchen777.github.io/2021/10/04/AWS-Cloud-Practitioner-Exam-Guide/">AWS CP Exam Guide</a></p>
+<p>关于这两个考试的区别， 我个人认为有过任何开发经验的同学最好都直接报SAA的考试，真的不难。而对于云计算，以及前端后端数据库API等概念都不清楚的同学，云从业者对你会是一个非常好的开始。</p>
+<p>另外我觉得云从业者也在日本想找IT相关工作的文科生同学的很好的一个证明，你简历上写这个证找IT相关工作的时候，人事至少会觉得你很认真地在考虑这件事情。</p>
+<p>通过任何一门AWS考试，都会送给你下一次注册考试的半价优惠券。云从业是是100美金，其他所有考试都是150美金，如果你实在没信心先考云从业者再考SAA的话，花的钱上来说是差不太多的。唯一的考量就是时间成本了。</p>
+<h2 id="关于AWS认证"><a href="#关于AWS认证" class="headerlink" title="关于AWS认证"></a>关于AWS认证</h2><p><img src="https://pic3.zhimg.com/v2-3ab822e6825ff3e178b103f27827774e_b.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>AWS认证体系</p>
+<p>AWS的认证体系如上，在入门的云从业者之后，是三个不同的发展方向：架构师、系统管理员和开发者。不同的类别侧重点也不一样，developer更多的是如何对一些具体的服务（EC2、DynamoDB等）的配置，CLI的内容也会占很大的比重；operations则是侧重安全配置（Security Group、IAM等）以及系统配置等；architect的题目则是给定一个客户需求，选择那些服务的组合去满足客户的需求。</p>
+<p>就我个人的观点来说，architect学到的应该是最通用的技能，不论是对于开发者、DevOps以及PM，都是价值的基础。实际上architect也是考的人最多的。developer的很多知识过于琐碎，日常真的开发的时候也是直接搜文档。operations则没有具体了解过。</p>
+<p>其他speciality的资格就按照自己需求去考就好了。</p>
+<p>FreeCodeCamp的SAA教程里还有一张这样的图以供参考：</p>
+<p><img src="https://pic1.zhimg.com/v2-6d3f2bcfa096ad7608202b43e9251ee4_b.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>YouTube@FreeCodeCamp</p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>SAA主要包含以下4方面的内容，考试大纲和分数占比如下：</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Domain</span> <span class="hljs-number">1</span>: Design Resilient Architectures <span class="hljs-number">30</span>%
+<span class="hljs-attribute">1</span>.<span class="hljs-number">1</span> Design a multi-tier architecture solution
+<span class="hljs-attribute">1</span>.<span class="hljs-number">2</span> Design highly available and/or fault-tolerant architectures
+<span class="hljs-attribute">1</span>.<span class="hljs-number">3</span> Design decoupling mechanisms using AWS services
+<span class="hljs-attribute">1</span>.<span class="hljs-number">4</span> Choose appropriate resilient storage 
+<span class="hljs-attribute">Domain</span> <span class="hljs-number">2</span>: Design High-Performing Architectures <span class="hljs-number">28</span>%
+<span class="hljs-attribute">2</span>.<span class="hljs-number">1</span> Identify elastic and scalable compute solutions for a workload
+<span class="hljs-attribute">2</span>.<span class="hljs-number">2</span> Select high-performing and scalable storage solutions for a workload
+<span class="hljs-attribute">2</span>.<span class="hljs-number">3</span> Select high-performing networking solutions for a workload
+<span class="hljs-attribute">2</span>.<span class="hljs-number">4</span> Choose high-performing database solutions for a workload
+<span class="hljs-attribute">Domain</span> <span class="hljs-number">3</span>: Design Secure Applications and Architectures <span class="hljs-number">24</span>%
+<span class="hljs-attribute">3</span>.<span class="hljs-number">1</span> Design secure access to AWS resources
+<span class="hljs-attribute">3</span>.<span class="hljs-number">2</span> Design secure application tiers
+<span class="hljs-attribute">3</span>.<span class="hljs-number">3</span> Select appropriate data security options
+<span class="hljs-attribute">Domain</span> <span class="hljs-number">4</span>: Design Cost-Optimized Architectures <span class="hljs-number">18</span>%
+<span class="hljs-attribute">4</span>.<span class="hljs-number">1</span> Identify cost-effective storage solutions
+<span class="hljs-attribute">4</span>.<span class="hljs-number">2</span> Identify cost-effective compute and database services
+<span class="hljs-attribute">4</span>.<span class="hljs-number">3</span> Design cost-optimized network architectures</code></pre></div>
+
+<p>考试时间是130分钟，总共65道题。其中50道题是计分题目，15道题是新题目，混在考试中为了判断难度是否合适，不计入分数。当然你也不知道那些题目是计分题目，所以对你来说也就是65道题，每题2分钟了。</p>
+<p>总分1000分，720分即可通过。一道题200分，50道计分题，36道通过</p>
+<p>通过AWS认证的考试合作伙伴可以预约在家考试以及到考试中心进行考试，考试中心在全国主要城市都有，甚至在西安都有超过5家，遍布全城。</p>
+<p>机考现场出分，点了提交后立马能知道结果，非常令人愉悦。</p>
+<p>考试形式全部是选择题，包含单选和多个选项选两个。个人经验来说，单选是占绝大多数的（大概9：1）。</p>
+<p>全部以选择题为形式这一点来说，难度上确实难不到哪里去了。并且很多题非常套路，后面我会详细说。对于我这种一路国内应试教育上来的小镇做题家来说，不成难度。</p>
+<p>SAA去年十月之前是可以选择报C02或者是C01的，C01是老一版的考试。现在的时间点就只有C02可以报了。顺便附上C01的大纲，很有意思可以对照，看一看对于AWS官方的视点来说哪些部分更重要了。</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">design</span> resilient architectures <span class="hljs-number">34</span>%
+<span class="hljs-attribute">specify</span> secure applications and architectures <span class="hljs-number">26</span>%
+<span class="hljs-attribute">design</span> cost-optimized architectures <span class="hljs-number">10</span>%
+<span class="hljs-attribute">define</span> operationally-excellent architectures <span class="hljs-number">6</span>%</code></pre></div>
+
+<p>备考时间来说的话，有以下建议：</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Developer</span> <span class="hljs-number">1</span> month
+
+<span class="hljs-attribute">No</span> Experience <span class="hljs-number">1</span>-<span class="hljs-number">2</span> months
+
+<span class="hljs-attribute">Cloud</span> Engineer <span class="hljs-number">20</span> hours</code></pre></div>
+
+<p>对于0经验的人来说：第一个月过一过教程，自己上手做一些实验；第二个月自己做做题，知识点查漏补缺。</p>
+<p>对于工作中常用AWS的工程师来说，确实20个小时做做题看看白皮书就完全够了。 </p>
+<h2 id="备考资源"><a href="#备考资源" class="headerlink" title="备考资源"></a>备考资源</h2><p>我备考的全部资源都整理在下面的链接了：</p>
+<p><a href="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/AWS-SAA-C02/">AWS SAA Note</a></p>
+<p>因为我在国外，访问鸿鹄慢得令人发指，这次备考没怎么用。如果在国内的话还是可以有效利用一下的。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>我去年刚考云从业者的时候，大部分知识点也是死记硬背，以及看着例题发挥自己的做题技巧。今年这一年自己也在学一些开发流程，在企业也是实习过之后，再考SAA的时候更多的时候是看看白皮书规范自己开发的范式，轻松了许多。</p>
+<p>同时我也建议，专注于过程而不是结果。边看白皮书或者视频教程，边跟着在AWS Console做做实验，心情好了给个人博客买个域名，放到S3上托管，这才是更好的学习方式。题做得不错，拿到了资格，实操上什么也不会也是没有价值的。</p>
+<blockquote>
+<p>你的目标应该是提高技能，而不是取得某种结果。 Heidi Grant Halvorson博士做了一项研究，她让两组人解决各种问题。第一组被告知得分尽可能高。第二组被告知将问题视为学习机会。结果令人惊讶。第一组渐渐感到沮丧，而第二组坚持并解决了更多问题。通过专注于掌握知识，你会将遇到的困难和时间上紧迫视为有助于你成长的要素。反之，以结果为导向的心态，会把遇到的问题视为阻碍，并渐渐让你感到气馁。更重要的是，如果你专注于掌握，你会看到持续的进步。每次当你阅读一个新段落或解决一个新问题时，你都在提高自己的技能。这种持续不断的满足令人难以置信。 因此，下次你在上课或练习面试时，请专注于变得更好，而不是通过考试或获得录取通知书。</p>
+</blockquote>
+<p>另外，单纯以题目来说，充满着套路：</p>
+<ol>
+<li>提到CPU时常占用率过高，客户希望保证性能和cost，就一套ALB&#x2F;NLB+ASG就可以了。</li>
+<li>提到S3或者DynamoDB的访问希望从VPC内部走，直接Gateway Endpoint就行了。</li>
+<li>提到服务全球客户就CloudFront。</li>
+<li>提到不希望管理自己的计算单元，就往serverless的那几个上靠就行了。</li>
+<li>etc</li>
+</ol>
+<p>由于我在日本，我个人觉得这个证还是蛮有用的。因为日本新卒（应届生）找工作，投ES（简历）非常玄学，再好的学校简历都用可能给你刷了。但你有这个证，人事一般会抱着这个小伙子有点意思，进面试先聊聊吧的心情，给你保过去简历关。还挺好的。</p>
+<p>拿到Badge之后，建议发到LinkedIn的<a target="_blank" rel="noopener" href="https://www.linkedin.com/groups/6814264/">AWS Certified Global Community</a>。我收获了领英点赞最多的一条动态。</p>
+<p><img src="https://pic3.zhimg.com/v2-24bcf1c4c3d5b7971da539af9d8de9f6_b.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>成年之后能如此廉价获取成就感的方式确实不多，诸位有兴趣可以花些看电影刷题打游戏的时间去试一试。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/How-to-land-job-in-Big-Tech-when-you-are-still-at-school/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何在一流的科技企业找到实习？---当你还在学校（翻译）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/AWS-Solution-Architect-Associate-Exam-Guide/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/AWS-Solution-Architect-Associate-Exam-Guide/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="Elastic BeanstalkLike Heroku IntroQuick Deploy and manage web-apps on AWS without worrying about infrastructure The Heroku of AWS. Choose a platform, upload your code and it runs with little worry for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Container &amp; Kubernetes">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Quick-Deploy/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="Elastic BeanstalkLike Heroku IntroQuick Deploy and manage web-apps on AWS without worrying about infrastructure The Heroku of AWS. Choose a platform, upload your code and it runs with little worry for">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled%207.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.659Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Quick-Deploy/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Container &amp; Kubernetes - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Container &amp; Kubernetes">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      5 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Container &amp; Kubernetes</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Elastic-Beanstalk"><a href="#Elastic-Beanstalk" class="headerlink" title="Elastic Beanstalk"></a>Elastic Beanstalk</h1><p>Like Heroku</p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p><strong>Quick Deploy and manage web-apps on AWS without worrying about infrastructure</strong></p>
+<p>The Heroku of AWS. Choose a platform, upload your code and it runs with little worry for developers about infrastructure knowledge. </p>
+<p><strong>Not recommended</strong> for “Production” applications.</p>
+<p><img src="/img/AWS/Quick-Deploy/Untitled.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Quick-Deploy/Untitled.png"></p>
+<h2 id="Elastic-Beanstalk-Cheat-Sheet"><a href="#Elastic-Beanstalk-Cheat-Sheet" class="headerlink" title="Elastic Beanstalk Cheat Sheet"></a>Elastic Beanstalk Cheat Sheet</h2><p><img src="/img/AWS/Quick-Deploy/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Quick-Deploy/Untitled%201.png"></p>
+<h1 id="EKS"><a href="#EKS" class="headerlink" title="EKS"></a>EKS</h1><p>Amazon Elastic Kubernetes Service (Amazon EKS)</p>
+<h2 id="Kubernetes-Architecture"><a href="#Kubernetes-Architecture" class="headerlink" title="Kubernetes Architecture"></a>Kubernetes Architecture</h2><p>master node</p>
+<p>etcd</p>
+<p>worker node</p>
+<p><img src="/img/AWS/Quick-Deploy/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Quick-Deploy/Untitled%202.png"></p>
+<h2 id="Amazon-EKS-Architecture"><a href="#Amazon-EKS-Architecture" class="headerlink" title="Amazon EKS Architecture"></a>Amazon EKS Architecture</h2><p><img src="/img/AWS/Quick-Deploy/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Quick-Deploy/Untitled%203.png"></p>
+<p><img src="/img/AWS/Quick-Deploy/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Quick-Deploy/Untitled%204.png"></p>
+<h1 id="ECS"><a href="#ECS" class="headerlink" title="ECS"></a>ECS</h1><p>Elastic Container Service (ECS)</p>
+<ul>
+<li>managed service to run Containers (Docker)</li>
+<li>serverless (with <strong>Fargate</strong>) and managed (with <strong>EC2</strong>) options</li>
+<li>supports auto scaling to handle variable volume</li>
+<li>cost-effective</li>
+<li>great for ad-hoc jobs or full scale service</li>
+</ul>
+<h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><p><img src="/img/AWS/Quick-Deploy/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Quick-Deploy/Untitled%205.png"></p>
+<p>can assign task on specific ECS cluster</p>
+<h2 id="ECR"><a href="#ECR" class="headerlink" title="ECR"></a>ECR</h2><p>EC2 Container Registry</p>
+<ul>
+<li>fully managed docker container registry</li>
+<li>store, manage and deploy container images</li>
+<li>integrated with amazon ECS</li>
+<li>encrypted, redundant and highly-available</li>
+<li>granular security permissions with AWS IAM</li>
+</ul>
+<p><img src="/img/AWS/Quick-Deploy/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Quick-Deploy/Untitled%206.png"></p>
+<h2 id="ECS-1"><a href="#ECS-1" class="headerlink" title="ECS"></a>ECS</h2><p>runs and manages docker-enabled applications across a logical group of EC2 instances</p>
+<p><img src="/img/AWS/Quick-Deploy/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Quick-Deploy/Untitled%207.png"></p>
+<h2 id="ECS-Cluster"><a href="#ECS-Cluster" class="headerlink" title="ECS Cluster"></a>ECS Cluster</h2><ul>
+<li>logical group of EC2 instances that you can place containers onto</li>
+<li>can utilize on-demand, spot or reserved EC2 instances</li>
+<li>can include different EC2 instance types region-specific</li>
+<li>EC2 instances are liked in a virtual private cloud (VPC)</li>
+</ul>
+<h2 id="ECS-Agent"><a href="#ECS-Agent" class="headerlink" title="ECS Agent"></a>ECS Agent</h2><ul>
+<li>manages the state of containers on a single EC2 instance</li>
+<li>how ECS communicates with the docker daemon on the EC2 instance</li>
+<li>must be on every EC2 instance in your ECS cluster</li>
+<li>included with the ECS-Optimized Amazon Machine Image (AMI)</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Other/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Other: Elastic Cache, Kinesis, AWS AD</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/S3/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] S3 & Snowball</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Quick-Deploy/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Quick-Deploy/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

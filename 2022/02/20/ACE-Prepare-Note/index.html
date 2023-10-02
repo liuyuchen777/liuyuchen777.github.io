@@ -1,0 +1,1461 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="Cloud IAM Identity and Access Management documentation  |  IAM Documentation  |  Google Cloud IAM: Provides granular access to resources, prevents unwanted access to other resources and adopts the sec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GCP Associate Cloud Engineer Prepara Note">
+<meta property="og:url" content="https://liuyuchen777.github.io/2022/02/20/ACE-Prepare-Note/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="Cloud IAM Identity and Access Management documentation  |  IAM Documentation  |  Google Cloud IAM: Provides granular access to resources, prevents unwanted access to other resources and adopts the sec">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2022.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2023.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2024.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2025.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2026.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/ACE/Untitled%2027.png">
+<meta property="article:published_time" content="2022-02-19T23:43:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.657Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="GCP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/ACE/Untitled.png">
+  
+  
+  <title>GCP Associate Cloud Engineer Prepara Note - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="GCP Associate Cloud Engineer Prepara Note">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-20 08:43" pubdate>
+        February 20, 2022 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      23k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      72 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GCP Associate Cloud Engineer Prepara Note</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Cloud-IAM"><a href="#Cloud-IAM" class="headerlink" title="Cloud IAM"></a>Cloud IAM</h1><p><img src="/img/ACE/Untitled.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.google.com/iam/docs/">Identity and Access Management documentation  |  IAM Documentation  |  Google Cloud</a></p>
+<p>IAM: Provides granular access to resources, prevents unwanted access to other resources and adopts the security principle of least privilege.</p>
+<h2 id="Core-Components"><a href="#Core-Components" class="headerlink" title="Core Components"></a>Core Components</h2><ul>
+<li><p>Members (Who)</p>
+<ul>
+<li><p>Person (Google Account)</p>
+</li>
+<li><p>Google Group → image group of account</p>
+</li>
+<li><p>Service Account</p>
+<p>  Special type of account belonging to your application and can be identified by <code>&lt;project_number/id&gt;@developer.gserviceaccount.com</code> → for application</p>
+</li>
+</ul>
+</li>
+<li><p>Permissions &amp; Roles (What)</p>
+<ul>
+<li><p>Role</p>
+<ul>
+<li><strong>Collection of <em>permissions</em></strong> to use or manage GCP resources</li>
+<li>Assigned to users</li>
+</ul>
+</li>
+<li><p>Permissions</p>
+<p>  <img src="/img/ACE/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li><p>Give access to a given <em>resource</em></p>
+</li>
+<li><p>Identified by <code>&lt;service&gt;.&lt;resource&gt;.&lt;verb&gt;</code></p>
+<p>  E.g. <code>pubsub.subscriptions.consume</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Resources</p>
+<p>  Check reousrce Hierarchy</p>
+</li>
+<li><p>Policies</p>
+<ul>
+<li><p>Bind Members to Roles at a hierarchy level</p>
+<p>  Such as Organisation, Folder, Project or Resource</p>
+</li>
+<li><p>Collection of <em>Roles</em> that define who has what type of access</p>
+</li>
+<li><p>Are hierarchally defined, with parent overruling child policy</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Service-Account"><a href="#Service-Account" class="headerlink" title="Service Account"></a>Service Account</h2><ul>
+<li><strong>Global</strong></li>
+<li>Similar to AWS Role</li>
+<li>This is a special type of Google account that represents an application, not an end user</li>
+<li>Can be “assumed” by applications or individual users when authorised</li>
+</ul>
+<h3 id="Service-Account-Keys"><a href="#Service-Account-Keys" class="headerlink" title="Service Account Keys"></a><strong>Service Account Keys</strong></h3><ul>
+<li><strong>GCP-managed keys</strong><ul>
+<li>Keys used by GCP services such as App Engince and Compute Engine</li>
+<li>Key cannot be downloads</li>
+<li>Rotated automatically on a weekly basis</li>
+</ul>
+</li>
+<li><strong>User-managed keys</strong><ul>
+<li>Keys are created, downloadable, and managed by users</li>
+<li>Expire 10 years from creation</li>
+</ul>
+</li>
+</ul>
+<h2 id="Primitive-Predefined-amp-Customer-Role"><a href="#Primitive-Predefined-amp-Customer-Role" class="headerlink" title="Primitive, Predefined &amp; Customer Role"></a>Primitive, Predefined &amp; Customer Role</h2><p><img src="/img/ACE/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="Basic roles are very coarse "></p>
+<p>Basic roles are very coarse </p>
+<ul>
+<li><p><strong>Primitive (Basic)</strong></p>
+<p>  Scope: Project, Folder</p>
+<p>  Historical roles before Cloud IAM was implemented.</p>
+<p>  Types:</p>
+<ul>
+<li>Viewer<ul>
+<li>Read only</li>
+</ul>
+</li>
+<li>Editor<ul>
+<li>Read + Write</li>
+</ul>
+</li>
+<li>Owner<ul>
+<li>Read + Write</li>
+<li>Manage access to Project and resources</li>
+<li>Setup project billing</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Predefined</strong></p>
+<p>  predefined roles are fine-grained permissions on particular services</p>
+<p>  <img src="/img/ACE/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>  Scope: resource</p>
+<p>  Much more granular access, they are applied at the <em>Resource</em> level</p>
+<p>  Example:</p>
+<p>  <img src="/img/ACE/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+</li>
+<li><p>Customer</p>
+<p>  Scope: organization, project</p>
+<p>  You can include many, but not all, IAM permissions in custom roles. Each permission has one of the following support levels for use in custom role</p>
+</li>
+</ul>
+<h2 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h2><p><img src="/img/ACE/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h1 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h1><h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><h3 id="Google-Domains"><a href="#Google-Domains" class="headerlink" title="Google Domains"></a>Google Domains</h3><p>→ Like AWS Route53</p>
+<p>Range: Global</p>
+<ul>
+<li>Google’s registrar for domain names</li>
+<li>Built-in DNS or custom nameservers</li>
+<li>Supports DNSSEC</li>
+</ul>
+<h3 id="Cloud-DNS"><a href="#Cloud-DNS" class="headerlink" title="Cloud DNS"></a>Cloud DNS</h3><p>Range: Global</p>
+<ul>
+<li>DNS service</li>
+<li>100% uptime guarantee</li>
+<li>Low latency globally</li>
+<li>Supports DNSSEC</li>
+<li>Pay for:<ul>
+<li>Hosted zone, fixed fee</li>
+<li>DNS lookups (i.e. usage)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Static-IP"><a href="#Static-IP" class="headerlink" title="Static IP"></a>Static IP</h3><ul>
+<li>Two types:<ul>
+<li>Regional Static IP<ul>
+<li>GCE Instances</li>
+<li>Network Load Balancers</li>
+</ul>
+</li>
+<li>Global Static IP (Anycast IP)<ul>
+<li>Global Load Balancers<ul>
+<li>HTTP(S)</li>
+<li>SSL Proxy</li>
+<li>TCP Proxy <em>Note:</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pay for IPs that are not in use</li>
+</ul>
+<h2 id="Cloud-Load-Balancing-CLB"><a href="#Cloud-Load-Balancing-CLB" class="headerlink" title="Cloud Load Balancing (CLB)"></a>Cloud Load Balancing (CLB)</h2><p>Range: Regional&#x2F;Global</p>
+<ul>
+<li><p>Built into their Software Defined Networking (SDN) system that can naturally handle spikes without any pre-warming</p>
+</li>
+<li><p>External vs. Internal</p>
+<p>  <img src="/img/ACE/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+</li>
+<li><p>Global vs. Regional:</p>
+<p>  <img src="/img/ACE/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li>Regional Network Load Balancer<ul>
+<li>Supports:<ul>
+<li>Session Affinity<ul>
+<li>Setting up uses forwarding rules based on IP, protocol (TCP&#x2F;UDP), and (optionally) port</li>
+</ul>
+</li>
+<li>Round Robin</li>
+<li>Health Checks</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Global Load Balancer<ul>
+<li>Supports:<ul>
+<li>Multi-region failover for HTTP(S), SSL Proxy, and TCP Proxy</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>*<strong>LB Types</strong></p>
+<p>  <img src="/img/ACE/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li>Global HTTPS(S) Load Balancing<ul>
+<li>HTTP LB</li>
+<li>HTTPS LB</li>
+<li>Internet facing or single and multi-region</li>
+</ul>
+</li>
+<li>Global TCP Load Balancing<ul>
+<li>TCP LB</li>
+<li>TCP Proxy</li>
+<li>Internet facing or single and multi-region</li>
+</ul>
+</li>
+<li>Global SSL Proxy</li>
+<li>Regional</li>
+<li>Regional Internal</li>
+</ul>
+</li>
+</ul>
+<h2 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h2><h3 id="Cloud-CDN"><a href="#Cloud-CDN" class="headerlink" title="Cloud CDN"></a>Cloud CDN</h3><p>Range: Global</p>
+<ul>
+<li>Low-latency content delivery</li>
+<li>Based on HTTP(S) CLB &amp; integrated with GCE &amp; GCS</li>
+<li>Supports GCP only<ul>
+<li>HTTP(S) LBs<ul>
+<li>Backend can be a GCS Bucket</li>
+</ul>
+</li>
+<li>Does not support custom origins</li>
+</ul>
+</li>
+<li>Supports the following protocols of HTTP&#x2F;2 and HTTPS</li>
+<li>Pay for<ul>
+<li>POP to client network egress</li>
+<li>HTTP(S) request volume</li>
+<li>Per cache invalidation request (not per resource)</li>
+</ul>
+</li>
+</ul>
+<h3 id="CND-Interconnect"><a href="#CND-Interconnect" class="headerlink" title="CND Interconnect"></a>CND Interconnect</h3><p>Range: Regional&#x2F;Multi-Regional</p>
+<ul>
+<li>Direct, low-latency connectivity to certain CDN providers, with cheaper egress</li>
+<li>For external CDNs, not GCP’s CDN service</li>
+<li>Supports:<ul>
+<li>Akami</li>
+<li>Cloudflare</li>
+<li>Fastly</li>
+</ul>
+</li>
+<li>Contact CDN provider to set up for GCP project and which regions</li>
+<li>Free to enable, then pay less for the egress you configured</li>
+</ul>
+<h2 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a>Connection</h2><h3 id="Cloud-Interconnect-Not-Physical-Link"><a href="#Cloud-Interconnect-Not-Physical-Link" class="headerlink" title="Cloud Interconnect (Not Physical Link)"></a>Cloud Interconnect (Not Physical Link)</h3><p>Range: <strong>Regional&#x2F;Multi-Regional</strong></p>
+<ul>
+<li><p><strong>Use Case</strong></p>
+<p>  Say you have an application running within GCP on a GCE instance but you need to let the application access data from a business system on-premise then you would choose to Cloud Interconnect</p>
+<p>  → Connecting external networks to Google’s network</p>
+</li>
+<li><p><strong>Direct access to RFC1918 IPs in your VPC - with SLA (Private Connections)</strong></p>
+<ul>
+<li>Dedicated Interconnect</li>
+<li>Cloud VPN</li>
+</ul>
+</li>
+<li><p><strong>Access to Google public IPs only - without SLA Peering</strong></p>
+<ul>
+<li>Direct Peering</li>
+<li>Carrier Peering</li>
+</ul>
+</li>
+</ul>
+<h3 id="Cloud-VPN"><a href="#Cloud-VPN" class="headerlink" title="Cloud VPN"></a>Cloud VPN</h3><p>Range: Regional</p>
+<ul>
+<li>IPsec VPN</li>
+<li>To connect to VPC via public internet for low-volume data connections</li>
+<li>Persistent, static connections between gateways<ul>
+<li>Not for a Dynamic client</li>
+</ul>
+</li>
+<li>VPN Gateways must have static IP</li>
+<li><strong>Encrypted link to VPC, into one subnet</strong></li>
+<li>Supports both Static and Dynamic routing<ul>
+<li>Dynamic is preferred to stop the need to re-establish the connection</li>
+</ul>
+</li>
+<li>99.9% availability SLA</li>
+<li>Pay per tunnel-hour</li>
+<li>Normal traffic charges apply</li>
+</ul>
+<h3 id="Dedicated-Interconnect"><a href="#Dedicated-Interconnect" class="headerlink" title="Dedicated Interconnect"></a>Dedicated Interconnect</h3><p>Range: <strong>Regional&#x2F;Multi-Regional</strong></p>
+<ul>
+<li>Direct <strong>physical link</strong> between VPC and on-prem for high-volume data connections</li>
+<li>VLAN attachment is private connection to VPC in one region; no public GCP APIs</li>
+<li>Link are private but not encrypted<ul>
+<li>You need to layer your own encryption in order to achieve encrypted traffic</li>
+</ul>
+</li>
+<li>Redundant connections are advised to provide high availabilty achieving 99.99% SLA.<ul>
+<li>Without redundant conneciotns the SLA is 99.9%</li>
+</ul>
+</li>
+<li>Pay fee per 10Gbps link, plus small fee per VLAN attachment</li>
+</ul>
+<h2 id="Cloud-Router"><a href="#Cloud-Router" class="headerlink" title="Cloud Router"></a>Cloud Router</h2><p>Range: Regional</p>
+<ul>
+<li>Dynamic routing using BGP for hybrid networks linking GCP VPCs to external networks</li>
+<li>Works with Cloud VPN and Dedicated Interconnect</li>
+<li>Automatically learns subnets in VPC and announces them to on-prem network</li>
+<li>Without Cloud Router you must manage static routes for VPN</li>
+<li>Free to setup</li>
+<li>Pay for VPC egress</li>
+</ul>
+<h2 id="VPC"><a href="#VPC" class="headerlink" title="VPC"></a>VPC</h2><p>Range: Global</p>
+<ul>
+<li>Global IPv4 unicast SDN for GCP resources</li>
+<li><strong>Subnets are Regional</strong></li>
+<li>Can:<ul>
+<li>Be shared across multiple Projects</li>
+<li>Be peered with other VPCs</li>
+<li>Enable private (internal IP) access to some GCP services (e.g. BQ, GCS)</li>
+</ul>
+</li>
+<li>Pay for:<ul>
+<li>Certain services (e.g. VPN)</li>
+<li>Network egress</li>
+</ul>
+</li>
+</ul>
+<h3 id="Shared-VPC"><a href="#Shared-VPC" class="headerlink" title="Shared VPC"></a>Shared VPC</h3><p><a target="_blank" rel="noopener" href="https://cloud.google.com/vpc/docs/shared-vpc">Shared VPC overview  |  Google Cloud</a></p>
+<p>Shared VPC allows an organization to connect resources from multiple projects to a common Virtual Private Cloud (VPC) network, so that they can communicate with each other securely and efficiently using internal IPs from that network. When you use Shared VPC, you designate a project as a host project and attach one or more other service projects to it. The VPC networks in the host project are called Shared VPC networks. Eligible resources from service projects can use subnets in the Shared VPC network.</p>
+<h1 id="Compute"><a href="#Compute" class="headerlink" title="Compute"></a>Compute</h1><p><img src="/img/ACE/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/img/ACE/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/img/ACE/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Google-Compute-Engine-GCE"><a href="#Google-Compute-Engine-GCE" class="headerlink" title="Google Compute Engine (GCE)"></a>Google Compute Engine (GCE)</h2><p>Range: Zonal</p>
+<ul>
+<li>IaaS</li>
+<li>VMs referred to as Instances</li>
+<li>Offers complete control and most flexibility at the cost of the following administrative burdens<ul>
+<li>CPU&#x2F;GPU</li>
+<li>Memory</li>
+<li>Disk Space</li>
+<li>OS</li>
+<li>Firewall Controls</li>
+<li>Network Connection&#x2F;management (VPN&#x2F;Load Balancing)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Instance-Type"><a href="#Instance-Type" class="headerlink" title="Instance Type"></a>Instance Type</h3><ul>
+<li><p>OS</p>
+<ul>
+<li><p>Windows</p>
+<p>  <a target="_blank" rel="noopener" href="https://cloud.google.com/compute/docs/instances/windows/generating-credentials">Generating credentials for Windows VMs  |  Compute Engine Documentation  |  Google Cloud</a></p>
+</li>
+<li><p>Linux</p>
+</li>
+</ul>
+</li>
+<li><p>Machine Type</p>
+<p>  <img src="/img/ACE/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+</li>
+<li><p>Spot &amp; Preemptible VM</p>
+<p>  Spot&#x2F;Preemptible VMs are available at much lower price—a <a target="_blank" rel="noopener" href="https://cloud.google.com/compute/docs/instances/spot#pricing">60-91% discount</a>— compared to the price of standard VMs. However, Compute Engine might preempt Spot VMs if it needs to reclaim those resources for other tasks.</p>
+</li>
+<li><p>Custom Machine-Type VM</p>
+<p>  Compute Engine offers predefined machine types that you can use when you create a VM instance. A predefined machine type has a preset number of vCPUs and amount of memory, and is charged at a set price.</p>
+<p>  If predefined VMs don’t meet your needs, you can create a VM instance with custom virtualized hardware settings. Specifically, you can create a VM instance with a custom number of vCPUs and amount of memory, effectively using a custom machine type. Custom machine types are available in the <a target="_blank" rel="noopener" href="https://cloud.google.com/compute/docs/general-purpose-machines">general-purpose machine family</a>. When you create a custom VM, you’re deploying a custom VM from the E2, N2, N2D, or N1 machine family.</p>
+</li>
+<li><p>HPC-ready VM</p>
+</li>
+<li><p>SQL Server VM</p>
+</li>
+</ul>
+<h3 id="Instance-Group"><a href="#Instance-Group" class="headerlink" title="Instance Group"></a>Instance Group</h3><p>→ Like Auto-Scaling Group in AWS</p>
+<p>You can create and manage groups of VM instances so that you don’t have to individually control each instance in your project. Compute Engine offers two different types of instance groups:</p>
+<ul>
+<li><p>managed</p>
+<p>  Uses <a target="_blank" rel="noopener" href="https://cloud.google.com/compute/docs/instance-templates/">instance templates</a> to create a group of identical resources. Making changes to instances will make the changes to the whole instance group, benefits of homongenous grouping of VM instances are: </p>
+<p>  (a) Automatic scaling; → resilient</p>
+<p>  (b) Work with Load Balancing to distribute traffic to all of the instances in the group; → distrbiuted</p>
+<p>  (c) If an instance in a group stops, crashes, or is deleted then the group automatically recreates the instance. → fault-tolerant</p>
+<ul>
+<li><p>zonal managed instance groups</p>
+<p>  A Zonal managed instance group will contain instances from the same zone.</p>
+<p>  <strong>Note:</strong> Choose zonal if you want to <strong>avoid the slightly higher latency</strong> incurred by cross-zone communication or if you need fine-grained control of the sizes of your groups in each zone.</p>
+</li>
+<li><p>regional managed instance groups</p>
+<p>  A Regional group will contain instances from multiple zones across the region.</p>
+<p>  <strong>Note:</strong> This is general recommended group over Zonal as it protects against zonal failures and unforeseen scenarions where an entire group of instances in a single zone malfunctions.</p>
+</li>
+</ul>
+</li>
+<li><p>unmanaged</p>
+<p>  Unmanaged groups are groups of dissimilar instances that you can arbitrarily add and remove from the group. Unmanaged instance groups do not offer autoscaline, rolling update support, or the use of instance templates.</p>
+<p>  <strong>Note:</strong> Use if you need to apply load balancing to your pre-existing configurations or to groups of dissimilar instances.</p>
+</li>
+</ul>
+<h3 id="Snapshots"><a href="#Snapshots" class="headerlink" title="Snapshots"></a>Snapshots</h3><p>Public Image → provided and maintained by Google, both open source and third-party</p>
+<p>Custom Image → only to your project</p>
+<p>From different resources:</p>
+<ul>
+<li>A persistent disk</li>
+<li>A snapshot of a persistent disk</li>
+<li>Another image in your project</li>
+<li>An image that is shared from another project</li>
+<li>A compressed RAW image</li>
+</ul>
+<p>Example: With Persistent Disk</p>
+<p><img src="/img/ACE/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Cloud-Run"><a href="#Cloud-Run" class="headerlink" title="Cloud Run"></a>Cloud Run</h2><p>Develop and deploy highly scalable containerized applications on a fully managed serverless platform.</p>
+<h2 id="Google-Kubernetes-Engine-GKE"><a href="#Google-Kubernetes-Engine-GKE" class="headerlink" title="Google Kubernetes Engine (GKE)"></a>Google Kubernetes Engine (GKE)</h2><p>Range: Regional</p>
+<ul>
+<li><p>Managed Applications not machines</p>
+</li>
+<li><p>Powered by Kubernetes</p>
+</li>
+<li><p>Deploy containerized applications</p>
+<ul>
+<li><p>De-couples app components from OS</p>
+</li>
+<li><p>Run app in multiple envs, regardless of OS</p>
+</li>
+<li><p>Kubernetes DNS on by default</p>
+<p>  No need for Consul unless wanted</p>
+</li>
+</ul>
+</li>
+<li><p>No IAM integration</p>
+<p>  To connect with other GCP services you have top manage these secrets more manually.</p>
+</li>
+<li><p>Production clusters require ≥ 3 nodes</p>
+</li>
+<li><p>Integrates with Persistent Storage on underlying GCE components</p>
+</li>
+</ul>
+<h3 id="commands"><a href="#commands" class="headerlink" title="*commands"></a>*commands</h3><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># get pods</span>
+kubectl get pods</code></pre></div>
+
+<h3 id="GKE-Sandbox"><a href="#GKE-Sandbox" class="headerlink" title="GKE Sandbox"></a>GKE Sandbox</h3><p><a target="_blank" rel="noopener" href="https://cloud.google.com/kubernetes-engine/docs/concepts/sandbox-pods">GKE Sandbox  |  Kubernetes Engine Documentation  |  Google Cloud</a></p>
+<p>This page describes how GKE Sandbox protects the host kernel on your nodes when containers in the Pod execute unknown or untrusted code. For example, <a target="_blank" rel="noopener" href="https://cloud.google.com/kubernetes-engine/docs/concepts/multitenancy-overview">multi-tenant clusters</a> such as software-as-a-service (SaaS) providers often execute unknown code submitted by their users.</p>
+<p>GKE Sandbox uses gVisor, an open source project. This topic broadly discusses gVisor, but you can learn more details by reading the <a target="_blank" rel="noopener" href="https://gvisor.dev/docs/">official gVisor documentation</a></p>
+<h2 id="App-Engine"><a href="#App-Engine" class="headerlink" title="App Engine"></a>App Engine</h2><p>Range: Regional</p>
+<ul>
+<li>Managed Service<ul>
+<li>No adminstration is needed for underlying infrastructure</li>
+<li>Deployment, maintenance, and scalability handled</li>
+</ul>
+</li>
+<li>Developers can focus on writing the code, while Google handles the rest</li>
+<li>Build scalable web apps and mobile backends</li>
+</ul>
+<h3 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h3><ul>
+<li><p>Standard</p>
+<p>  Supports: Python, Go, Java, PHP</p>
+</li>
+<li><p>Flexible</p>
+<p>  Supports: Java, Python, Node.js, .NET Core, Go, PHP, Ruby, etc.</p>
+</li>
+</ul>
+<h3 id="Hierarchy"><a href="#Hierarchy" class="headerlink" title="Hierarchy"></a><strong><strong>Hierarchy</strong></strong></h3><p><img src="/img/ACE/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h3 id="Scaling-Options"><a href="#Scaling-Options" class="headerlink" title="Scaling Options"></a>Scaling Options</h3><ul>
+<li><p><strong>Manual scaling → Resident Instances</strong></p>
+<p>  A service with manual scaling use resident instances that continuously run the specified number of instances irrespective of the load level. This allows tasks such as compel initializations and applications that rely on the state of the memory over time.</p>
+</li>
+<li><p><strong>Automatic scaling → Dynamic Instances</strong></p>
+<p>  Auto scaling services use dynamic instances that get created based on request rate, response latencies, and other application metrics. However, if you specify a number of minimum idle instances, that specified number of instances run as resident instances while any additional instances are dynamic.</p>
+</li>
+<li><p><strong>Basic Scaling → Dynamic Instances</strong></p>
+<p>  A service with basic scaling use dynamic instances. Each instance is created when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.</p>
+</li>
+</ul>
+<h3 id="Versions"><a href="#Versions" class="headerlink" title="Versions"></a>Versions</h3><h2 id="Cloud-Functions"><a href="#Cloud-Functions" class="headerlink" title="Cloud Functions"></a>Cloud Functions</h2><p>→ Like AWS Lambda</p>
+<p>Range: Regional</p>
+<ul>
+<li><p>FaaS (Functions as a Service, I.e. Serverless)</p>
+</li>
+<li><p>Runs Node.js code in response to an event</p>
+<p>  Triggers can include:</p>
+<ul>
+<li>GCS Objects</li>
+<li>Pub&#x2F;Sub Messages</li>
+<li>HTTP Request</li>
+</ul>
+</li>
+<li><p>Pay for CPU &amp; RAM assigned to function per 100ms (mins. 100ms)</p>
+</li>
+<li><p>Massive scalability (horizontally)</p>
+</li>
+</ul>
+<h1 id="Storage-x2F-Data"><a href="#Storage-x2F-Data" class="headerlink" title="Storage&#x2F;Data"></a>Storage&#x2F;Data</h1><p><img src="/img/ACE/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/img/ACE/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/img/ACE/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Local-SSD"><a href="#Local-SSD" class="headerlink" title="Local SSD"></a>Local SSD</h2><p>Range: Zonal</p>
+<ul>
+<li><p>Data is encrypted at rest</p>
+</li>
+<li><p>375GB SSD attached to each server</p>
+<p>  Similar to the ephemeral disk on AWS</p>
+</li>
+<li><p>Data is lost whenever the instance shuts down</p>
+</li>
+<li><p>Data survives live migrations</p>
+</li>
+<li><p>Pay for GB-month provisioned</p>
+</li>
+</ul>
+<h2 id="Persistent-Disk"><a href="#Persistent-Disk" class="headerlink" title="Persistent Disk"></a>Persistent Disk</h2><p>Range: Zonal</p>
+<ul>
+<li><p>Persistent disks</p>
+</li>
+<li><p>Performance scales with wolume size</p>
+<p>  Performance is way below that of a Local SSD but is still fast.</p>
+</li>
+<li><p>Can resize while in use but will need file system update within VM</p>
+<p>  Max file size: 10TB</p>
+</li>
+<li><p>Pricing &#x3D; Incremental storage difference * ($ * time)</p>
+</li>
+</ul>
+<h2 id="Cloud-SQL"><a href="#Cloud-SQL" class="headerlink" title="Cloud SQL"></a>Cloud SQL</h2><p>Range: Regional</p>
+<ul>
+<li>Fully Managed</li>
+<li>Databases:<ul>
+<li>MySQL</li>
+<li>PostgreSQL</li>
+<li>SQL Server (new)</li>
+</ul>
+</li>
+<li>Supports automatice replication, backup, failover</li>
+<li>Scaling is manual (both vertically and horizontally)</li>
+</ul>
+<p><img src="/img/ACE/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Cloud-Spanner-→-NewSQL"><a href="#Cloud-Spanner-→-NewSQL" class="headerlink" title="Cloud Spanner → NewSQL"></a>Cloud Spanner → NewSQL</h2><p>Range: <strong>Regional</strong> &#x2F; <strong>Multi-Regional</strong> &#x2F; <strong>Global</strong></p>
+<ul>
+<li><p>Horizontally scalable</p>
+</li>
+<li><p>Strongly consistent</p>
+<p>  Provides external consistency which is far more than stongly</p>
+</li>
+<li><p>Relational database structure with non-relational horizontal scale</p>
+</li>
+<li><p>Supports SQL to query data</p>
+</li>
+<li><p>ACID transactions</p>
+</li>
+<li><p>Scales from 1 to thousands of nodes</p>
+</li>
+<li><p>Requires 3 nodes for a Production environment</p>
+</li>
+<li><p>Use only for large systems</p>
+<p>  Not for small apps&#x2F;systems</p>
+</li>
+<li><p>Pay for provisioned node time (region&#x2F;multi-region) and used storage time</p>
+<p>  Production systems are very costly</p>
+</li>
+</ul>
+<h2 id="BigQuery-→-Data-Warehouse"><a href="#BigQuery-→-Data-Warehouse" class="headerlink" title="BigQuery → Data Warehouse"></a>BigQuery → Data Warehouse</h2><p>Range: <strong>Multi-Regional</strong></p>
+<p>BigQuery is Google’s serverless, highly scalable, low cost enterprise data warehouse designed to <strong>make all your data analysts productive</strong>. Because there is no infrastructure to manage, <strong>you can focus on analyzing data to find meaningful insights</strong> using familiar SQL and you don’t need a database administrator. BigQuery <strong>enables you to analyze all your data</strong> by creating a logical data warehouse over managed, columnar storage as well as data from object storage, and spreadsheets. BigQuery makes it easy to securely <strong>share insights within your organization and beyond</strong> as datasets, queries, spreadsheets and reports. BigQuery allows organizations to <strong>capture and analyze data in real-time</strong> using its powerful streaming ingestion capability <strong>so that your insights are always current</strong>. BigQuery <strong>is free</strong> for up to 1TB of data analyzed each month and 10GB of data stored.</p>
+<ul>
+<li>Serverless <strong>column-store</strong> data warehouse</li>
+<li>Supports SQL to query data</li>
+<li>Pay for:<ul>
+<li>GBs actually considered (scanned) during queries<ul>
+<li>Attempts to reuse cached results, which are free</li>
+</ul>
+</li>
+<li>Data stored (GB-months)<ul>
+<li>Relatively inexpensive</li>
+<li>This gets cheaper when tables are not modified for 90 days</li>
+</ul>
+</li>
+<li>Streaming inserts paid per GB</li>
+</ul>
+</li>
+</ul>
+<h3 id="Estimate-Cost-of-BigQuery"><a href="#Estimate-Cost-of-BigQuery" class="headerlink" title="Estimate Cost of BigQuery"></a>Estimate Cost of BigQuery</h3><p><a target="_blank" rel="noopener" href="https://cloud.google.com/bigquery/docs/estimate-costs">Estimate storage and query costs  |  BigQuery  |  Google Cloud</a></p>
+<p>To estimate costs before running a query, you can use one of the following methods:</p>
+<ul>
+<li>Query validator in the Cloud Console</li>
+<li><code>-dry_run</code> flag in the <code>bq</code> command-line tool</li>
+<li><code>dryRun</code> parameter when submitting a query job using the API</li>
+<li>The <a target="_blank" rel="noopener" href="https://cloud.google.com/products/calculator/">Google Cloud Pricing Calculator</a></li>
+<li>Client libraries</li>
+</ul>
+<h2 id="Cloud-Datastore-→-Document"><a href="#Cloud-Datastore-→-Document" class="headerlink" title="Cloud Datastore → Document"></a>Cloud Datastore → Document</h2><p>Range: <strong>Regional</strong> &#x2F; <strong>Multi-Regional</strong></p>
+<ul>
+<li>Fully Managed</li>
+<li>NoSQL DB</li>
+<li>Similar to DynamoDB</li>
+<li>Capabilities:<ul>
+<li>ACID transactions</li>
+<li>SQL-like queries</li>
+<li>Indexes</li>
+<li>RESTful interface</li>
+</ul>
+</li>
+<li>Pay for GB-months of storage used</li>
+<li>Pay for IO operations (r, w, deletes) performed</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>Cloud Datastore was born as the <strong>structured data</strong> store for App Engine</li>
+<li>Scales from 0 to terabytes worth of data as your application grows</li>
+</ul>
+<h2 id="BigTable-→-KV"><a href="#BigTable-→-KV" class="headerlink" title="BigTable → KV"></a>BigTable → KV</h2><h2 id="Cloud-Storage-GCS-→-Block"><a href="#Cloud-Storage-GCS-→-Block" class="headerlink" title="Cloud Storage (GCS) → Block"></a>Cloud Storage (GCS) → Block</h2><p>Range: <strong>Regional&#x2F;Multi-Regional</strong></p>
+<ul>
+<li>Fully Managed</li>
+<li>Strongly Consistent (for overwrite PUTs and DELETEs)</li>
+<li>Durability &#x3D; 11 9’S</li>
+<li>Can provide site hosting functionality</li>
+<li>Lifecycle features</li>
+</ul>
+<h3 id="Type-1"><a href="#Type-1" class="headerlink" title="Type"></a>Type</h3><p><img src="/img/ACE/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>Nearline could be used for disaster backup</p>
+<ul>
+<li><p>Standard</p>
+<ul>
+<li><p>Regional</p>
+<p>  Storing frequently accessed in the same region as your Google Cloud DataProc or Google Compute Engine instances that use it, such as for data analytics.</p>
+<ul>
+<li>99.99% typical monthly availability</li>
+<li>99.9% availability SLA*</li>
+<li>Lower cost per GB stored</li>
+<li>Data stored in a narrow geographic region</li>
+<li>Redundant across availability zones</li>
+</ul>
+</li>
+<li><p>Multi-Regional</p>
+<p>  Storing data that is frequently accessed (“hot” objects) around the world, such as serving website content, streaming videos, or gaming and mobile applications.</p>
+<ul>
+<li><blockquote>
+<p>99.99% typical monthly availability</p>
+</blockquote>
+</li>
+<li>99.95% availability SLA*</li>
+<li>Geo-redundant</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Nearline</p>
+<p>  Data you do not expect to access frequently (i.e., no more than once per month). Ideal for back-up and serving long-tail multimedia content.</p>
+<ul>
+<li>99.9% typical monthly availability</li>
+<li>99.0% availability SLA*</li>
+<li>Very low cost per GB stored</li>
+<li>Data retrieval costs</li>
+<li>Higher per-operation costs</li>
+<li>30-day minimum storage duration</li>
+</ul>
+</li>
+<li><p>Codeline</p>
+<p>  Data you expect to access infrequently (i.e., no more than once per year). Typically this is for disaster recovery, or data that is archived and may or may not be needed at some future time.</p>
+<ul>
+<li>99.9% typical monthly availability</li>
+<li>99.0% availability SLA*</li>
+<li>Lowest cost per GB stored</li>
+<li>Data retrieval costs</li>
+<li>Higher per-operation costs</li>
+<li>90-day minimum storage duration</li>
+</ul>
+</li>
+<li><p>Archive</p>
+</li>
+</ul>
+<h3 id="Life-Cycle"><a href="#Life-Cycle" class="headerlink" title="Life Cycle"></a>Life Cycle</h3><h3 id="Data-Transfer"><a href="#Data-Transfer" class="headerlink" title="Data Transfer"></a>Data Transfer</h3><p>Transfer data from on-premise to GCP</p>
+<ul>
+<li><p>Data Transfer Appliance → AWS Snowball</p>
+<ul>
+<li>Rackable, high-capacity storage server</li>
+<li>Physically transfer (ship) data from your data center to GCS</li>
+<li>Similar to AWS Snowball</li>
+<li>Ingest only</li>
+<li>100 or 480TB versions</li>
+</ul>
+</li>
+<li><p>Storage Transfer Service</p>
+<p>  Range: G<strong>lobal</strong></p>
+<ul>
+<li>If data is not in your own data center then you can use this</li>
+<li>Destination is always GCS bucket</li>
+<li>Source can be:<ul>
+<li>S3</li>
+<li>HTTP&#x2F;HTTPS endpoint</li>
+<li>GCS Bucket</li>
+</ul>
+</li>
+<li>Pay for it’s actions, such as data transfer</li>
+</ul>
+</li>
+</ul>
+<h1 id="Operation-amp-Management"><a href="#Operation-amp-Management" class="headerlink" title="Operation &amp; Management"></a>Operation &amp; Management</h1><h2 id="Cloud-Identity"><a href="#Cloud-Identity" class="headerlink" title="Cloud Identity"></a>Cloud Identity</h2><p>Range: Global</p>
+<ul>
+<li>Identity as a Service (IDaaS) to provision and manage users and groups</li>
+<li>Supports MFA and enforcement, including security keys</li>
+<li>Identities can be used to SSO with other apps via OIDC, SAML, OAuth2</li>
+<li>Can sync from AD and LDAP directories via Google Cloud Directory Sync</li>
+<li>Free Google Accounts for non Google Suite users, tied to a verified domain</li>
+</ul>
+<h2 id="Cloud-Resource-Management"><a href="#Cloud-Resource-Management" class="headerlink" title="Cloud Resource Management"></a>Cloud Resource Management</h2><p><a target="_blank" rel="noopener" href="https://cloud.google.com/resource-manager/docs">Resource Manager documentation  |  Resource Manager Documentation  |  Google Cloud</a></p>
+<p>Range: Global</p>
+<ul>
+<li>Hierarchically manage resources by project, folder, and organization<ul>
+<li>Organization is root node in hierarchy</li>
+</ul>
+</li>
+<li>Provides a Recycle bin which allows you to undelete projects</li>
+<li>You can define custom IAM roles at the organization level</li>
+<li>Can apply IAM policies at organization, folder or project levels</li>
+</ul>
+<h2 id="Cloud-Operation-StackDriver"><a href="#Cloud-Operation-StackDriver" class="headerlink" title="Cloud Operation (StackDriver)"></a>Cloud Operation (StackDriver)</h2><p>Range: Global</p>
+<ul>
+<li>Multi-cloud monitoring and management service</li>
+<li>Integrated monitoring, logging and diagnostics</li>
+<li>Manages resources across platform<ul>
+<li>Google Cloud</li>
+<li>AWS</li>
+<li>On-premises</li>
+</ul>
+</li>
+<li>Provides observable signals on resource performance</li>
+</ul>
+<h3 id="Cloud-Monitoring"><a href="#Cloud-Monitoring" class="headerlink" title="Cloud Monitoring"></a>Cloud Monitoring</h3><p><img src="/img/ACE/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h3 id="Cloud-Logging"><a href="#Cloud-Logging" class="headerlink" title="Cloud Logging"></a>Cloud Logging</h3><ul>
+<li>Stored for a limited number of days</li>
+<li>Length of storage varies:<ul>
+<li>Admin Activity audit logs are kept for 400 days</li>
+<li>Data Access audit logs are kept for only 30 days</li>
+</ul>
+</li>
+<li>You can export logs for analysis or longer storage</li>
+<li>Google Cloud’s Operations Suite Fundamental Quest :  QwikLab 35</li>
+</ul>
+<h2 id="Cloud-Deployment-Manager"><a href="#Cloud-Deployment-Manager" class="headerlink" title="Cloud Deployment Manager"></a>Cloud Deployment Manager</h2><p>Range: Global</p>
+<ul>
+<li>Similar to Terraform and CloudFormation</li>
+<li>Create and Manage resources via declarative templates</li>
+<li>Templates written in:<ul>
+<li>YAML</li>
+<li>Python</li>
+<li>Jinja2</li>
+</ul>
+</li>
+<li>Supports input and output parameters</li>
+<li>Create and update of deployments both support preview</li>
+</ul>
+<h2 id="Billing"><a href="#Billing" class="headerlink" title="Billing"></a>Billing</h2><p>GCP Billing Operations</p>
+<h3 id="Billing-Account"><a href="#Billing-Account" class="headerlink" title="Billing Account"></a>Billing Account</h3><ul>
+<li>To manage billing, you must be a billing admin</li>
+<li>To change a billing account, you must be:<ul>
+<li>An owner on the project</li>
+<li>A billing admin on the billing account</li>
+</ul>
+</li>
+<li>Projects are linked to billing accounts</li>
+<li>If you only have one account, all projects are linked to it</li>
+<li>If you don’t have billing account, you must create one to consume services</li>
+</ul>
+<p><img src="/img/ACE/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h3 id="Budgets-and-Alerts"><a href="#Budgets-and-Alerts" class="headerlink" title="Budgets and Alerts"></a>Budgets and Alerts</h3><p>Alerts help prevent surprises on your bill</p>
+<ul>
+<li>To set a budget alert, you must be a billing admin</li>
+<li>You can apply budget alerts to either a billing account or a project</li>
+<li>You can set the budget to an amount you specify</li>
+<li>Setting a budget does not cap API usage</li>
+</ul>
+<h3 id="Cloud-Billing-API"><a href="#Cloud-Billing-API" class="headerlink" title="Cloud Billing API"></a>Cloud Billing API</h3><p>Range: Global</p>
+<p>Programmatically manage billing for GCP projects and get GCP pricing</p>
+<h3 id="Pricing-Calculator"><a href="#Pricing-Calculator" class="headerlink" title="Pricing Calculator"></a>Pricing Calculator</h3><p>Estimate cost for daily, weekly, monthly, etc.</p>
+<p><img src="/img/ACE/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h1 id="Big-Data-amp-IoT"><a href="#Big-Data-amp-IoT" class="headerlink" title="Big Data &amp; IoT"></a>Big Data &amp; IoT</h1><p><img src="/img/ACE/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="BigData Service"></p>
+<p>BigData Service</p>
+<p><img src="/img/ACE/Untitled%2024.png" srcset="/img/loading.gif" lazyload alt="GCP Big Data Life Cycle"></p>
+<p>GCP Big Data Life Cycle</p>
+<h2 id="IoT-Core"><a href="#IoT-Core" class="headerlink" title="IoT Core"></a>IoT Core</h2><p>Range: Global</p>
+<ul>
+<li>Fully Managed</li>
+<li>A service to connect, manage, and ingest data from devices globally</li>
+<li>Devices connect securely using IoT industry-standard MQTT or HTTPS protocols</li>
+<li>CA signed certs can be used to verify device ownership on first connect</li>
+<li>Pay per MB of data exchanged with devices</li>
+</ul>
+<p><strong>Device Manager</strong></p>
+<ul>
+<li>Handles device identity, authentication, config, and control</li>
+</ul>
+<p><strong>Protocol Bridge</strong></p>
+<ul>
+<li>Publishes incoming telemetry to Cloud Pub&#x2F;Sub for processing</li>
+</ul>
+<h2 id="Cloud-Pub-x2F-Sub-Publish-x2F-Subscribe-→-AWS-SQS"><a href="#Cloud-Pub-x2F-Sub-Publish-x2F-Subscribe-→-AWS-SQS" class="headerlink" title="Cloud Pub&#x2F;Sub (Publish&#x2F;Subscribe) → AWS SQS"></a><strong><strong>Cloud Pub&#x2F;Sub (Publish&#x2F;Subscribe) → AWS SQS</strong></strong></h2><p>Range: Global</p>
+<ul>
+<li>Infinitely scalable</li>
+<li>At least once messaging for ingestion, decoupling etc…</li>
+<li>Can be thought of as the “glue” that links everything together</li>
+<li>Pay for data volume; min 1KB per publish&#x2F;push&#x2F;pull request, not charged per message</li>
+<li>Can even end up being the replacement for things such as AWS Kinesis or Apache Kafka</li>
+</ul>
+<p><img src="/img/ACE/Untitled%2025.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><strong>Components</strong></p>
+<ul>
+<li>Topic and Subscribers<ul>
+<li>A publisher sends a message to that topic which will then get sent to all the subscribers</li>
+</ul>
+</li>
+</ul>
+<p><strong>Messages</strong></p>
+<ul>
+<li>Can be up to 10MB</li>
+<li>Undelivered messages are stored for 7 days<ul>
+<li>There is no DLQ (Dead Letter Queue)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Push</strong></p>
+<ul>
+<li>Delivers to HTTPS endpoints</li>
+<li>Will delete messages when it receives an HTTP success code</li>
+<li>Uses a “slow-start” algorithm which ramps up on success and backs off &amp; retries, on failures</li>
+</ul>
+<p><strong>Pull</strong></p>
+<ul>
+<li>Delivers messages to requesting clients and waits for ACK to delete or until the timer expires</li>
+<li>Lets clients set rate of consumption, and supports batching and long-polling (Similar to AWS SQS)</li>
+</ul>
+<h2 id="Cloud-Dataprep"><a href="#Cloud-Dataprep" class="headerlink" title="Cloud Dataprep"></a>Cloud Dataprep</h2><p>Range: Global</p>
+<ul>
+<li>Visually explore, clean, and prep data for analysis without running servers (ETL)</li>
+<li>Ad-hoc ETL, for BA’s and not IT professionals</li>
+<li>Managed version of Trifacta Wrangler</li>
+<li>Source data can be from the services and types below, formatted in CSV, JSON, or relational:<ul>
+<li>GCS</li>
+<li>BigQuery</li>
+<li>File Upload</li>
+</ul>
+</li>
+<li>Automatically detects schemas, datatypes, possible joins, and various anomalies</li>
+<li>Pay for underlying Dataflow job, plus management overhead charge on top of the services accessed</li>
+</ul>
+<h2 id="Cloud-Dataproc-→-MapReduce"><a href="#Cloud-Dataproc-→-MapReduce" class="headerlink" title="Cloud Dataproc → MapReduce"></a>Cloud Dataproc → MapReduce</h2><p>Range: Zonal</p>
+<ul>
+<li>Batch MapReduce processing via configurable, managed Spark &amp; Hadoop clusters</li>
+<li>Scales, by removing or adding nodes, even whhile jobs are running</li>
+<li>Integrates with:<ul>
+<li>GCS</li>
+<li>BigQuery</li>
+<li>Bigtable</li>
+<li>Some Stackdriver services</li>
+</ul>
+</li>
+<li>Pay for:<ul>
+<li>underlying GCE servers used in the cluster</li>
+<li>a Cloud Dataproc management fee per vCPU-hour in the cluster</li>
+</ul>
+</li>
+<li><strong>You should use this service to move <em>existing</em> Spark&#x2F;Hadoop setups to GCP</strong><ul>
+<li>You should use Cloud Dataflow for new data processing pipelines</li>
+</ul>
+</li>
+</ul>
+<h2 id="Cloud-Dataflow-→-Data-Processing-Pipeline"><a href="#Cloud-Dataflow-→-Data-Processing-Pipeline" class="headerlink" title="Cloud Dataflow → Data Processing Pipeline"></a>Cloud Dataflow → Data Processing Pipeline</h2><p>Range: Zonal</p>
+<ul>
+<li>Fully Managed Apache Beam</li>
+<li>Smartly-autoscaled and dynamically redistributes lagging work, mid-job, to optimize run time</li>
+<li>Batch or Stream MapReduce-like processing</li>
+<li>Integrates with:<ul>
+<li>Cloud Pub&#x2F;Sub</li>
+<li>Datastore,</li>
+<li>BigQuery</li>
+<li>Bigtable</li>
+<li>Cloud ML</li>
+<li>Stackdriver</li>
+</ul>
+</li>
+<li>Pay for underlying worker GCE via consildated charges<ul>
+<li>Pay per second for vCPUs, RAM GBs, and Persistent Disks</li>
+<li>Dataflow <em>Shuffle</em> charged for time per GB used</li>
+</ul>
+</li>
+</ul>
+<h2 id="Cloud-Datalab"><a href="#Cloud-Datalab" class="headerlink" title="Cloud Datalab"></a>Cloud Datalab</h2><ul>
+<li>Interactive tool for data exploration, analysis, visualization and machine learning</li>
+<li>Uses Jupyter Notebook</li>
+</ul>
+<h2 id="Cloud-Data-Studio-→-Visualization"><a href="#Cloud-Data-Studio-→-Visualization" class="headerlink" title="Cloud Data Studio → Visualization"></a>Cloud Data Studio → Visualization</h2><ul>
+<li>Big Data Visualisation tool for dashboards and reporting</li>
+<li>Similiar to AWS Quicksight and Tableau</li>
+</ul>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="10-Things-Need-to-Know-before-Taking-Exam"><a href="#10-Things-Need-to-Know-before-Taking-Exam" class="headerlink" title="10 Things Need to Know before Taking Exam"></a>10 Things Need to Know before Taking Exam</h2><ol>
+<li>Know gcloud commands for managing and creating objects such as gcloud projects list</li>
+<li>Know basic container terms. Pods, Deployment, etc. Also kubectl commands, such as <code>kubectl get pods</code></li>
+<li>Know the use case and differences between Cloud Source Repo, Cloud Build and Container Registry</li>
+<li>Cloud SQL vs. Cloud Spanner, Big Table vs. Big Query, Cloud Datastire vs. Firebase (usecase, scaling)</li>
+<li>Know your use cases for data services, including Cloud Storage, App Enginem Kubernetes Engine, Cloud Pub&#x2F;Sub, Cloud Dataflow</li>
+<li>Know how to deploy Window on compute engine (best way to login and authenticate) → secure</li>
+<li>IAM permissions basics. Know what service accounts are, know how to setup audit logs for auditors and logging best practices. Custom permission.</li>
+<li>Stackdriver (Cloud Operation) logging setup, setup alerts and difference between Stackdriver modules</li>
+<li>BigQuery pricing. Price calculator. Know on demand vs. flat rate. Storage pricing.</li>
+<li>How to save billing info but also query against.</li>
+</ol>
+<h2 id="Main-Service"><a href="#Main-Service" class="headerlink" title="Main Service"></a>Main Service</h2><p><img src="/img/ACE/Untitled%2026.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Resource-Hierarchy"><a href="#Resource-Hierarchy" class="headerlink" title="Resource Hierarchy"></a>Resource <strong><strong>Hierarchy</strong></strong></h2><p>Organization → Folder → Project → Resource</p>
+<p>*Project: control access to resources</p>
+<p>Project Name: custom name</p>
+<p>Project ID: global unique ID, cannot be changed after set</p>
+<p>Project Number: GCP assigned id</p>
+<h2 id="Interacting-with-Google-Cloud-Platform"><a href="#Interacting-with-Google-Cloud-Platform" class="headerlink" title="Interacting with Google Cloud Platform"></a><strong><strong>Interacting with Google Cloud Platform</strong></strong></h2><h3 id="Google-Cloud-Platform-Console"><a href="#Google-Cloud-Platform-Console" class="headerlink" title="Google Cloud Platform Console"></a>Google Cloud Platform Console</h3><p>web user interface</p>
+<h3 id="Cloud-Console-Mobile-App"><a href="#Cloud-Console-Mobile-App" class="headerlink" title="Cloud Console Mobile App"></a>Cloud Console Mobile App</h3><p>For iOS and Android</p>
+<h3 id="REST-based-API"><a href="#REST-based-API" class="headerlink" title="REST-based API"></a>REST-based API</h3><p>For custom applications</p>
+<p><img src="/img/ACE/Untitled%2027.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>API Explorer → interactive tool that lets you easily try Google APIs</p>
+<ul>
+<li>Google Client Libraries</li>
+<li>Google API Client Libraries</li>
+</ul>
+<h3 id="Cloud-Shell"><a href="#Cloud-Shell" class="headerlink" title="Cloud Shell"></a>Cloud Shell</h3><ul>
+<li>Pre-configured Google SDK Linux Instance</li>
+<li>Automatic auth based upon GCP Console login</li>
+<li>Accessible via any web browser</li>
+<li>All client libs for web apps pre-installed</li>
+<li>5GB persistent storage</li>
+</ul>
+<p>Note: Direct&#x2F;Interactive Use only</p>
+<h3 id="SDK-amp-CLI"><a href="#SDK-amp-CLI" class="headerlink" title="SDK &amp; CLI"></a>SDK &amp; CLI</h3><ul>
+<li>Includes command-line tools for Cloud Platform products and services<ul>
+<li><code>gcloud</code>, <code>gsutil</code>, <code>bq</code></li>
+</ul>
+</li>
+<li>Access via the Cloud Shell button in the Console</li>
+<li>Can also be installed on local machines</li>
+<li>Is also available as a Docker image</li>
+</ul>
+<p><code>gcloud</code> </p>
+<p>Allows you to manage Google Cloud Platform resources and developer workflow</p>
+<p>Format: <code>gcloud [GROUP] [GROUP] [COMMAND] --arguments</code> Example: <code>gcloud compute instances create instance-1 --zone us-central1-a</code></p>
+<p><em>Note</em></p>
+<ul>
+<li><p><code>gcloud alpha...</code></p>
+<p>  Feature is typically not ready for Production</p>
+</li>
+<li><p><code>gcloud beta...</code></p>
+<p>  Feature on the other hand is normally a completed feature, that is being tested to be production ready.</p>
+</li>
+</ul>
+<p><code>gsutil</code> → storage</p>
+<p><code>bq</code> → BigQuery</p>
+<p>Basic Command Lines</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># list project</span>
+gcloud projects list
+
+<span class="hljs-comment"># set your default project</span>
+gcloud config <span class="hljs-built_in">set</span> project &lt;project name&gt;
+
+<span class="hljs-comment"># set defult region</span>
+gcloud config <span class="hljs-built_in">set</span> compute/region <span class="hljs-string">&quot;europe-west1&quot;</span>
+
+<span class="hljs-comment"># list compute regions</span>
+gcloud compute zone list
+
+<span class="hljs-comment"># describe a project</span>
+gcloud compute project-info describe &lt;project name&gt;</code></pre></div>
+
+<h2 id="Cloud-Endpoints"><a href="#Cloud-Endpoints" class="headerlink" title="Cloud Endpoints"></a>Cloud Endpoints</h2><p>Range: Global</p>
+<ul>
+<li>Handles auth, monitoring, logging, and API keys for APIs backed by GCP</li>
+<li>Based on NGINX and runs on a container (running on instances), called an ESP (Extensible Service Proxy) which is super fast and hook into the Cloud Load Balancer</li>
+<li>Uses JWT</li>
+<li>Integrates with:<ul>
+<li>Firebase</li>
+<li>Auth0</li>
+<li>Google Auth</li>
+</ul>
+</li>
+<li>Pay per call to your API</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/GCP/">GCP</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/20/GCP-Associate-Cloud-Engineer-%E8%AE%A4%E8%AF%81%E8%80%83%E8%AF%95%E5%BF%83%E5%BE%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">GCP Associate Cloud Engineer 认证考试心得</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/01/My-winter-trip-to-HOKKAIDO/">
+                        <span class="hidden-mobile">My winter trip to HOKKAIDO</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2022/02/20/ACE-Prepare-Note/';
+          this.page.identifier = '/2022/02/20/ACE-Prepare-Note/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

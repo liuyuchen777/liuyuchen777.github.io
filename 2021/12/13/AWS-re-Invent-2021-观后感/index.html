@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="今年我注册了AWS re:Invent 2021的免费账号，抽时间浏览了大部分KeyNote，少部分Leadership Session和一小部分我感兴趣的内容。 最后，可能因为看得有点多，上瘾了。我也找来了其他云厂商的年度活动来看，GCP、Azure、阿里云，以及前一段时间在知乎上刷到的字节跳动新的云服务火山引擎。火山引擎IaaS的发布会在12.2号，基本和AWS re:Invent在同一段时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AWS re:Invent 2021 观后感">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/12/13/AWS-re-Invent-2021-%E8%A7%82%E5%90%8E%E6%84%9F/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="今年我注册了AWS re:Invent 2021的免费账号，抽时间浏览了大部分KeyNote，少部分Leadership Session和一小部分我感兴趣的内容。 最后，可能因为看得有点多，上瘾了。我也找来了其他云厂商的年度活动来看，GCP、Azure、阿里云，以及前一段时间在知乎上刷到的字节跳动新的云服务火山引擎。火山引擎IaaS的发布会在12.2号，基本和AWS re:Invent在同一段时间">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-13T08:22:48.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.660Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta property="article:tag" content="Technology">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>AWS re:Invent 2021 观后感 - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="AWS re:Invent 2021 观后感">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-13 17:22" pubdate>
+        December 13, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AWS re:Invent 2021 观后感</h1>
+            
+            <div class="markdown-body">
+              <p>今年我注册了AWS re:Invent 2021的免费账号，抽时间浏览了大部分KeyNote，少部分Leadership Session和一小部分我感兴趣的内容。</p>
+<p>最后，可能因为看得有点多，上瘾了。我也找来了其他云厂商的年度活动来看，GCP、Azure、阿里云，以及前一段时间在知乎上刷到的字节跳动新的云服务火山引擎。火山引擎IaaS的发布会在12.2号，基本和AWS re:Invent在同一段时间，我也对比着看了。以后有时间出一期对比视频。</p>
+<p><a target="_blank" rel="noopener" href="https://www.volcengine.com/activities/live/cloud">2021火山引擎云产品发布会</a></p>
+<p>之后我会挑几个今年AWS活动里面我印象比较深刻的几个部分谈谈自己的感想。</p>
+<p>另外推荐一下AWS的播客，在Spotify或者Apple Podcast上搜AWS直接能搜到。更新非常频繁，上下班通勤路上碎片时间充电的黄金之选。</p>
+<h1 id="CEO-KeyNote"><a href="#CEO-KeyNote" class="headerlink" title="CEO KeyNote"></a>CEO KeyNote</h1><p>AWS CEO的keynote有两个多小时，有很多内容。从开始介绍了15年AWS的历史，这个部分请了纳斯达克CTO来介绍她们是如何使用AWS的服务的。后面回顾第一个发布的产品是S3，之后是EC2，然后扩展EC2从最开始的实例（Instance Type）到上百种的实例，并且还在增加。之后引入了自研芯片Graviton 3和对应的实例。之后介绍了包括Data和机器学习方面的产品，这个演讲部分非常标准，后面细说。再接着是Training和工业转型相关的新服务。最后收尾，云计算对创新的重要性，以及今年keynote的主题transformation。为什么主旨是transformation，是因为自疫情以来，越来越多的企业转向云计算。云计算最大的特点是”pay as go”，不拥有自己的数据中心，或者说机房，只使对自己使用的云上计算资源进行付费。这在后疫情时代是非常有意义的。对于某些在疫情中，业务受阻，需要削减IT支出的企业，比如全美航空，云计算帮助他们节约了成本。对于在疫情中业务取得长足发展的企业，比如Netflix，云计算能够快速响应他们增长的IT资源需求，不存在购买计算机 → 安装 → 部署 → 投入使用的长期循环。以及今年很大的环节在讲解对于数据的使用，从传统的决策到基于数据（data-driven）的决策，也是transformation的一个重点。</p>
+<p>下面想要讲一下data部分的演讲结构，这个是一个非常标准的美式演讲+产品发布。虽然不知道什么时候能用上，但是我认真学习并记了笔记。</p>
+<p>这个部分的演讲从南丁格尔的故事开始，第二次世界大战的时候，南丁格尔发现英军战地医院的死亡率异常高。根据她多年护士生涯的经验判断，死亡率居高不下的原因应该是战地医院卫生措施导致的护理过程中的干扰导致的，她向上级报告了这一想法，并请求批准提高卫生等级的经费。上级因为经费紧张，拒绝将有限的经费用于卫生环境。之后南丁格尔只身采集大量数据，做了一张明显能看出来死亡率与卫生强相关的数据图，最终说服了上司。南丁格尔在战后也因此创举成为第一个获得英女王奖章的女性。以这个故事为引子，CEO提出了当今数据对于作出正确决策的重要性。</p>
+<p>之后他提出了一个数据应用的流程框架（The Data Jounery）：</p>
+<p>Data Sources → Goverence → People, Apps and Devices</p>
+<p>之后分成三个部分说明AWS如何帮助企业在全环节处理、使用和管理自己的数据。每一部分的介绍都关联了既存的AWS服务，也退出了几个新的数据相关的服务。这部分介绍完了之后，CEO邀请了全美航空的CTO来介绍他们公司如何使用AWS来利用数据开展业务。</p>
+<p>在Guest Speeching结束之后，他讲到之前都是说如果使用过去的数据，目前使用机器学习基于已有的数据预测未来也是很重要的。开始介绍机器学习部分产品，包括SageMaker的进一步加强以及面对不了解机器学习的人也能使用的SageMaker Canvas。最后提了一嘴机器学习的民主化，AWS帮助所有人都能使用机器学习的力量。</p>
+<p>最终又回到了南丁格尔的故事，南丁格尔通过数据看到了其他人看不到的东西，AWS帮助每一位客户做到这件事。</p>
+<p>这部分演讲结构非常工整，从一个故事开始，一个故事结尾。中间分成对于现有数据的分析以及对于数据的预测。非常值得学习。</p>
+<h1 id="Netflix-Session"><a href="#Netflix-Session" class="headerlink" title="Netflix Session"></a>Netflix Session</h1><p>Netflix一直是我很感兴趣的一家公司，从2010年Netflix决定把自己的几乎全部计算平台迁移到AWS，他们坚信让专业的人做专业的事情。将计算资源交给云服务厂商打理，能让更加专注于自己的core business——创造优质内容。</p>
+<p>我们先来看几个来自Netflix re:Invent 2016 Speech的数据：</p>
+<ul>
+<li>Netflix 的视频服务在高峰时段占据了高达37%的 Internet 流量。相比之下，YouTube 仅占到 15.6%，网页浏览约 6%, Facebook约 2.7%, Amazon Instant Video 约2.0%， Hulu 约1.9%</li>
+<li>在 AWS 上共利用超过10万个 EC2 Instances 的80万CPU Cores，且在此基础上有约 20% 的波动</li>
+<li>在每个服务区域上的 AWS Elastic Load Balancing 的流量超过 50Gbps</li>
+<li>在 S3 上存储和管理超过15亿个对象的 60 PB 的数据。其中每天要丢弃超过 400TB 的过期数据以及新增 600TB 的数据</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.slideshare.net/AmazonWebServices/aws-reinvent-2016-another-day-in-the-life-of-a-netflix-engineer-dev209">[AWS re:Invent 2016] Day in the Life of a Netflix Engineer</a></p>
+<p>考虑到疫情后，Netflix用户的日均使用时长达到惊人的三个半小时，上述的数字应该会有大幅的提升。</p>
+<p>近几年的re:Invent都会有专门的Netflix session，我挑了几个看了一下，有一个prioritized load shedding的speech非常有意思。我来分享一下大致的内容。</p>
+<h2 id="NFX-Keeping-Netflix-reliable-using-prioritized-load-shedding"><a href="#NFX-Keeping-Netflix-reliable-using-prioritized-load-shedding" class="headerlink" title="[NFX] Keeping Netflix reliable using prioritized load shedding"></a>[NFX] Keeping Netflix reliable using prioritized load shedding</h2><p>简而言之，这项技术是对于用户不同类别的请求进行优先级分类，在请求数目陡增，服务器端Auto-Scaling完成之前，drop掉不影响客户串流体验的请求，以保证最基本的服务质量。</p>
+<p>这个演讲的技术应该分类在SRE或者QA，我想应该没有比Netflix工程师更懂可靠性工程的吧。</p>
+<p>我很早之前就很喜欢看Netflix工程师的speech。如果说谷歌工程师受到evaluate axis里complexity的趋势，倾向于把简单的问题用你能想到最复杂的方式去解决。那么Netflix工程师则是用最朴素的方式去解决问题，并用最能让人理解的方式和逻辑链讲出来。</p>
+<h1 id="AWS-Private-5G"><a href="#AWS-Private-5G" class="headerlink" title="AWS Private 5G"></a>AWS Private 5G</h1><p>我本人是从通信专业跑路到码农的，尽管已背叛C的阵地，但还是一直关注着通信行业新闻的。要说这次AWS活动中让我最意想不到的产品就是CEO KeyNote发布的第二个大项——AWS Private 5G。</p>
+<p>AWS从前几年开始就一直和电信运营商有着密切的合作，美国最大的运营商Verizon迁移了一大部分计算资源到AWS，AWS在日本最大客户是日本用户数最多的运营商NTT DoCoMo。在去年的re:Invent上，AWS宣布推出了5G边缘部署服务——AWS Wavelength。尽管不知道现在这项服务的具体销售数据如何，但从今年早些时候已经在亚太多个市场开始服务来说，运营得应该还不错。</p>
+<p><a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/private5g/">AWS Private 5G</a></p>
+<p>不过从AWS与CSP和网络设备vendor的密切关系来说，Private 5G也就并不是这么意外地出现了。目前网络上对于这项新服务的资料很少，除了官方的介绍page和媒体的新闻稿暂时见不到其他消息。</p>
+<p>由于这是一个面向企业的服务，相信信息以及具体收费需要联系销售人员才能得到spec，作为对其感兴趣的个人，我就很难受了。</p>
+<p>另外，负责这项产品的Principal PM，Bala Thekkedath在AWS官方博客上介绍了一些在CEO KeyNote上没有详细说的细节。包括设想的应用场景，收费模式，以及和partner的合作等等。</p>
+<p><a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/podcasts/492-introducing-aws-private-5g/">AWS Podcast for AWS Private 5G</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Technology/">Technology</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/07/Japan-IT/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">日本码农工作分类——新卒视角</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/09/How-to-study-C/">
+                        <span class="hidden-mobile">如何学习C++</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/12/13/AWS-re-Invent-2021-%E8%A7%82%E5%90%8E%E6%84%9F/';
+          this.page.identifier = '/2021/12/13/AWS-re-Invent-2021-%E8%A7%82%E5%90%8E%E6%84%9F/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

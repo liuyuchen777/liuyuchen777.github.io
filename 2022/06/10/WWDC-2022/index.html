@@ -1,0 +1,631 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="WWDC是苹果全球开发者大会（Apple Worldwide Developers Conference）的缩写，苹果在1983年为了推出Apple Basic，最初的MAC产品之一，在加州举办了发布会。当时开发布会发布新产品还是一个非常新的概念。这个会议是标准conference的形式，开场keynote，有线下的交流会、学习会，并且是面向开发者的大会，也有很多开发者工具的讲演和workshop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊 WWDC 2022">
+<meta property="og:url" content="https://liuyuchen777.github.io/2022/06/10/WWDC-2022/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="WWDC是苹果全球开发者大会（Apple Worldwide Developers Conference）的缩写，苹果在1983年为了推出Apple Basic，最初的MAC产品之一，在加州举办了发布会。当时开发布会发布新产品还是一个非常新的概念。这个会议是标准conference的形式，开场keynote，有线下的交流会、学习会，并且是面向开发者的大会，也有很多开发者工具的讲演和workshop">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2022.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2023.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2024.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2025.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2026.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2027.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2028.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2029.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2030.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2031.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2032.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2033.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2034.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2035.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2036.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2037.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2038.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled%2039.png">
+<meta property="article:published_time" content="2022-06-10T02:09:23.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.662Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="Technology">
+<meta property="article:tag" content="Apple">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/WWDC-2022/Untitled.png">
+  
+  
+  <title>聊聊 WWDC 2022 - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="聊聊 WWDC 2022">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-10 11:09" pubdate>
+        June 10, 2022 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">聊聊 WWDC 2022</h1>
+            
+            <div class="markdown-body">
+              <p>WWDC是苹果全球开发者大会（Apple Worldwide Developers Conference）的缩写，苹果在1983年为了推出Apple Basic，最初的MAC产品之一，在加州举办了发布会。当时开发布会发布新产品还是一个非常新的概念。这个会议是标准conference的形式，开场keynote，有线下的交流会、学习会，并且是面向开发者的大会，也有很多开发者工具的讲演和workshop，是苹果生态的开发者和苹果工程师交流的重要机会，以及还会有一些面向学生的教学活动。</p>
+<p><img src="/img/WWDC-2022/Untitled.png" srcset="/img/loading.gif" lazyload alt="Apple Basic (Apple 2)"></p>
+<p>另外，2002年开始，苹果公司开始将该会议用作新产品的主要发布平台，WWDC也成为了苹果春秋季两次重要的产品发布会之外的另一次重要的产品发布窗口。不过主要还是面向开发者的活动，因此更加偏向于发布新的软件系统，iOS，Mac OS，iPad OS，TV OS，Watch OS。硬件也会有一些。 </p>
+<p>2020年的WWDC苹果推出了M1芯片，开启了Apple Silicon时代，也是ARM架构桌面处理器真正成为主流生产力芯片的开端。ARM架构在这之前更多得用于手机处理器和物联网处理器，因为其RISC精简指令集的特征，比较适合简单的应用场景，并且能耗上的优势更加适用于电池容量有限的设备。M1芯片在苹果自主设计的架构下，和台积电先进的半导体制程加持下，保留了低功耗优势的同时，带来了强大的性能。一套连招打得Intel有点找不着北。</p>
+<p>之后，2021年WWDC苹果推出了M1 Pro，M1 Max用于换上新外壳（刘海屏）的新Mac Pro产品线，2022春季又发布了M1 Ultra用于Mac Studio产品线。</p>
+<p><img src="/img/WWDC-2022/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="新版的Mac Pro，刘海屏和HDMI接口，SD卡接口成了最大的特征"></p>
+<p>今年的WWDC开始之前，M2，M1的继任者的发布成了板上钉钉的传闻，并且新Mac Air产品线将用上和Mac Pro类似的模具的传闻也是满天飞。那么我们来看看这次苹果能在桌面处理器上面整出什么新活吧。并且这次是WWDC是第一次在丘珀蒂诺的apple park线下举办，我看的是回放，长达一个班小时。回放有八种语言字幕，含中文，不错。</p>
+<p><img src="/img/WWDC-2022/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="Apple Store有每次apple event的入口"></p>
+<p><img src="/img/WWDC-2022/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="Cook in Apple Park"></p>
+<p>开场是库克站在建筑物里面bb，每次他这个站姿我都很想吐槽，o型腿严重。开场介绍了以下对于学生，少数族裔，学生等开发者的特别活动。另外一提，六月是美国的同性恋月（Homosexuality on the United States），全称为“女同性恋者、男同性恋者、双性恋者及变性者骄傲月”，支持LGBT的权利，你可以看到很多网站、公司的logo都变成彩虹色了。是2009年奥巴马开的先河。</p>
+<p><img src="/img/WWDC-2022/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="indeed"></p>
+<p><img src="/img/WWDC-2022/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="你SIE日本公司凑什么热闹"></p>
+<p><img src="/img/WWDC-2022/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="中国网站凑什么热闹"></p>
+<p><img src="/img/WWDC-2022/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="谷歌本来就是彩色的，那没事了"></p>
+<h3 id="iOS-16"><a href="#iOS-16" class="headerlink" title="iOS 16"></a>iOS 16</h3><p>第一部分是关于iOS 16的介绍。一贯是由Craig Federighi，software的SVP负责介绍。</p>
+<p><img src="/img/WWDC-2022/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="Craig - Apple Leadership"></p>
+<p>第一个介绍的功能是自定义锁屏界面，他们用的形容词是biggest update on lock screen in history。</p>
+<p><img src="/img/WWDC-2022/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="一段炫酷的预告片"></p>
+<p><img src="/img/WWDC-2022/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="锁屏自定义"></p>
+<p>长按后即可进行自定义，锁屏上的任何元素都可以自定义，还有widget gallery，也就是小组件现在可以放在锁屏了，还可以定义照片的景深和滤镜。不过当Craig说了一下我们把锁屏设计得如此漂亮，确保你能一直欣赏，我还是笑了一下，谁要一直盯着锁屏看啊。另外Focus被带到了锁屏自定义，你定义不同Focus模式下锁屏。</p>
+<p>另外新设计的消息是从底部显示的，更适合全面屏。</p>
+<p>接着过渡到了Focus新功能的介绍，更细粒度的focus设置。</p>
+<p>接着是iMessage的新功能介绍：</p>
+<ul>
+<li>编辑已发送的信息</li>
+<li>撤回</li>
+<li>标记对话为未读（对我比较有用，有时候我点开暂时不想回，之后就完全忘记回了）</li>
+</ul>
+<p>接着介绍了SharePaly in Message。过渡到了share API。新的Share with You的API，面向开发者，可以在iOS系统上和别人共同听音乐、看电影之类的。</p>
+<p>之后介绍了新的听写功能，就是键盘那里的语音转文字。新的听写功能可以让听写和打字同时进行，听写的时候键盘不用保持在话筒界面了。另外，苹果芯片现在都是带一个NPU的，神经网络引擎，为神经网络forward设计，能够让离线在手机上部署模型更加高效，听写也得益于这个硬件设计，语音转文字离线非常快，并且正确率很高，因为能够部署较大的模型离线使用。</p>
+<p> 之后介绍了live text，也就是苹果第一方应用里能够直接复制图片里文字的功能，也和NPU的应用有关。新的live text不止能复制，并且还能翻译。同时公布了live text API，开发者之后在第三方APP也能使用这个功能了。</p>
+<p><img src="/img/WWDC-2022/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="目标识别"></p>
+<p><img src="/img/WWDC-2022/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="第一方应用发送"></p>
+<p>并且现在live功能能直接从图片提取主题，截取后发送出去，也是计算机视觉的一个应用。他们宣称这个计算需要在几毫秒内进行几百次运算，得益于NPU的支持。</p>
+<p>之后是新的钱包（wallet）新功能的介绍，在US可以用于年龄认证了，一些R18，R20的应用也可以轻松通过wallet进行认证了。另外之前wallet是可以NFC存储一些IC门禁卡的，现在NFC里这些信息可以通过message共享。比如校区门口需要刷IC卡，你有朋友来你不想下去接他，你可以直接把IC信息发给他，他就能直接刷开小区的门。另外他们也在和一些酒店合作，可以直接在app上下载酒店房卡，然后用手机打开。</p>
+<p>之后是Apple Pay Later功能，金融服务，类似于花呗，可以分期，应该暂时只在US。</p>
+<p>再下来是Apple自带地图应用的介绍。比较经验我的是下面这个类似于谷歌街景的功能，不过这个可能是挑出来效果比较好的，实际应该不可能大部分是这个效果。</p>
+<p><img src="/img/WWDC-2022/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="3D地图"></p>
+<p><img src="/img/WWDC-2022/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="说是之后会有更多城市支持高精度3D"></p>
+<p>新的Map Kit会有更多地理信息可以让开发者使用。</p>
+<p>之后是Family Share的新更新，增加了家长控制的新功能。</p>
+<p>照片共享的更新，共享照片库的功能，一个单独的相册，能自动和手动转移家庭相关的照片。</p>
+<p><img src="/img/WWDC-2022/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="iCloud Share Library"></p>
+<h3 id="Mac-M2，Mac-Air"><a href="#Mac-M2，Mac-Air" class="headerlink" title="Mac - M2，Mac Air"></a>Mac - M2，Mac Air</h3><p>开场回顾M1系列：</p>
+<p><img src="/img/WWDC-2022/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="M1 Series"></p>
+<p>M1 Series</p>
+<p>所以其实架构都是一样的，不同的M1规格就是增加了核心数，芯片更大了。然而绝大部分程序都是单程的，实际的使用提升并不会特别明显。</p>
+<p>正式介绍M2之前，强调了power-compute efficiency。因为没有用上新的3nm工艺，是台积电第二代5nm工艺。有200亿晶体管，25%之于M1。UM的带宽这次来到了100Gbps，较于M1提升50%。内存最大支持24GB。核心上：</p>
+<p><img src="/img/WWDC-2022/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="Compute Core"></p>
+<p>之后是重要的对比图了</p>
+<p><img src="/img/WWDC-2022/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="Compare with M1"></p>
+<p>自家的对比图是提升18%，不算大，意料之中，毕竟架构和工艺没改，正常挤牙膏。</p>
+<p><img src="/img/WWDC-2022/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="Compare with Intel"></p>
+<p>对比A和I家的桌面端处理器，能耗依然强悍。</p>
+<p>GPU方面相比CPU提升较大，25%同能耗性能提升，35%最大性能提升。 </p>
+<p><img src="/img/WWDC-2022/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="Compare Power Efficiency"></p>
+<p>另外一些特殊功能的专有芯片一直是M系列的亮点，这次介绍了NPU和安全芯片。NPU可以一秒进行15.8 trillion的运算，相较40%提升。</p>
+<p><img src="/img/WWDC-2022/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="GPU"></p>
+<p>媒体芯片方面，专门新增了对ProRes支持的专用的单元。这也是为什么M1 Mac播放视频非常省电，转码非常高效的原因。</p>
+<p><img src="/img/WWDC-2022/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="Other Core"></p>
+<p>总结如下：</p>
+<p><img src="/img/WWDC-2022/Untitled%2024.png" srcset="/img/loading.gif" lazyload></p>
+<p>新的MacBook Air来了！对于新模具的介绍词是remarkablely thin，认真的吗？</p>
+<p><img src="/img/WWDC-2022/Untitled%2025.png" srcset="/img/loading.gif" lazyload></p>
+<p>新增了magsafe充电接口，依然两个type c，当然type c还是能充电，不过多一个选择，在家的话magsafe充电能省出来接口。</p>
+<p><img src="/img/WWDC-2022/Untitled%2026.png" srcset="/img/loading.gif" lazyload></p>
+<p>屏幕是刘海屏，屏幕素质还是没变。前摄变成1080P了，比之前的2倍分辨率，也是应对现在video会议越来越多了。扬声器两个在键盘顶部，三个阵列麦克风，有一定提升。键盘重新设计，整块黑色，和Mac Pro一样了。</p>
+<p>性能上其实提升不大：</p>
+<p><img src="/img/WWDC-2022/Untitled%2027.png" srcset="/img/loading.gif" lazyload></p>
+<p>依然是无风扇设计，18小时待机。现在支持快充，30分钟充满一半电量。</p>
+<p><img src="/img/WWDC-2022/Untitled%2028.png" srcset="/img/loading.gif" lazyload></p>
+<p>另外老模具里塞进了M2当一个新产品卖。</p>
+<h3 id="Mac-OS-16-Venture"><a href="#Mac-OS-16-Venture" class="headerlink" title="Mac OS 16 - Venture"></a>Mac OS 16 - Venture</h3><p>以前版本的 macOS 以大型猫科动物命名，例如 Mac OS X v10.8 被称为“Mountain Lion”，但随着 2013 年 6 月 OS X Mavericks 的公布，命名开始采用加州地标。这次是Venture：</p>
+<p><img src="/img/WWDC-2022/Untitled%2029.png" srcset="/img/loading.gif" lazyload></p>
+<p>一上来介绍了新的任务管理器，stage manager：</p>
+<p><img src="/img/WWDC-2022/Untitled%2030.png" srcset="/img/loading.gif" lazyload></p>
+<p>大概就是把多个窗口组成分组摆在桌面左侧，不需要上滑触控板进入任务管理器就可以切换工作组。</p>
+<p>Spot Light也有更新了，就是cmd+空格出来那个全系统搜索。现在可以搜live text了，以及跨设备搜索了。</p>
+<p>Mail也有了更新，包括：</p>
+<ul>
+<li>撤回发送</li>
+<li>schedule send（原来之前一直没有）</li>
+<li>follow up建议 → 机器学习应用？</li>
+<li>inner mail search → 之前确实不太好用<ul>
+<li>附件等单独搜索</li>
+<li>typing建议</li>
+</ul>
+</li>
+</ul>
+<p>Safri的更新，据苹果称是世界上最快的浏览器。包括分享标签组，隐私保护等新功能。其中PassKey功能很有意思，你注册账户时不需要自己再输入密码，直接Mac或者iPhone上的生物识别，系统会自动生成一个token后续登录，在任何苹果设备上通用，并且在微软或谷歌设备上用二维码扫描可以登录。</p>
+<p><img src="/img/WWDC-2022/Untitled%2031.png" srcset="/img/loading.gif" lazyload alt="故意把windows电脑画得很厚"></p>
+<p>之后是Mac OS的游戏体验。苹果的图形Metal API。不是太懂计算机图形学。有意思的是宣布生化危机7登录Mac后，找了卡普空的人来介绍。我都准备好听日式英语了，结果他开始说日语了。</p>
+<p><img src="/img/WWDC-2022/Untitled%2032.png" srcset="/img/loading.gif" lazyload></p>
+<p>另外现在可以用iPhone当mac摄像头了：</p>
+<p><img src="/img/WWDC-2022/Untitled%2033.png" srcset="/img/loading.gif" lazyload alt="好怪啊"></p>
+<p>好怪啊</p>
+<p>Mac OS更新总结</p>
+<p><img src="/img/WWDC-2022/Untitled%2034.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="iPad-OS-16"><a href="#iPad-OS-16" class="headerlink" title="iPad OS 16"></a>iPad OS 16</h3><p>天气应用更好的动画效果和对界面的自定义。</p>
+<p>第一方应用的共享，以及Collaboration API</p>
+<p><img src="/img/WWDC-2022/Untitled%2035.png" srcset="/img/loading.gif" lazyload></p>
+<p>新的APP，有点像Miro，合作白板，Sneak Peak：</p>
+<p><img src="/img/WWDC-2022/Untitled%2036.png" srcset="/img/loading.gif" lazyload></p>
+<p>Stage Manager on Mac，右下上左上划进入该模式</p>
+<p><img src="/img/WWDC-2022/Untitled%2037.png" srcset="/img/loading.gif" lazyload></p>
+<p>多个窗口这个比较有用</p>
+<p><img src="/img/WWDC-2022/Untitled%2038.png" srcset="/img/loading.gif" lazyload></p>
+<p>总结</p>
+<p><img src="/img/WWDC-2022/Untitled%2039.png" srcset="/img/loading.gif" lazyload></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Technology/">Technology</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Apple/">Apple</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/16/toeic/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一个月速成托业950</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/25/TLS-Blog/">
+                        <span class="hidden-mobile">东京LS运营总结</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2022/06/10/WWDC-2022/';
+          this.page.identifier = '/2022/06/10/WWDC-2022/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

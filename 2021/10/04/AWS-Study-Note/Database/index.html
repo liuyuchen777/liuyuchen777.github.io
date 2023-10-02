@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="RDSRelational Database Service  A managed relational database service.v Support multiple SQL engines, easy to scale, backup and secure. RDS is the AWS Solution for relational databases. There are 6 re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Database Service: RDS, Aurora, Redshift, DynamoDB, DMS">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Database/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="RDSRelational Database Service  A managed relational database service.v Support multiple SQL engines, easy to scale, backup and secure. RDS is the AWS Solution for relational databases. There are 6 re">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2022.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2023.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2024.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2025.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2026.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2027.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2028.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2029.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2030.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2031.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2032.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2033.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2034.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2035.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2036.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2037.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2038.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled%2039.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.659Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Database/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Database Service: RDS, Aurora, Redshift, DynamoDB, DMS - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Database Service: RDS, Aurora, Redshift, DynamoDB, DMS">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Database Service: RDS, Aurora, Redshift, DynamoDB, DMS</h1>
+            
+            <div class="markdown-body">
+              <h1 id="RDS"><a href="#RDS" class="headerlink" title="RDS"></a>RDS</h1><p>Relational Database Service </p>
+<p>A managed relational database service.v Support multiple SQL engines, easy to scale, backup and secure.</p>
+<p>RDS is the AWS Solution for relational databases. There are 6 relational database options currently available on AWS.</p>
+<p><img src="/img/AWS/Database/Untitled.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled.png"></p>
+<h2 id="Encryption"><a href="#Encryption" class="headerlink" title="Encryption"></a>Encryption</h2><p><img src="/img/AWS/Database/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%201.png"></p>
+<h2 id="Backup"><a href="#Backup" class="headerlink" title="Backup"></a>Backup</h2><p>There are two backup solutions available for RDS</p>
+<ul>
+<li>Automated Backups</li>
+</ul>
+<p><img src="/img/AWS/Database/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%202.png"></p>
+<ul>
+<li>Manual Snapshots</li>
+</ul>
+<p><img src="/img/AWS/Database/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%203.png"></p>
+<h2 id="Restoring-Backup"><a href="#Restoring-Backup" class="headerlink" title="Restoring Backup"></a>Restoring Backup</h2><p> When recovering AWS will take the most recent daily backup, and apply transaction log data relevant to that day. This allows point-in-time recovery down to a second inside the retention period.</p>
+<p><img src="/img/AWS/Database/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%204.png"></p>
+<h2 id="Multi-AZ"><a href="#Multi-AZ" class="headerlink" title="Multi-AZ"></a>Multi-AZ</h2><p>ensure database remains available if another AZ becomes unavailable</p>
+<p><img src="/img/AWS/Database/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%205.png"></p>
+<p>Synchronize</p>
+<p>makes an exact copy of your database in another AZ. Automatically synchronizes changes in the database over to the standby copy.</p>
+<p><img src="/img/AWS/Database/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%206.png"></p>
+<p>Automatic Failover Protection</p>
+<p>If one AZ goes down, failover will occur and the standby slave will be promoted to master</p>
+<p><img src="/img/AWS/Database/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%207.png"></p>
+<h2 id="Read-Replicas"><a href="#Read-Replicas" class="headerlink" title="Read Replicas"></a>Read Replicas</h2><p>Read Replicas allow you to run multiples copies of your db, these copies only allows reads (no writes) and is intended to alleviate the workload of your primary db to improve performance.</p>
+<p><img src="/img/AWS/Database/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%208.png"></p>
+<p>you can have up to <strong>5 replicas</strong> of a database</p>
+<p>each RR will have its own DNS endpoint</p>
+<p>you can have Multi-AZ replicas, replicas in another region or even replicas of other replicas</p>
+<p><img src="/img/AWS/Database/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%209.png"></p>
+<p>Replicas can be promoted to their own db, but this breaks replication.</p>
+<p>No automatic failover, if primary copy fails, you must manually update urls to point at copy.</p>
+<h2 id="Multi-AZ-vs-Read-Replicas"><a href="#Multi-AZ-vs-Read-Replicas" class="headerlink" title="Multi-AZ vs. Read Replicas"></a>Multi-AZ vs. Read Replicas</h2><p><img src="/img/AWS/Database/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2010.png"></p>
+<h2 id="RDS-Cheat-Sheet"><a href="#RDS-Cheat-Sheet" class="headerlink" title="RDS Cheat Sheet"></a>RDS Cheat Sheet</h2><p><img src="/img/AWS/Database/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2011.png"></p>
+<h1 id="Aurora"><a href="#Aurora" class="headerlink" title="Aurora"></a>Aurora</h1><p>Fully Managed Postgres or MySQL compatible database designed by default to scale and fine-tuned to be really fast.</p>
+<h2 id="Intro-to-Aurora"><a href="#Intro-to-Aurora" class="headerlink" title="Intro to Aurora"></a>Intro to Aurora</h2><p>combines the speed and availability of high-end db with simplicity and cost-effectiveness of open source db.</p>
+<p><img src="/img/AWS/Database/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2012.png"></p>
+<h2 id="Scaling-with-Aurora"><a href="#Scaling-with-Aurora" class="headerlink" title="Scaling with Aurora"></a>Scaling with Aurora</h2><p>start with 10GB storage and scale in 10GB increments up to 64TB</p>
+<p>storage is autoscaling</p>
+<p>computing resources can scale all the way up to 32 vCPUs and 244GB of memory</p>
+<p><img src="/img/AWS/Database/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2013.png"></p>
+<h2 id="Availability-with-Aurora"><a href="#Availability-with-Aurora" class="headerlink" title="Availability with Aurora"></a>Availability with Aurora</h2><p><img src="/img/AWS/Database/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2014.png"></p>
+<h2 id="Fault-Tolerance-and-Durabillity"><a href="#Fault-Tolerance-and-Durabillity" class="headerlink" title="Fault Tolerance and Durabillity"></a>Fault Tolerance and Durabillity</h2><p>Back-up and Failover is handled automatically</p>
+<p><img src="/img/AWS/Database/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2015.png"></p>
+<p>storage is self-healing, in that data blocks and disks are continuously scanned for errors and repaired automatically.</p>
+<h2 id="Aurora-Replicas"><a href="#Aurora-Replicas" class="headerlink" title="Aurora Replicas"></a>Aurora Replicas</h2><p>2 types of replicas available</p>
+<p>Up to 15 replicas</p>
+<p><img src="/img/AWS/Database/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2016.png"></p>
+<h2 id="Aurora-Serverless"><a href="#Aurora-Serverless" class="headerlink" title="Aurora Serverless"></a>Aurora Serverless</h2><p><img src="/img/AWS/Database/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2017.png"></p>
+<p>serverless is more elastic</p>
+<p>compare to one writer and multiple readers, serverless is less expensive</p>
+<h2 id="Aurora-Cheat-Sheet"><a href="#Aurora-Cheat-Sheet" class="headerlink" title="Aurora Cheat Sheet"></a>Aurora Cheat Sheet</h2><p><img src="/img/AWS/Database/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2018.png"></p>
+<h1 id="Redshift"><a href="#Redshift" class="headerlink" title="Redshift"></a>Redshift</h1><p>Fully managed PB-size <strong>Data Warehouse</strong></p>
+<p>Analyze (Run complex SQL queries) on massive amounts of data Columnar Store Database.</p>
+<h2 id="What-is-Data-Warehouse"><a href="#What-is-Data-Warehouse" class="headerlink" title="What is Data Warehouse?"></a>What is Data Warehouse?</h2><p>what is database transcation?</p>
+<p>A transaction symbolizes a unit of work performed within a database management system</p>
+<p>ex. read and write</p>
+<p><img src="/img/AWS/Database/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2019.png"></p>
+<h2 id="Intro-of-Redshift"><a href="#Intro-of-Redshift" class="headerlink" title="Intro of Redshift"></a>Intro of Redshift</h2><p>less cost</p>
+<p>use for Business Intelligence</p>
+<p>OLAP</p>
+<p><img src="/img/AWS/Database/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2020.png"></p>
+<h2 id="Use-Case"><a href="#Use-Case" class="headerlink" title="Use Case"></a>Use Case</h2><p><img src="/img/AWS/Database/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2021.png"></p>
+<p>different source</p>
+<p>Columnar Storage stores data together as columns instead of rows</p>
+<p><img src="/img/AWS/Database/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2022.png"></p>
+<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>Single Node</p>
+<p>Node come in size of 160GB. You can launch a single node to get started with Redshift.</p>
+<p><img src="/img/AWS/Database/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2023.png"></p>
+<p>Multi-Node</p>
+<p>you can launch a cluster of nodes with Multi-Node mode</p>
+<ul>
+<li>Leader Node: manage client connections and receiving queries</li>
+<li>Compute Node: store data and performs queries up to 128 compute node</li>
+</ul>
+<p><img src="/img/AWS/Database/Untitled%2024.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2024.png"></p>
+<h2 id="Node-Type-and-Sizes"><a href="#Node-Type-and-Sizes" class="headerlink" title="Node Type and Sizes"></a>Node Type and Sizes</h2><p>There are two types of Nodes</p>
+<p><img src="/img/AWS/Database/Untitled%2025.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2025.png"></p>
+<h2 id="Compression"><a href="#Compression" class="headerlink" title="Compression"></a>Compression</h2><p><img src="/img/AWS/Database/Untitled%2026.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2026.png"></p>
+<h2 id="Processing"><a href="#Processing" class="headerlink" title="Processing"></a>Processing</h2><p>Massively Parallel Processing (MPP)</p>
+<p>Automatically distributes data and query loads across all nodes</p>
+<p>Lets you easily add new nodes to your data warehouse while still maintaining fast query performance</p>
+<p><img src="/img/AWS/Database/Untitled%2027.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2027.png"></p>
+<h2 id="Back-up"><a href="#Back-up" class="headerlink" title="Back-up"></a>Back-up</h2><p>backups are enabled by default with a 1 day retention period.</p>
+<p>retention period can be modified up to 35 days.</p>
+<p><img src="/img/AWS/Database/Untitled%2028.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2028.png"></p>
+<h2 id="Billing"><a href="#Billing" class="headerlink" title="Billing"></a>Billing</h2><p><img src="/img/AWS/Database/Untitled%2029.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2029.png"></p>
+<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><p>Data-in-transit: Encrypted using SSL</p>
+<p>Data-at-rest: Encrypted using AES-256 encryption</p>
+<p>Database Encryption can be applied using</p>
+<ul>
+<li>KMS multi-tenant HSM</li>
+<li>CloudHSM single-tenant HSM</li>
+</ul>
+<p><img src="/img/AWS/Database/Untitled%2030.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2030.png"></p>
+<h2 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h2><p>RS is a single AZ.</p>
+<p>To run in Multi-AZ you would have to run multiple RS Clusters in different AZs with same inputs.</p>
+<p>Snapshots can be restored to a different AZ in the event an outage occurs.</p>
+<p><img src="/img/AWS/Database/Untitled%2031.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2031.png"></p>
+<h2 id="Supplement-EMR"><a href="#Supplement-EMR" class="headerlink" title="[Supplement] EMR"></a>[Supplement] EMR</h2><p>Amazon EMR is the industry-leading cloud big data platform for processing vast amounts of data using open source tools such as Apache Spark, Apache Hive, Apache HBase, Apache Flink, Apache Hudi, and Presto. </p>
+<p>Amazon EMR makes it easy to set up, operate, and scale your big data environments by automating time-consuming tasks like provisioning capacity and tuning clusters. With EMR you can run <strong>PB-scale</strong> analysis at less than half of the cost of traditional on-premises solutions and over 3x faster than standard Apache Spark. </p>
+<p>You can run workloads on Amazon EC2 instances, on Amazon Elastic Kubernetes Service (EKS) clusters, or on-premises using EMR on AWS Outposts.</p>
+<h2 id="Redshift-CheatSheet"><a href="#Redshift-CheatSheet" class="headerlink" title="Redshift CheatSheet"></a>Redshift CheatSheet</h2><p><img src="/img/AWS/Database/Untitled%2032.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2032.png"></p>
+<h1 id="DynamoDB"><a href="#DynamoDB" class="headerlink" title="DynamoDB"></a>DynamoDB</h1><p>A key-value and document database (NoSQL) which can guarantees consistent reads and writes at any scale.</p>
+<h2 id="Intro-to-DynamoDB"><a href="#Intro-to-DynamoDB" class="headerlink" title="Intro to DynamoDB"></a>Intro to DynamoDB</h2><p><img src="/img/AWS/Database/Untitled%2033.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2033.png"></p>
+<p>define your read and write capacity</p>
+<p><img src="/img/AWS/Database/Untitled%2034.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2034.png"></p>
+<h2 id="Table-Structure"><a href="#Table-Structure" class="headerlink" title="Table Structure"></a>Table Structure</h2><p><img src="/img/AWS/Database/Untitled%2035.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2035.png"></p>
+<h2 id="Consistent-Read"><a href="#Consistent-Read" class="headerlink" title="Consistent Read"></a>Consistent Read</h2><p>When data needs to update it has to write update to all copies. It is possible for data to be inconsistent if you are reading from a copy which has yet to be updated. You have the ability to choose the read consistency in DynamoDB to meet your need.</p>
+<p><img src="/img/AWS/Database/Untitled%2036.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2036.png"></p>
+<p><img src="/img/AWS/Database/Untitled%2037.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2037.png"></p>
+<h2 id="DynamoDB-Accelerator-DAX"><a href="#DynamoDB-Accelerator-DAX" class="headerlink" title="DynamoDB Accelerator (DAX)"></a>DynamoDB Accelerator (DAX)</h2><p>Amazon DynamoDB Accelerator (DAX) is a fully managed, highly available, <strong>in-memory cache</strong> for Amazon DynamoDB that delivers up to a 10 times performance improvement—from milliseconds to microseconds—even at millions of requests per second.</p>
+<p>DAX does all the heavy lifting required to add in-memory acceleration to your DynamoDB tables, without requiring developers to manage cache invalidation, data population, or cluster management.</p>
+<h2 id="DynamoDB-CheatSheet"><a href="#DynamoDB-CheatSheet" class="headerlink" title="DynamoDB CheatSheet"></a>DynamoDB CheatSheet</h2><p><img src="/img/AWS/Database/Untitled%2038.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2038.png"></p>
+<h1 id="DMS"><a href="#DMS" class="headerlink" title="DMS"></a>DMS</h1><p><strong>Database Migration Service</strong></p>
+<p>AWS Database Migration Service helps you migrate databases to AWS quickly and securely. The source database remains fully operational during the migration, minimizing downtime to applications that rely on the database. The AWS Database Migration Service can migrate your data to and from most widely used commercial and open-source databases.</p>
+<p><img src="/img/AWS/Database/Untitled%2039.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Database/Untitled%2039.png"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/DNS/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Route53</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Other/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Other: Elastic Cache, Kinesis, AWS AD</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Database/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Database/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

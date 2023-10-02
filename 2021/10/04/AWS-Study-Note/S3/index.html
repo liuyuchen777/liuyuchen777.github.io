@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="S3Overviewsimple storage service objected-based storage service (manage data as object) as opposed to other storage architecture  file system which manages data as a files and fire hierarchy block sto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] S3 &amp; Snowball">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/S3/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="S3Overviewsimple storage service objected-based storage service (manage data as object) as opposed to other storage architecture  file system which manages data as a files and fire hierarchy block sto">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled%2017.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.659Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/S3/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] S3 &amp; Snowball - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] S3 &amp; Snowball">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] S3 &amp; Snowball</h1>
+            
+            <div class="markdown-body">
+              <h1 id="S3"><a href="#S3" class="headerlink" title="S3"></a>S3</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>simple storage service</p>
+<p>objected-based storage service (manage data as object)</p>
+<p>as opposed to other storage architecture</p>
+<ul>
+<li>file system which manages data as a files and fire hierarchy</li>
+<li>block storage which manages data as blocks within sectors and tracks</li>
+</ul>
+<p>[S3 Object]</p>
+<ul>
+<li>Key</li>
+<li>Value</li>
+<li>Version ID: when versioning enabled</li>
+<li>Metadata: additional information attached to the object</li>
+</ul>
+<p>store data from <strong>0 Bytes to 5 Terabytes</strong></p>
+<p>[S3 Bucket]</p>
+<p>hold objects, like top folder </p>
+<p>universal namespace</p>
+<h2 id="Storage-Class-and-Comparsion"><a href="#Storage-Class-and-Comparsion" class="headerlink" title="Storage Class and Comparsion"></a>Storage Class and Comparsion</h2><p>! trade retrieval time, accessibility for cheaper storage !</p>
+<p>11 9’s (11 nines) &#x3D; 99.999999999%</p>
+<p>9 9’s (9 nines) &#x3D; 99.9999999%</p>
+<p>[Type]</p>
+<p>standard (classes)</p>
+<p>intelligent tiering</p>
+<p>standard infrequently accessed (IA)</p>
+<p>one zone IA</p>
+<p>glacier</p>
+<p>glacier deep archive</p>
+<p><img src="/img/AWS/S3/Untitled.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled.png"></p>
+<h2 id="S3-Glacier-Retrieving-Options"><a href="#S3-Glacier-Retrieving-Options" class="headerlink" title="S3 Glacier Retrieving Options"></a>S3 Glacier Retrieving Options</h2><p>from minutes to hours</p>
+<ul>
+<li><strong>Expedited —</strong> Expedited retrievals allow you to quickly access your data when occasional urgent requests for a subset of archives are required. For all but the largest archives (250 MB+), data accessed using Expedited retrievals are typically made available within <strong>1–5 minutes</strong>. Provisioned Capacity ensures that retrieval capacity for Expedited retrievals is available when you need it.</li>
+<li><strong>Standard —</strong> Standard retrievals allow you to access any of your archives within <strong>several hours</strong>. Standard retrievals typically complete within 3–5 hours. This is the default option for retrieval requests that do not specify the retrieval option.</li>
+<li><strong>Bulk —</strong> Bulk retrievals are S3 Glacier’s lowest-cost retrieval option, which you can use to retrieve large amounts, even petabytes, of data inexpensively in a day. Bulk retrievals typically complete within <strong>5–12 hours</strong>.</li>
+</ul>
+<h2 id="S3-Security"><a href="#S3-Security" class="headerlink" title="S3 Security"></a>S3 Security</h2><p>All new buckets are PRIVATE when created by default</p>
+<p>Logging per request can be turned on a bucket</p>
+<p>Log files are generated and saved in a different bucket (even a bucket is a different AWS account if desired)</p>
+<p><img src="/img/AWS/S3/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%201.png"></p>
+<p>Access control is configured using Bucket policies and Access Control Lists (ACL)</p>
+<p><img src="/img/AWS/S3/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%202.png"></p>
+<h2 id="Encryption"><a href="#Encryption" class="headerlink" title="Encryption"></a>Encryption</h2><p>encryption in transit - traffic between your lock host and S3 is achieved via SSL&#x2F;TSL   </p>
+<p>server-side encryption (SSE) - encryption at rest</p>
+<p>S3 managed keys</p>
+<ul>
+<li>SSE-AES: S3 handle the key, uses AES-256 algorithm</li>
+<li>SSE-KMS: envelope encryption, AWS KMS and you manage the keys</li>
+<li>SSE-C: customer provide key</li>
+</ul>
+<p><img src="/img/AWS/S3/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%203.png"></p>
+<h2 id="Data-Consistency"><a href="#Data-Consistency" class="headerlink" title="Data Consistency"></a>Data Consistency</h2><ul>
+<li>[new objects] read after write consistency</li>
+</ul>
+<p>upload new object to S3, you are able to read immediately</p>
+<ul>
+<li>[overwrite (PUTS) or delete objects (DELETE)] eventual consistency</li>
+</ul>
+<p>when overwrite or delete an object it takes time for S3 to replicate versions to AZs</p>
+<p>if you read immediately, S3 may return you an old copy.</p>
+<h2 id="Cross-Region-Replication-CRR"><a href="#Cross-Region-Replication-CRR" class="headerlink" title="Cross Region Replication (CRR)"></a>Cross Region Replication (CRR)</h2><p><img src="/img/AWS/S3/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%204.png"></p>
+<p>When enabled, any object that is uploaded will be automatically replicated to another regions.</p>
+<p>Must have <strong>versioning</strong> turn on both source and dest bucket.</p>
+<h2 id="S3-Versioning"><a href="#S3-Versioning" class="headerlink" title="S3 Versioning"></a>S3 Versioning</h2><ul>
+<li>store all version of an object in S3</li>
+<li>once enabled it cannot be disabled, only suspended on the bucket</li>
+<li>fully integrates with S3 lifecycle rules</li>
+<li>MFA delete feature provides extra protection against deletion of your data</li>
+</ul>
+<p><img src="/img/AWS/S3/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%205.png"></p>
+<p><img src="/img/AWS/S3/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%206.png"></p>
+<h2 id="Lifecycle-Management"><a href="#Lifecycle-Management" class="headerlink" title="Lifecycle Management"></a>Lifecycle Management</h2><p>Automate the process of moving objects to different storage classes and deleting objects all together</p>
+<p>can used together with versioning</p>
+<p>can be applied to both current and previous version</p>
+<p><img src="/img/AWS/S3/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%207.png"></p>
+<p>lifecycle rule</p>
+<p><img src="/img/AWS/S3/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%208.png"></p>
+<h2 id="Transfer-Acceleration"><a href="#Transfer-Acceleration" class="headerlink" title="Transfer Acceleration"></a>Transfer Acceleration</h2><p>Fast and secure transfer of files over long distances between your end users and an S3 bucket</p>
+<p>CloudFront → Edge Location</p>
+<p>Instead of uploading to your bucket, users use a distinct URL for an Edge Location</p>
+<p><img src="/img/AWS/S3/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%209.png"></p>
+<h2 id="Pre-signed-URLs"><a href="#Pre-signed-URLs" class="headerlink" title="Pre-signed URLs"></a>Pre-signed URLs</h2><p>generate a URL which provides you temporary access to an object to either upload or download object data.</p>
+<p>provide access to private objects</p>
+<p>by AWS CLI or AWS SDK</p>
+<div class="code-wrapper"><pre><code class="hljs bash">aws s3 presign s3://mybucket/myobject --expires-in 300
+<span class="hljs-comment"># output</span>
+...url...</code></pre></div>
+
+<p>ex. web application which needs to allow users to download files from a password protected part of your app. generates pre-signed url which expires after 5s.</p>
+<h2 id="MFA-Delete"><a href="#MFA-Delete" class="headerlink" title="MFA Delete"></a>MFA Delete</h2><p>ensures users cannot delete objects from a bucket unless they provide their MFA code.</p>
+<p><img src="/img/AWS/S3/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%2010.png"></p>
+<p>delete only in this condition:</p>
+<ul>
+<li>AWS CLI must be used to turn on MFA</li>
+<li>the bucket must have versioning turned on</li>
+</ul>
+<p>Only the bucket owner logged in as root user can DELETE objects from bucket</p>
+<h2 id="Lab-on-S3"><a href="#Lab-on-S3" class="headerlink" title="Lab on S3"></a>Lab on S3</h2><p>S3 in region free!</p>
+<p>AWS CLI S3 command</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># list all buckets</span>
+aws s3 <span class="hljs-built_in">ls</span>
+<span class="hljs-comment"># list all folders and objects in bucket</span>
+aws s3 <span class="hljs-built_in">ls</span> s3://liuyuchen777
+<span class="hljs-comment"># list all folders and objects in folder</span>
+aws s3 <span class="hljs-built_in">ls</span> s3://liuyuchen777/pic
+<span class="hljs-comment"># download object</span>
+aws s3 <span class="hljs-built_in">cp</span> s3://liuyuchen777/pic/001.jpg ~/Desktop/001.jpg
+<span class="hljs-comment"># upload object to s3 bucket (002.jpg is not in bucket)</span>
+aws s3 <span class="hljs-built_in">cp</span> s3://liuyuchen777/pic/002.jpg ~/Desktop/002.jpg
+<span class="hljs-comment"># create pre-signed url that expires in 300s</span>
+aws s3 presign s3://liuyuchen777 --expires-in 300</code></pre></div>
+
+<h2 id="Cheatsheet-on-S3"><a href="#Cheatsheet-on-S3" class="headerlink" title="Cheatsheet on S3"></a>Cheatsheet on S3</h2><p><img src="/img/AWS/S3/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%2011.png"></p>
+<p><img src="/img/AWS/S3/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%2012.png"></p>
+<p><img src="/img/AWS/S3/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%2013.png"></p>
+<h1 id="AWS-Snow-Family"><a href="#AWS-Snow-Family" class="headerlink" title="AWS Snow Family"></a>AWS Snow Family</h1><h2 id="Snowball"><a href="#Snowball" class="headerlink" title="Snowball"></a>Snowball</h2><p><strong>Low Cost cost hundreds dollar to transfer 100TB over Internet and snow ball only cost 1&#x2F;5</strong></p>
+<p><strong>Speed</strong> snowball takes only less than a week</p>
+<p><img src="/img/AWS/S3/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%2014.png"></p>
+<p>Features and Limitations:</p>
+<ul>
+<li>E-link display</li>
+<li>Tamper and weather proof</li>
+<li>Data is encrypted end-to-end</li>
+<li>Trusted Platform Module (TPM)</li>
+<li>completed within 90 days</li>
+<li>Snowball can Import and Export from S3</li>
+</ul>
+<p>50TB and 80 TB</p>
+<h2 id="AWS-Snowball-Edge"><a href="#AWS-Snowball-Edge" class="headerlink" title="AWS Snowball Edge"></a>AWS Snowball Edge</h2><p>more storage and with <strong>local processing</strong></p>
+<p><img src="/img/AWS/S3/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%2015.png"></p>
+<p>Snowball Edge Compute Optimized is a secure, rugged device that brings AWS computing and storage capabilities</p>
+<h2 id="Snowmobile"><a href="#Snowmobile" class="headerlink" title="Snowmobile"></a>Snowmobile</h2><p>45 foot-long ruggedized shipping container, pulled by a semi-trailer truck</p>
+<p>up to 100PB</p>
+<p><img src="/img/AWS/S3/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%2016.png"></p>
+<p>for S3 and S3 Glacier</p>
+<h2 id="Cheatsheet"><a href="#Cheatsheet" class="headerlink" title="Cheatsheet"></a>Cheatsheet</h2><p><img src="/img/AWS/S3/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/S3/Untitled%2017.png"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Quick-Deploy/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Container & Kubernetes</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Security/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Security: VPC, IAM, NACLs, WAF</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/S3/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/S3/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

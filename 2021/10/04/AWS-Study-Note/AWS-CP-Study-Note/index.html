@@ -1,0 +1,2045 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="Memo for AWS Cloud Practitioner【Cloud Concepts】Why cloud computing?On-premise:  You own the servers You hire the IT people You pay or rent the real-estate You take all the risk  Cloud providers:  Some">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS CP Study Note] Intro">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/AWS-CP-Study-Note/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="Memo for AWS Cloud Practitioner【Cloud Concepts】Why cloud computing?On-premise:  You own the servers You hire the IT people You pay or rent the real-estate You take all the risk  Cloud providers:  Some">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-04T07:13:07.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.657Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>[AWS CP Study Note] Intro - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS CP Study Note] Intro">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 16:13" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      61k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      190 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS CP Study Note] Intro</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Memo-for-AWS-Cloud-Practitioner"><a href="#Memo-for-AWS-Cloud-Practitioner" class="headerlink" title="Memo for AWS Cloud Practitioner"></a>Memo for AWS Cloud Practitioner</h1><h2 id="【Cloud-Concepts】"><a href="#【Cloud-Concepts】" class="headerlink" title="【Cloud Concepts】"></a>【Cloud Concepts】</h2><h3 id="Why-cloud-computing"><a href="#Why-cloud-computing" class="headerlink" title="Why cloud computing?"></a>Why cloud computing?</h3><p>On-premise:</p>
+<ul>
+<li>You own the servers</li>
+<li>You hire the IT people</li>
+<li>You pay or rent the real-estate</li>
+<li>You take all the risk</li>
+</ul>
+<p>Cloud providers:</p>
+<ul>
+<li>Someone else owns the servers</li>
+<li>Someone lese hires It people</li>
+<li>Someone else pays or rents the real-estate</li>
+<li>You are responsible for <strong>your configuring cloud services and code</strong> , and someone else takes care of the rest</li>
+</ul>
+<h3 id="Six-advantages-and-benefits-of-cloud-computing"><a href="#Six-advantages-and-benefits-of-cloud-computing" class="headerlink" title="Six advantages and benefits of cloud computing"></a><strong>Six advantages</strong> and benefits of cloud computing</h3><ul>
+<li>trade capital expense for variable expense:</li>
+</ul>
+<p><strong>no upfront cost</strong></p>
+<p><strong>pay on-demand</strong></p>
+<ul>
+<li>benefit from massive economies of scale</li>
+</ul>
+<p>sharing the cost with other customers</p>
+<p>当AWS业务扩大的时候，经济规模效应将普及每一位用户</p>
+<ul>
+<li>stop guessing capacity</li>
+</ul>
+<p>instead of paying of idle or underutilized servers</p>
+<ul>
+<li>increase speed and agility</li>
+</ul>
+<p>launch resources within a few clicks in minutes</p>
+<ul>
+<li>stop spending money on running and maintaining data centers</li>
+</ul>
+<p>focus on your own customers</p>
+<ul>
+<li>go global in minutes</li>
+</ul>
+<p>multiple regions around the world with a few clicks</p>
+<h3 id="Types-of-cloud-computing"><a href="#Types-of-cloud-computing" class="headerlink" title="Types of cloud computing"></a>Types of cloud computing</h3><ul>
+<li>SaaS: software as a service (for customers)</li>
+</ul>
+<p>Office 365, Gmail</p>
+<ul>
+<li>PaaS: platform as a service (for developers)</li>
+</ul>
+<p>Heroku</p>
+<ul>
+<li>IaaS: infrastructure as a service (for admins)</li>
+</ul>
+<p>AWS, Google Cloud Platform, Azure</p>
+<h3 id="Cloud-computing-development-models"><a href="#Cloud-computing-development-models" class="headerlink" title="Cloud computing development models"></a>Cloud computing development models</h3><p>(  Cloud</p>
+<p>Startups</p>
+<p>SaaS offerings</p>
+<p>New projects for company</p>
+<p>(2) Hybrid</p>
+<p>Bank</p>
+<p>Fintech</p>
+<p>Large professional service providers</p>
+<p>(3) On-Premise</p>
+<p>Large enterprise</p>
+<p>Public sector</p>
+<p>Super sensitive data (ex: hospital)</p>
+<h2 id="【AWS-Global-Infrastructure】"><a href="#【AWS-Global-Infrastructure】" class="headerlink" title="【AWS Global Infrastructure】"></a>【AWS Global Infrastructure】</h2><h3 id="AWS-global-infrastructure"><a href="#AWS-global-infrastructure" class="headerlink" title="AWS global infrastructure"></a>AWS global infrastructure</h3><ul>
+<li>Regions: physical location in the world with multiple availability zones<ul>
+<li>every region is <strong>physically isolated</strong> from and independent of every other region in terms of location, power, water supply</li>
+<li>each region has at least <strong>2 AZs</strong></li>
+<li>not all services are available in every region</li>
+<li><strong>US-EAST (the region)</strong> include almost all the services</li>
+<li>AWS largest region is <strong>US-EAST</strong></li>
+<li>**US-EAST- * is the region where you see all your billing information</li>
+</ul>
+</li>
+<li>Availability Zones (AZ): one or more discrete data centers<ul>
+<li>AZs are represented by a region code, followed by a letter identifier: US-EAST- </li>
+<li>Multi-AZ: distributing your instances across multiple AZs allows failover configuration for handling requests when one goes down</li>
+<li><strong>&amp;lt;  ms</strong> latency between AZs</li>
+</ul>
+</li>
+<li>Edge Location: datacenter owned by a <strong>trusted partner</strong> of AWS (much more than AZ)<ul>
+<li>get data fast or upload data fast to AWS</li>
+<li>the locations serve requests for <strong>CloudFront</strong> and <strong>Route 53</strong>. Requests going to either of these services will be routed to the nearest edge location automatically</li>
+<li><strong>S3 Transfer Acceleration traffic</strong> and <strong>API Gateway</strong> endpoint traffic also use the AWS Edge Network</li>
+<li>this allows for low latency no matter where the end user is geographically located</li>
+</ul>
+</li>
+</ul>
+<h3 id="GovCloud-Only-for-US-from-now"><a href="#GovCloud-Only-for-US-from-now" class="headerlink" title="GovCloud (Only for US from now)"></a>GovCloud (Only for US from now)</h3><ul>
+<li>AWS GovCloud Regions allow customers to host <strong>sensitive</strong> Controlled Unclassified Information and other types of regulated workloads</li>
+<li>GovCloud Regions are only operated by employees who are US citizens, on US soil</li>
+<li>They are only accessible to US entities and root account holders who pass a screening process</li>
+<li>Service sell for US government</li>
+</ul>
+<h2 id="【AWS-Services】In-detail"><a href="#【AWS-Services】In-detail" class="headerlink" title="【AWS Services】In detail"></a>【AWS Services】In detail</h2><h3 id="Compute"><a href="#Compute" class="headerlink" title="Compute"></a>Compute</h3><h4 id="EC2"><a href="#EC2" class="headerlink" title="EC2"></a>EC2</h4><h5 id="Cost-Optimization-EC2-Right-Sizing"><a href="#Cost-Optimization-EC2-Right-Sizing" class="headerlink" title="Cost Optimization: EC2 Right Sizing"></a>Cost Optimization: EC2 Right Sizing</h5><p>EC2 Right Sizing utilizes managed services to execute right-sizing analysis to provide detailed recommendations for more cost-saving builds and implementations of Amazon EC2 instances</p>
+<h5 id="Amazon-EC2-Dedicated-Hosts-vs-Instances"><a href="#Amazon-EC2-Dedicated-Hosts-vs-Instances" class="headerlink" title="Amazon EC2 Dedicated Hosts vs Instances"></a>Amazon EC2 Dedicated Hosts vs Instances</h5><ul>
+<li>An important difference between a Dedicated Host and a Dedicated instance is that a <strong>Dedicated Host gives you additional visibility and control over how instances are placed on a physical server, and you can consistently deploy your instances to the same physical server over time</strong>.</li>
+<li>As a result, Dedicated Hosts enable you to use your existing server-bound software licenses and address corporate compliance and regulatory requirements.</li>
+<li>只有dedicated host才能使用已有的software licenses</li>
+</ul>
+<h4 id="EC2-Auto-Scaling"><a href="#EC2-Auto-Scaling" class="headerlink" title="EC2 Auto-Scaling"></a>EC2 Auto-Scaling</h4><ul>
+<li><p>monitor your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost</p>
+</li>
+<li><p>scalability would scale-out (increase the number of instances) or scale in (decrease the number of instances)</p>
+</li>
+<li><p>when one of the instances is with the least load it will divert the traffic to the least loaded instance</p>
+</li>
+</ul>
+<h4 id="Amazon-Elastic-Container-Service-ECS"><a href="#Amazon-Elastic-Container-Service-ECS" class="headerlink" title="Amazon Elastic Container Service (ECS)"></a>Amazon Elastic Container Service (ECS)</h4><p>A highly scalable, high-performance container orchestration service that supports Docker containers and allows you to easily run and scale containerized applications on AWS. Amazon ECS eliminates the need for you to install and operate your own container orchestration.</p>
+<h5 id="Amazon-Elastic-Container-Registry-ECR"><a href="#Amazon-Elastic-Container-Registry-ECR" class="headerlink" title="Amazon Elastic Container Registry (ECR)"></a>Amazon Elastic Container Registry (ECR)</h5><ul>
+<li>A fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images.</li>
+<li>You pay only for the amount of data you store in your repositories and data transferred to the Internet.</li>
+</ul>
+<h5 id="Amazon-Elastic-Container-Service-for-Kubernetes-EKS"><a href="#Amazon-Elastic-Container-Service-for-Kubernetes-EKS" class="headerlink" title="Amazon Elastic Container Service for Kubernetes (EKS)"></a>Amazon Elastic Container Service for Kubernetes (EKS)</h5><ul>
+<li><p>makes it easy to deploy, manage, and scale containerized applications using Kubernetes on AWS.</p>
+</li>
+<li><p>Amazon EKS runs the Kubernetes management infrastructure for you across multiple AWS availability zones to eliminate a single point of failure.</p>
+</li>
+</ul>
+<h4 id="AWS-Lambda"><a href="#AWS-Lambda" class="headerlink" title="AWS Lambda"></a>AWS Lambda</h4><ul>
+<li><strong>a serverless service</strong> that makes it possible to run event-triggered functions on Edge Locations within the AWS Content Delivery Network</li>
+<li>an administrator can introduce decision-making and compute processing closer to the viewer&#39;s location, thereby improving on their browsing experience</li>
+</ul>
+<h4 id="Elastic-Beanstalk-部署"><a href="#Elastic-Beanstalk-部署" class="headerlink" title="Elastic Beanstalk (部署)"></a>Elastic Beanstalk (部署)</h4><ul>
+<li>make it even easier for developers to quickly deploy and manage applications in the AWS Cloud</li>
+<li>simply upload your code, and AWS Elastic Beanstalk will automatically handles the deployment</li>
+<li>upload your code and AWS Elastic Beanstalk <strong>automatically handles the deployment</strong> , from capacity provisioning, load balancing and auto scaling to application health monitoring.</li>
+</ul>
+<h4 id="Amazon-Lightsail"><a href="#Amazon-Lightsail" class="headerlink" title="Amazon Lightsail"></a>Amazon Lightsail</h4><p>Lightsail is an easy-to-use cloud platform that <strong>offers you everything needed to build an application or website, plus a cost-effective, monthly plan</strong>. Whether you&#39;re new to the cloud or looking to get on the cloud quickly with AWS infrastructure you trust, we&#39;ve got you covered.</p>
+<p>类似于集成方案</p>
+<h4 id="AWS-Batch"><a href="#AWS-Batch" class="headerlink" title="AWS Batch"></a>AWS Batch</h4><p>Enables developers, scientists, and engineers to easily and efficiently run hundreds of thousands of <strong>batch computing jobs</strong> on AWS.</p>
+<ul>
+<li>no need to install and manage batch computing software or server clusters that you use to run your jobs, allowing you to focus on analyzing results and solving problems</li>
+</ul>
+<h4 id="AWS-Fragate-去虚拟机，直接操作container"><a href="#AWS-Fragate-去虚拟机，直接操作container" class="headerlink" title="AWS Fragate (去虚拟机，直接操作container)"></a>AWS Fragate (去虚拟机，直接操作container)</h4><ul>
+<li>AWS Fargate is a compute engine for Amazon ECS that allows you to run containers without having to manage servers or clusters.</li>
+<li>With AWS Fargate, you no longer have to provision, configure, and scale clusters of virtual machines to run containers.</li>
+<li>AWS Fargate removes the need for you to interact with or think about servers or clusters. Fargate lets you focus on designing and building your applications instead of managing the infrastructure that runs them.</li>
+</ul>
+<h3 id="Developer-Tools"><a href="#Developer-Tools" class="headerlink" title="Developer Tools"></a>Developer Tools</h3><h4 id="AWS-CodeCommit"><a href="#AWS-CodeCommit" class="headerlink" title="AWS CodeCommit"></a>AWS CodeCommit</h4><ul>
+<li>AWS CodeCommit is a fully-managed <a target="_blank" rel="noopener" href="https://aws.amazon.com/devops/source-control/">source control</a> service that hosts <strong>secure Git-based repositories</strong>. It makes it easy for teams to collaborate on code in a secure and highly scalable ecosystem. CodeCommit eliminates the need to operate your own source control system or worry about scaling its infrastructure. You can use CodeCommit to securely store anything from source code to binaries, and it works seamlessly with your existing Git tools.</li>
+</ul>
+<h4 id="AWS-CodeDeploy"><a href="#AWS-CodeDeploy" class="headerlink" title="AWS CodeDeploy"></a>AWS CodeDeploy</h4><ul>
+<li>a deployment service that <strong>automates application deployments</strong> to Amazon EC2 instance, on-premises instance, serverless Lambda function, or Amazon ECS services</li>
+<li>AWS CodeDeploy is a fully managed deployment service that automates software deployments to a variety of compute services such as Amazon EC2, AWS Fargate, AWS Lambda, and your on-premises servers. AWS CodeDeploy makes it easier for you to rapidly release new features, helps you avoid downtime during application deployment, and handles the complexity of updating your applications. You can use AWS CodeDeploy to automate software deployments, eliminating the need for error-prone manual operations. The service scales to match your deployment needs.</li>
+</ul>
+<h4 id="AWS-CodeStar"><a href="#AWS-CodeStar" class="headerlink" title="AWS CodeStar"></a>AWS CodeStar</h4><p>Unified user interface, manage software deployment in one place</p>
+<ul>
+<li>provide a unified user interface, enabling you to easily <strong>manage your software development activities</strong> in on place</li>
+<li>you can set up your entire continuous <strong>delivery toolchain in minutes</strong> , allowing you to start releasing code faster</li>
+<li>make it easy for your whole team to work together securely, allowing you to easily manage access and add owners, contributors, and viewers to your projects</li>
+</ul>
+<h4 id="AWS-CodeBuild"><a href="#AWS-CodeBuild" class="headerlink" title="AWS CodeBuild"></a>AWS CodeBuild</h4><ul>
+<li>a fully managed service that primarily <strong>compiles source code, runs unit tests and generate software package</strong> with the output being artifacts that will be ready for deployment</li>
+</ul>
+<h4 id="AWS-CodePipeline"><a href="#AWS-CodePipeline" class="headerlink" title="AWS CodePipeline"></a>AWS CodePipeline</h4><ul>
+<li>a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates.</li>
+<li>CodePipeline automates the <strong>build, test, and deploy</strong> phases of your release process every time <strong>there is a code change</strong> , based on the release model you define.</li>
+</ul>
+<h4 id="AWS-X-Ray"><a href="#AWS-X-Ray" class="headerlink" title="AWS X-Ray"></a>AWS X-Ray</h4><ul>
+<li>AWS X-Ray helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture.</li>
+<li>With X-Ray, you can understand how your application and its underlying services are performing to identify and troubleshoot the root cause of performance issues and errors. X-Ray provides an end-to-end view of requests as they travel through your application, and shows a map of your application&#39;s underlying components.</li>
+<li>You can use X-Ray to analyze <strong>both applications in development and in production</strong> , from simple three-tier applications to complex microservices applications consisting of thousands of services.</li>
+<li>Thousands of application</li>
+</ul>
+<h4 id="AWS-Cloud9"><a href="#AWS-Cloud9" class="headerlink" title="AWS Cloud9"></a>AWS Cloud9</h4><ul>
+<li>AWS Cloud9 is a <strong>cloud-based integrated development environment (<strong><strong>IDE</strong></strong>)</strong> that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal.</li>
+<li>Cloud9 comes prepackaged with essential tools for popular programming languages, including JavaScript, Python, PHP, and more, so you don&#39;t need to install files or configure your development machine to start new projects. Since your Cloud9 IDE is cloud-based, you can work on your projects from your office, home, or anywhere using an internet-connected machine.</li>
+<li>Cloud9 also provides a seamless experience for developing <strong>serverless applications</strong> enabling you to easily define resources, debug, and switch between local and remote execution of serverless applications. With Cloud9, you can quickly share your development environment with your team, enabling you to pair program and track each other&#39;s inputs in real time.</li>
+</ul>
+<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><h4 id="Amazon-Simple-Storage-Service-S3"><a href="#Amazon-Simple-Storage-Service-S3" class="headerlink" title="Amazon Simple Storage Service (S3)"></a>Amazon Simple Storage Service (S3)</h4><p>an object storage service that offers industry-leading scalability, data availability, security, and performance</p>
+<p>for use cases such as website, mobile applications, backup and restore, archive, enterprise applications, IoT devices and big data analytics.</p>
+<p>99.999999999% (  9) durability</p>
+<h5 id="S3-Storage-Class"><a href="#S3-Storage-Class" class="headerlink" title="S3 Storage Class"></a>S3 Storage Class</h5><p>【mission-critical production data, for frequent access】</p>
+<p>S3 Standard</p>
+<p>S3 Intelligent-Tiering</p>
+<p>【save costs by storing infrequently accessed data】</p>
+<p>S3 Standard-Infrequent Access (S3 Standard-IA)</p>
+<p>S3 One Zone-Infrequent Access (S3 One Zone-IA)</p>
+<p>【archive data at the lowest costs in the archival storage classes】</p>
+<p>Amazon S3 Glacier (S3 Glacier)</p>
+<p>Amazon S3 Glacier Deep Archive (S3 Glacier Deep Archive)</p>
+<p>S3 Outposts:  you can use the S3 Outposts storage class to store your S3 data on-premises using S3 on Outposts</p>
+<h5 id="Amazon-S3-Intelligent-Tiering"><a href="#Amazon-S3-Intelligent-Tiering" class="headerlink" title="Amazon S3 Intelligent-Tiering"></a>Amazon S3 Intelligent-Tiering</h5><ul>
+<li>S3 Intelligent-Tiering is a new Amazon S3 storage class designed for customers who want to optimize storage costs <strong>automatically when data access patterns change</strong> , without performance impact or operational overhead.</li>
+<li>S3 Intelligent-Tiering is the first cloud object storage class that delivers automatic cost savings by moving data between two access tiers — <strong>frequent access and infrequent access</strong> — when access patterns change, and is ideal for data with unknown or changing access patterns.</li>
+<li>S3 Intelligent-Tiering stores objects in two access tiers: one tier that is optimized for <strong>frequent access and another lower-cost</strong> tier that is optimized for infrequent access. For a small monthly monitoring and automation fee per object, S3 Intelligent-Tiering monitors access patterns and moves objects that have not been accessed for 30 consecutive days to the infrequent access tier. There are no retrieval fees in S3 Intelligent-Tiering. If an object in the infrequent access tier is accessed later, it is automatically moved back to the frequent access tier. No additional tiering fees apply when objects are moved between access tiers within the S3 Intelligent-Tiering storage class. S3 Intelligent-Tiering is designed for 99.9% availability and 99.999999999% durability, and offers the same low latency and high throughput performance of S3 Standard.</li>
+</ul>
+<h5 id="Amazon-S3-Lifecycle-policies"><a href="#Amazon-S3-Lifecycle-policies" class="headerlink" title="Amazon S3 Lifecycle policies"></a>Amazon S3 Lifecycle policies</h5><ul>
+<li>are used to automatically transition objects through different storage classes in accordance to a preconfigured rule</li>
+<li>will typically move the object regardless of how frequently it is accessed</li>
+<li>are automatically triggered when the &#39;days after creation&#39; period lapses</li>
+<li>can be configured to permanently delete objects</li>
+</ul>
+<h5 id="Amazon-S3-Object-Versioning"><a href="#Amazon-S3-Object-Versioning" class="headerlink" title="Amazon S3 Object Versioning"></a>Amazon S3 Object Versioning</h5><ul>
+<li>use versioning to keep multiple versions of an object in on bucket</li>
+<li>protect you from the consequences of unintended overwrites and deletions</li>
+</ul>
+<h5 id="S3-Storage-Class-Analysis"><a href="#S3-Storage-Class-Analysis" class="headerlink" title="S3 Storage Class Analysis"></a>S3 Storage Class Analysis</h5><p>monitor access patterns across objects to discover data that should be moved to lower-cost storage classes</p>
+<h4 id="Amazon-S3-Glacier-Deep-Archive"><a href="#Amazon-S3-Glacier-Deep-Archive" class="headerlink" title="Amazon S3 Glacier Deep Archive"></a>Amazon S3 Glacier Deep Archive</h4><ul>
+<li>S3 Glacier Deep Archive is a new <a target="_blank" rel="noopener" href="https://aws.amazon.com/s3/storage-classes/">Amazon S3 storage class</a> that provides secure and durable object storage for <strong>long-term retention of data</strong> that is accessed once or twice in a year. From just $0.00099 per GB-month (less than one-tenth of one cent, or about $ per TB-month), S3 Glacier Deep Archive offers the lowest cost storage in the cloud, at prices significantly lower than storing and maintaining data in on-premises magnetic tape libraries or archiving data off-site.</li>
+</ul>
+<h4 id="Amazon-Elastic-Block-Store-EBS"><a href="#Amazon-Elastic-Block-Store-EBS" class="headerlink" title="Amazon Elastic Block Store (EBS)"></a>Amazon Elastic Block Store (EBS)</h4><p>provides persistent block storage volumes for <strong>use with Amazon EC2 instances</strong> in the AWS Cloud.</p>
+<ul>
+<li>Each Amazon EBS volume is <strong>automatically replicated within its Availability Zone</strong> (Same AZ) to protect you from component failure, offering high availability and durability.</li>
+<li>Amazon EBS volumes offer the <strong>consistent and low-latency performance</strong> needed to run your workloads.</li>
+</ul>
+<h4 id="Amazon-Elastic-File-System-EFS"><a href="#Amazon-Elastic-File-System-EFS" class="headerlink" title="Amazon Elastic File System (EFS)"></a>Amazon Elastic File System (EFS)</h4><p>provides a simple, scalable, elastic file system for <strong>Linux-based workloads</strong> for use with AWS Cloud services and on-premises resources.</p>
+<ul>
+<li>You can access your file systems across AZs and regions and share files between thousands of Amazon EC2 instances and on-premises servers via AWS Direct Connect or AWS VPN.</li>
+</ul>
+<h4 id="Amazon-S3-Transfer-Acceleration"><a href="#Amazon-S3-Transfer-Acceleration" class="headerlink" title="Amazon S3 Transfer Acceleration"></a>Amazon S3 Transfer Acceleration</h4><ul>
+<li>enable fast, easy, and secure transfers of files over long distances between your client and an S3 bucket</li>
+<li>take advantage of Amazon CloudFront&#39;s globally distributed edge locations</li>
+<li>as the data arrives at an edge location, data is routed to Amazon S3 over an optimized network path</li>
+</ul>
+<h4 id="AWS-Storage-Gateway"><a href="#AWS-Storage-Gateway" class="headerlink" title="AWS Storage Gateway"></a>AWS Storage Gateway</h4><p>a hybrid storage service that enables your on-premises applications to seamlessly use AWS cloud storage.</p>
+<h3 id="Analytics"><a href="#Analytics" class="headerlink" title="Analytics"></a>Analytics</h3><h4 id="Amazon-Elastic-Map-Reduce-EMR-amp-gt-for-big-data"><a href="#Amazon-Elastic-Map-Reduce-EMR-amp-gt-for-big-data" class="headerlink" title="Amazon Elastic Map Reduce (EMR) -&amp;gt; for big data"></a>Amazon Elastic Map Reduce (EMR) -&amp;gt; for big data</h4><ul>
+<li>Amazon EMR is the industry leading <strong>cloud-native big data platform</strong> for processing vast amounts of data quickly and cost-effectively at scale.</li>
+<li>Using open source tools such as <a target="_blank" rel="noopener" href="https://aws.amazon.com/emr/features/spark/">Apache Spark</a>, <a target="_blank" rel="noopener" href="https://aws.amazon.com/emr/features/hive/">Apache Hive</a>, <a target="_blank" rel="noopener" href="https://aws.amazon.com/emr/features/hbase/">Apache HBase</a>, <a target="_blank" rel="noopener" href="https://aws.amazon.com/blogs/big-data/use-apache-flink-on-amazon-emr/">Apache Flink</a>, <a target="_blank" rel="noopener" href="https://aws.amazon.com/emr/features/hudi/">Apache Hudi (Incubating)</a>, and <a target="_blank" rel="noopener" href="https://aws.amazon.com/emr/features/presto/">Presto</a>, coupled with the dynamic scalability of <a target="_blank" rel="noopener" href="https://aws.amazon.com/ec2/">Amazon EC2</a> and scalable storage of <a target="_blank" rel="noopener" href="https://aws.amazon.com/s3/">Amazon S3</a>, EMR gives analytical teams the engines and elasticity to run Petabyte-scale analysis for a fraction of the cost of traditional on-premises clusters.</li>
+<li>EMR gives teams the flexibility to run use cases on single-purpose, short lived clusters that automatically scale to meet demand, or on long running highly available clusters using the new multi-master deployment mode. If you have existing on-premises deployments of open source tools such as Apache Spark and Apache Hive, you can also run <a target="_blank" rel="noopener" href="https://aws.amazon.com/emr/features/outposts/">EMR clusters on AWS Outposts</a>, giving you both the ability to scale out on-premises via Outposts or in the cloud.</li>
+</ul>
+<h4 id="Amazon-Athena"><a href="#Amazon-Athena" class="headerlink" title="Amazon Athena"></a>Amazon Athena</h4><p>DB Search Service over S3 storage using SQL</p>
+<ul>
+<li>a serverless query service used to analyze Big Data stored in S3 <strong>using standard SQL</strong></li>
+<li>a serverless query service that does not need to build databases on dedicated Elastic Block Store (EBS) volumes, instead, it builds tables from data read directly from Amazon S3 buckets</li>
+<li>does not store any of the data, is compatible with the regular data formats that include CSV, JSON, ORC, AVRO and Parquet</li>
+<li>Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.</li>
+<li>Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.</li>
+</ul>
+<h4 id="Amazon-Kinesis"><a href="#Amazon-Kinesis" class="headerlink" title="Amazon Kinesis"></a>Amazon Kinesis</h4><p>Amazon Kinesis makes it easy to collect, process, and analyze <strong>real-time, streaming data</strong> so you can get timely insights and react quickly to new information.</p>
+<ul>
+<li>Kinesis Video Streams<ul>
+<li>make it easy to securely stream video from connected devices to AWS for analytics, ML, and other processing</li>
+</ul>
+</li>
+<li>Kinesis Data Streams<ul>
+<li>a scalable and durable real-time data streaming service that can continuously capture gigabytes of data per second from hundreds of thousands of sources</li>
+</ul>
+</li>
+<li>Kinesis Data Firehose<ul>
+<li>the easiest way to capture, transform, and load data streams into AWS data stores for near real-time analytics with existing business intelligence tools</li>
+</ul>
+</li>
+<li>Kinesis Data Analytics<ul>
+<li>the easiest way to process data streams in real time with SQL or Java without having to learn new programming languages or processing frameworks</li>
+</ul>
+</li>
+</ul>
+<h4 id="Amazon-Redshift"><a href="#Amazon-Redshift" class="headerlink" title="Amazon Redshift"></a>Amazon Redshift</h4><p>A fast, scalable <strong>data warehouse</strong> (仓库) that makes it simple and cost-effective to analyze all your data across your data warehouse and data lake.</p>
+<ul>
+<li>Redshift delivers ten times faster performance than other data warehouses by using machine learning, massively parallel query execution, and columnar storage on high-performance disk.</li>
+<li>You can setup and deploy a new data warehouse in minutes, and run queries across petabytes of data in your Redshift data warehouse, and exabytes of data in your data lake built on Amazon S3.</li>
+</ul>
+<h4 id="AWS-CloudSearch"><a href="#AWS-CloudSearch" class="headerlink" title="AWS CloudSearch"></a>AWS CloudSearch</h4><p>set up, manage, and scale a <strong>search solution</strong> for your website or application.</p>
+<h4 id="AWS-Elasticsearch-Service"><a href="#AWS-Elasticsearch-Service" class="headerlink" title="AWS Elasticsearch Service"></a>AWS Elasticsearch Service</h4><p>makes it easy to deploy, secure, operate, and scale Elasticsearch to search, analyze, and visualize data in real-time.</p>
+<p>Integrated with other service</p>
+<h4 id="Amazon-QuickSight"><a href="#Amazon-QuickSight" class="headerlink" title="Amazon QuickSight"></a>Amazon QuickSight</h4><p>A fast, cloud-powered <strong>business intelligence (BI) service</strong> that makes it easy for you to deliver insights to everyone in your organization.</p>
+<h4 id="AWS-Glue"><a href="#AWS-Glue" class="headerlink" title="AWS Glue"></a>AWS Glue</h4><p>fully managed extract, transform, and load (ETL) service that makes it easy for customers to prepare and load their data for analytics.</p>
+<h3 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h3><h4 id="Amazon-RDS"><a href="#Amazon-RDS" class="headerlink" title="Amazon RDS"></a>Amazon RDS</h4><p>makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity</p>
+<ul>
+<li>while <strong>automating time-consuming administration tasks such as hardware provisioning, database setup, patching and backups</strong>. (patch is automatically)</li>
+<li>【Auto Replica】enhance the database performance and durability by allowing for automated distribution of load amongst several database instances with the exact copy of the parent database</li>
+<li>is best suited in scenarios where the dataset and forms are consistent such that their data schema is persistently valid</li>
+<li>it is best to deploy in an environment where the load can be anticipated and is somewhat finite</li>
+</ul>
+<h4 id="Amazon-Aurora-SQL-amp-gt-fully-managed"><a href="#Amazon-Aurora-SQL-amp-gt-fully-managed" class="headerlink" title="Amazon Aurora (SQL) -&amp;gt; fully managed"></a>Amazon Aurora (SQL) -&amp;gt; fully managed</h4><ul>
+<li><strong>a fully managed</strong> (don&#39;t need customer to upgrade service), MySQL- and PostgreSQL-compatible, relational database engine</li>
+<li>combine the speed and reliability of high-end commercial databases with the simplicity and cost-effectiveness of open-source databases</li>
+<li>deliver up to five times the throughput of MySQL and up to three times the throughput of PostgreSQL without requiring changes to most of your existing applications</li>
+</ul>
+<h4 id="DynamoDB-NoSQL"><a href="#DynamoDB-NoSQL" class="headerlink" title="DynamoDB (NoSQL)"></a>DynamoDB (NoSQL)</h4><p>A key-value and document database that delivers single-digit millisecond performance at any scale. It&#39;s a fully managed, multiregion, multimaster database with built-in security, backup and restore, and in-memory caching for internet-scale applications.</p>
+<h4 id="ElastiCache"><a href="#ElastiCache" class="headerlink" title="ElastiCache"></a>ElastiCache</h4><p>A web service that makes it easy to deploy, operate, and scale an <strong>in-memory cache in the cloud</strong>. The service improves the performance of web applications by allowing you to retrieve information from fast, managed, in-memory caches, instead of relying entirely on slower disk-based databases.</p>
+<p>Amazon ElastiCache supports two open-source in-memory caching engines:</p>
+<ul>
+<li>Redis</li>
+<li>Memcached</li>
+</ul>
+<h3 id="Network-and-Content-Distribution"><a href="#Network-and-Content-Distribution" class="headerlink" title="Network and Content Distribution"></a>Network and Content Distribution</h3><h4 id="AWS-VPC"><a href="#AWS-VPC" class="headerlink" title="AWS VPC"></a>AWS VPC</h4><ul>
+<li>Amazon Virtual Private Cloud (Amazon VPC) lets you provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define.</li>
+<li>You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.</li>
+<li>You can use both IPv4 and IPv6 in your VPC for secure and easy access to resources and applications.</li>
+</ul>
+<h4 id="AWS-PrivateLink"><a href="#AWS-PrivateLink" class="headerlink" title="AWS PrivateLink"></a>AWS PrivateLink</h4><ul>
+<li>simplifies the security of data shared with cloud-based applications by eliminating the exposure of data to the public Internet.</li>
+<li>AWS PrivateLink provides <strong>private connectivity between VPCs, AWS services, and on-premises applications</strong> , securely on the Amazon network.</li>
+<li>AWS PrivateLink makes it easy to connect services across <strong>different accounts</strong> and VPCs to significantly simplify the network architecture.</li>
+</ul>
+<h4 id="VPC-Peering"><a href="#VPC-Peering" class="headerlink" title="VPC Peering"></a>VPC Peering</h4><ul>
+<li>A VPC peering connection is a <strong>networking connection between two VPCs</strong> that enables you to route traffic between them using private IPv4 addresses or IPv6 addresses.</li>
+</ul>
+<h4 id="CloudFront"><a href="#CloudFront" class="headerlink" title="CloudFront"></a>CloudFront</h4><ul>
+<li>a web service that speeds up <strong>distribution of your static and dynamic web content</strong> , such as .html, .css, .js, and image files, to your users</li>
+<li>deliver your content through a worldwide network of data centers called edge locations</li>
+<li>Amazon CloudFront is a fast <strong>content delivery network (CDN) service</strong> that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment. CloudFront is integrated with AWS – both physical locations that are directly connected to the AWS global infrastructure, as well as other AWS services.</li>
+</ul>
+<h4 id="Amazon-Route53-DNS"><a href="#Amazon-Route53-DNS" class="headerlink" title="Amazon Route53 (DNS)"></a>Amazon Route53 (DNS)</h4><ul>
+<li><p>Amazon Route 53 is a highly available and scalable cloud <a target="_blank" rel="noopener" href="https://aws.amazon.com/route53/what-is-dns/">Domain Name System (DNS)</a> web service.</p>
+</li>
+<li><p>It is designed to give developers and businesses an extremely reliable and cost effective way to route end users to Internet applications by translating names like <a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> into the numeric IP addresses like  2.0.2. that computers use to connect to each other.</p>
+</li>
+<li><p>Amazon Route 53 is fully compliant with IPv6 as well.</p>
+</li>
+<li><p>CloudFront works seamlessly with services including AWS Shield for DDoS mitigation, Amazon S3, Elastic Load Balancing or Amazon EC2 as origins for your applications, and Lambda@Edge to run custom code closer to customers&#39; users and to customize the user experience. Lastly, if you use AWS origins such as Amazon S3, Amazon EC2 or Elastic Load Balancing, you don&#39;t pay for any data transferred between these services and CloudFront.</p>
+</li>
+</ul>
+<h5 id="Route-53-routing-policy"><a href="#Route-53-routing-policy" class="headerlink" title="Route 53 routing policy"></a>Route 53 routing policy</h5><ul>
+<li><strong>【</strong>** Simple routing policy **<strong>】</strong>  – Use for a <strong>single resource</strong> that performs a given function for your domain, for example, a web server that serves content for the example.com website.</li>
+<li><strong>【</strong>** Failover routing policy **<strong>】</strong>  – Use when you want to configure active-passive failover.</li>
+<li><strong>【</strong>** Geolocation routing policy **<strong>】</strong>  – Use when you want to route traffic based on the <strong>location of your users</strong>.</li>
+<li><strong>【</strong>** Geoproximity routing policy **<strong>】</strong>  – Use when you want to route traffic based on the location of your resources and, optionally, shift traffic from resources in one location to resources in another.</li>
+<li><strong>【</strong>** Latency routing policy ** 】– Use when you have resources in multiple AWS Regions and you want to route traffic to the region that provides the** best latency**.</li>
+<li><strong>【</strong>** Multivalue answer routing policy **<strong>】</strong>  – Use when you want Route 53 to respond to DNS queries with up to eight healthy records selected at random.</li>
+<li><strong>【</strong>** Weighted routing policy **<strong>】</strong>  – Use to route traffic to multiple resources in <strong>proportions that you specify</strong>.</li>
+</ul>
+<h4 id="AWS-Global-Accelerator"><a href="#AWS-Global-Accelerator" class="headerlink" title="AWS Global Accelerator"></a>AWS Global Accelerator</h4><p>A networking service that improves the availability and performance of the applications that you offer to your global users.</p>
+<p>Using edge location</p>
+<p>AWS Global Accelerator uses the highly available and <strong>congestion-free AWS global network to direct internet traffic from your users to your applications on AWS</strong> , making your users&#39; experience more consistent</p>
+<h4 id="AWS-API-Gateway"><a href="#AWS-API-Gateway" class="headerlink" title="AWS API Gateway"></a>AWS API Gateway</h4><p>A fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale</p>
+<h4 id="AWS-Transit-Gateway"><a href="#AWS-Transit-Gateway" class="headerlink" title="AWS Transit Gateway"></a>AWS Transit Gateway</h4><p>A service that enables customers to connect their Amazon Virtual Private Clouds (VPCs) and their on-premises networks to <strong>a single gateway.</strong></p>
+<h4 id="Elastic-Load-Balancing"><a href="#Elastic-Load-Balancing" class="headerlink" title="Elastic Load Balancing"></a>Elastic Load Balancing</h4><ul>
+<li><p>automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, and IP addresses.</p>
+</li>
+<li><p>It can handle the varying load of your application traffic in a single Availability Zone or across multiple Availability Zones.</p>
+</li>
+<li><p>Three types</p>
+</li>
+</ul>
+<h5 id="Application-Load-Balancer-Layer7"><a href="#Application-Load-Balancer-Layer7" class="headerlink" title="Application Load Balancer (Layer7)"></a>Application Load Balancer (Layer7)</h5><p>best suited for load balancing of <strong>HTTP and HTTPS traffic</strong> and provides advanced request routing targeted at the delivery of modern application architectures, including microservices and containers.</p>
+<p>VPC</p>
+<h5 id="Network-Load-Balancer-Layer4"><a href="#Network-Load-Balancer-Layer4" class="headerlink" title="Network Load Balancer (Layer4)"></a>Network Load Balancer (Layer4)</h5><p>best suited for load balancing of TCP traffic where extreme performance is required.</p>
+<h5 id="Classical-Load-Balancer"><a href="#Classical-Load-Balancer" class="headerlink" title="Classical Load Balancer"></a>Classical Load Balancer</h5><p>provides basic load balancing across multiple Amazon EC2 instances and operates at both the request level and connection level.</p>
+<p>For EC2 classical network.</p>
+<h3 id="Mobile"><a href="#Mobile" class="headerlink" title="Mobile"></a>Mobile</h3><h4 id="AWS-Cognito-Sign-in-Service"><a href="#AWS-Cognito-Sign-in-Service" class="headerlink" title="AWS Cognito (Sign-in Service)"></a>AWS Cognito (Sign-in Service)</h4><ul>
+<li>Amazon Cognito lets you add user <strong>sign-up, sign-in, and access control to your web and mobile apps quickly and easily</strong>.</li>
+<li>Amazon Cognito scales to millions of users and supports sign-in with social identity providers, such as Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0.</li>
+</ul>
+<h3 id="Management-and-Governance"><a href="#Management-and-Governance" class="headerlink" title="Management and Governance"></a>Management and Governance</h3><h4 id="AWS-CloudTrail"><a href="#AWS-CloudTrail" class="headerlink" title="AWS CloudTrail"></a>AWS CloudTrail</h4><ul>
+<li>is a service that primarily <strong>tracks</strong> governance, compliance, operational auditing, and risk auditing of your AWS account.</li>
+<li>CloudTrail logs continuously monitors and retains account activity related to actions across all AWS infrastructure. CloudTrail provides <strong>event history of AWS account activity</strong> , including actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services. This event history simplifies security analysis, resource change tracking and troubleshooting</li>
+</ul>
+<h4 id="Amazon-CloudWatch"><a href="#Amazon-CloudWatch" class="headerlink" title="Amazon CloudWatch"></a>Amazon CloudWatch</h4><p>A <strong>monitoring and management service</strong> built for developers, system operators, site reliability engineers (SRE), and IT managers.</p>
+<ul>
+<li>CloudWatch collects monitoring and operational data in the form of logs, metrics, and events, providing you with a unified view of AWS resources, applications and services that run on AWS, and on-premises servers.</li>
+</ul>
+<h4 id="AWS-Service-Catalog"><a href="#AWS-Service-Catalog" class="headerlink" title="AWS Service Catalog"></a>AWS Service Catalog</h4><ul>
+<li>AWS Service Catalog allows organizations to <strong>create and manage catalogs of IT services that are approved for use on AWS</strong>.</li>
+<li>These IT services can include everything from virtual machine images, servers, software, and databases to complete multi-tier application architectures.</li>
+<li>AWS Service Catalog allows you to centrally manage commonly deployed IT services, and helps you achieve consistent governance and meet your compliance requirements, while enabling users to quickly deploy only the approved IT services they need.</li>
+</ul>
+<h4 id="Amazon-Auto-Scaling"><a href="#Amazon-Auto-Scaling" class="headerlink" title="Amazon Auto Scaling"></a>Amazon Auto Scaling</h4><p>(Compare to EC2 Auto Scaling)</p>
+<p>monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost.</p>
+<p>Available to: Amazon EC2, Amazon ECS, Amazon DynamoDB, Amazon Aurora</p>
+<h4 id="AWS-CloudFormation"><a href="#AWS-CloudFormation" class="headerlink" title="AWS CloudFormation"></a>AWS CloudFormation</h4><p>gives developers and systems administrators an easy way to create and manage a collection of related AWS resources, provisioning and updating them in an orderly and predictable fashion.</p>
+<p>CloudFormation Template</p>
+<h4 id="AWS-Well-Architected-Tool"><a href="#AWS-Well-Architected-Tool" class="headerlink" title="AWS Well-Architected Tool"></a>AWS Well-Architected Tool</h4><p>Machine Learning based tool that analyses metrics of historic utilization and makes recommendations of compute services to be used for workload.</p>
+<p>Review the state of your workloads and compares them to the latest AWS architectural best practices.</p>
+<h4 id="AWS-Systems-Manager"><a href="#AWS-Systems-Manager" class="headerlink" title="AWS Systems Manager"></a>AWS Systems Manager</h4><p>AWS Systems Manager gives you visibility and control of your infrastructure on AWS.</p>
+<ul>
+<li>Systems Manager provides a unified user interface so you can <strong>view operational data</strong> from multiple AWS services and allows you to <strong>automate operational tasks</strong> across your AWS resources.</li>
+<li>With Systems Manager, you can group resources, like <a target="_blank" rel="noopener" href="https://aws.amazon.com/ec2/">Amazon EC2</a> instances, <a target="_blank" rel="noopener" href="https://aws.amazon.com/s3/">Amazon S3</a> buckets, or <a target="_blank" rel="noopener" href="https://aws.amazon.com/rds/">Amazon RDS</a> instances, by application, view operational data for monitoring and troubleshooting, and take action on your groups of resources.</li>
+<li>Systems Manager simplifies resource and application management, shortens the time to detect and resolve operational problems, and makes it easy to operate and manage your infrastructure securely at scale.</li>
+</ul>
+<h5 id="Resource-Group"><a href="#Resource-Group" class="headerlink" title="Resource Group"></a>Resource Group</h5><h5 id="Insights-Dashboard"><a href="#Insights-Dashboard" class="headerlink" title="Insights Dashboard"></a>Insights Dashboard</h5><h5 id="Run-Command"><a href="#Run-Command" class="headerlink" title="Run Command"></a>Run Command</h5><h5 id="State-Manager"><a href="#State-Manager" class="headerlink" title="State Manager"></a>State Manager</h5><h5 id="Automation"><a href="#Automation" class="headerlink" title="Automation"></a>Automation</h5><h5 id="Parameter-Store"><a href="#Parameter-Store" class="headerlink" title="Parameter Store"></a>Parameter Store</h5><h5 id="Distributor"><a href="#Distributor" class="headerlink" title="Distributor"></a>Distributor</h5><h5 id="Session-Manager"><a href="#Session-Manager" class="headerlink" title="Session Manager"></a>Session Manager</h5><h4 id="AWS-Config-change-of-configuration"><a href="#AWS-Config-change-of-configuration" class="headerlink" title="AWS Config (change of configuration)"></a>AWS Config (change of configuration)</h4><ul>
+<li>used to audit and monitor configuration changes</li>
+<li>AWS Config is a service that enables you to <strong>assess, audit, and evaluate the configurations of your AWS resources</strong>.</li>
+<li>Config continuously <strong>monitors and records</strong> your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations.</li>
+<li>With Config, you can review changes in configurations and relationships between AWS resources, dive into detailed resource configuration histories, and determine your overall compliance against the configurations specified in your internal guidelines. This enables you to simplify compliance auditing, security analysis, change management, and operational troubleshooting.</li>
+</ul>
+<h4 id="AWS-OpsWorks"><a href="#AWS-OpsWorks" class="headerlink" title="AWS OpsWorks"></a>AWS OpsWorks</h4><ul>
+<li>AWS OpsWorks is a configuration management service that provides managed instances of Chef and Puppet.</li>
+<li>Chef and Puppet are <strong>automation platforms that allow you to use code to automate the configurations of your servers</strong>.</li>
+<li>OpsWorks lets you use Chef and Puppet to automate how servers are configured, deployed, and managed <strong>across your</strong> <a target="_blank" rel="noopener" href="https://aws.amazon.com/ec2/"><strong>Amazon EC2</strong></a> <strong>instances or on-premises</strong> compute environments.</li>
+</ul>
+<h4 id="AWS-Control-Tower"><a href="#AWS-Control-Tower" class="headerlink" title="AWS Control Tower"></a>AWS Control Tower</h4><p>● helps Enterprises quickly set-up a secure, AWS multi-account</p>
+<p>● provides you with a baseline environment to get started with a multi-account architecture</p>
+<p>● AWS Account Vending Machine (AVM)</p>
+<p>Automatically provisions and configure new accounts via Service Catalog Template</p>
+<p>Uses Single Sign-on (SSO) for managing and accessing accounts</p>
+<p>【Architecture Diagram】</p>
+<p>![](RackMultipart202 004-4- udwvv_html_3b37f 4c69387ab.png)</p>
+<h4 id="AWS-Personal-Health-Dashboard"><a href="#AWS-Personal-Health-Dashboard" class="headerlink" title="AWS Personal Health Dashboard"></a>AWS Personal Health Dashboard</h4><p>Technology and tools to monitor, manage, and optimize your AWS environment</p>
+<ul>
+<li>a tool that <strong>shows the status of AWS services</strong> that are running user-specific resources</li>
+<li>a graphical representation that <strong>sends alerts, notifications of any personal pending issues, planned changes and scheduled activities</strong></li>
+</ul>
+<h4 id="Service-Health-Dashboard"><a href="#Service-Health-Dashboard" class="headerlink" title="Service Health Dashboard"></a>Service Health Dashboard</h4><p>To monitor AWS is norm or not</p>
+<h3 id="Migration-and-Transfer"><a href="#Migration-and-Transfer" class="headerlink" title="Migration and Transfer"></a>Migration and Transfer</h3><h4 id="AWS-DataSync"><a href="#AWS-DataSync" class="headerlink" title="AWS DataSync"></a>AWS DataSync</h4><ul>
+<li>an online <strong>data transfer service</strong> that simplifies, automates, and accelerates copying large amounts of data to and from AWS storage services over the internet or AWS Direct Connect. DataSync can copy data between Network File System (NFS) or Server Message Block (SMB) file servers, Amazon S3 buckets, and Amazon Elastic File System file systems</li>
+</ul>
+<h4 id="AWS-Snowball"><a href="#AWS-Snowball" class="headerlink" title="AWS Snowball"></a>AWS Snowball</h4><ul>
+<li>Snowball is a petabyte-scale data transport solution that uses devices designed to be secure to transfer large amounts of data into and out of the AWS Cloud. Using Snowball addresses common challenges with large-scale data transfers including high network costs, long transfer times, and security concerns. Customers today use Snowball to migrate analytics data, genomics data, video libraries, image repositories, backups, and to archive part of data center shutdowns, tape replacement or application migration projects. Transferring data with Snowball is simple, fast, more secure, and can be as little as one-fifth the cost of transferring data via high-speed Internet.</li>
+</ul>
+<h3 id="Machine-Learning"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</h3><h4 id="Amazon-Rekognition"><a href="#Amazon-Rekognition" class="headerlink" title="Amazon Rekognition"></a>Amazon Rekognition</h4><ul>
+<li><p>Amazon Rekognition makes it easy to add image and video analysis to your applications using proven, highly scalable, deep learning technology that requires no machine learning expertise to use.</p>
+</li>
+<li><p>With Amazon Rekognition, you can identify objects, people, text, scenes, and activities in images and videos, as well as detect any inappropriate content. Amazon Rekognition also provides highly accurate facial analysis and facial search capabilities that you can use to detect, analyze, and compare faces for a wide variety of user verification, people counting, and public safety use cases.</p>
+</li>
+<li><p>make it easy to set up, operate, and scale a relational database in the cloud</p>
+</li>
+<li><p>provide cost-efficient and resizable capacity while automating time-consuming administration tasks such as hardware provisioning, database setup, patching and backups</p>
+</li>
+<li><p>free you to focus on your applications so you can give them the fast performance, high availability, security and compatibility they need</p>
+</li>
+</ul>
+<h4 id="Amazon-SageMaker"><a href="#Amazon-SageMaker" class="headerlink" title="Amazon SageMaker"></a>Amazon SageMaker</h4><ul>
+<li>Amazon SageMaker is a fully-managed platform that enables developers and data scientists to quickly and easily build, train, and deploy machine learning models at any scale.</li>
+<li>Amazon SageMaker includes modules that can be used together or independently to build, train, and deploy your machine learning models</li>
+</ul>
+<h4 id="Amazon-SageMaker-Ground-Truth"><a href="#Amazon-SageMaker-Ground-Truth" class="headerlink" title="Amazon SageMaker Ground Truth"></a>Amazon SageMaker Ground Truth</h4><p>helps you build highly accurate training datasets for machine learning quickly.</p>
+<ul>
+<li>SageMaker Ground Truth offers easy access to public and private human labelers and provides them with built-in workflows and interfaces for common labeling tasks.</li>
+<li>Additionally, SageMaker Ground Truth can lower your labeling costs by up to 70% using automatic labeling, which works by training Ground Truth from data labeled by humans so that the service learns to label data independently.</li>
+</ul>
+<h4 id="Amazon-Comprehend"><a href="#Amazon-Comprehend" class="headerlink" title="Amazon Comprehend"></a>Amazon Comprehend</h4><p>A natural language processing (NLP) service that uses machine learning to find insights and relationships in text. No machine learning experience required.</p>
+<ul>
+<li>Amazon Comprehend uses machine learning to help you uncover the insights and relationships in your unstructured data.</li>
+</ul>
+<h4 id="Amazon-Lex"><a href="#Amazon-Lex" class="headerlink" title="Amazon Lex"></a>Amazon Lex</h4><p>a service for building conversational interfaces into any application using voice and text.</p>
+<ul>
+<li>Lex provides the advanced deep learning functionalities of automatic speech recognition (ASR) for converting speech to text, and natural language understanding (NLU) to recognize the intent of the text</li>
+</ul>
+<h4 id="Amazon-Polly"><a href="#Amazon-Polly" class="headerlink" title="Amazon Polly"></a>Amazon Polly</h4><p>a service that turns text into lifelike speech</p>
+<h2 id="【Billing-x2F-Price-and-Service-Intro】"><a href="#【Billing-x2F-Price-and-Service-Intro】" class="headerlink" title="【Billing&#x2F;Price and Service Intro】"></a>【Billing&#x2F;Price and Service Intro】</h2><h3 id="EC2-Four-Types"><a href="#EC2-Four-Types" class="headerlink" title="EC2 (Four Types)"></a>EC2 (Four Types)</h3><p>Main cloud computing service of AWS</p>
+<h4 id="Pricing-Model"><a href="#Pricing-Model" class="headerlink" title="Pricing Model"></a>Pricing Model</h4><h5 id="On-Demand-least-commitment"><a href="#On-Demand-least-commitment" class="headerlink" title="On-Demand (least commitment)"></a>On-Demand (least commitment)</h5><p>Norm service</p>
+<ul>
+<li>charged by the hour or by the minute</li>
+<li>is for applications where workload is for short-term, spikey or unpredictable</li>
+</ul>
+<h5 id="Spot-biggest-savings"><a href="#Spot-biggest-savings" class="headerlink" title="Spot (biggest savings)"></a>Spot (biggest savings)</h5><ul>
+<li>AWS wants to maximize the utility of those idle servers (like hotel discount to fill vacant seats)</li>
+<li>Design for applications that have flexible start and end times or applications that are only feasible at very low compute costs</li>
+<li>provide a discount of <strong>90% compared to on-demand pricing</strong></li>
+<li><strong>Termination Conditions:</strong> can be terminated if the computing capacity is needed by on-demand customers<ul>
+<li>instances can be terminated by AWS at anytime</li>
+<li>if your instance is terminated by AWS, you don&#39;t get charged for a partial hour of usage</li>
+<li>if you terminate an instance, you will still be charged for any hour that it ran</li>
+</ul>
+</li>
+</ul>
+<h5 id="Reserved-Best-Long-term-RI"><a href="#Reserved-Best-Long-term-RI" class="headerlink" title="Reserved (Best Long-term) RI"></a>Reserved (Best Long-term) RI</h5><p>Design for application that have <strong>steady-state, predicable usage</strong> or require reserved capacity</p>
+<p>Convertible Reserved Instances: have the flexibility to change families, operating system types, and tenancies while benefitting from Reserved Instance pricing</p>
+<ul>
+<li>pricing is based on Term x Class Offering x Payment Option</li>
+<li>Offering Class:<ul>
+<li>standard: <strong>up to 75% reduced pricing</strong> compared to on-demand</li>
+<li>convertible: up to 54% reduced pricing</li>
+<li>scheduled: reserve instance for specific time periods, savings vary</li>
+</ul>
+</li>
+<li>Term:<ul>
+<li>commit to a  ear or 3 Year contract</li>
+<li>the longer the term, the greater savings</li>
+</ul>
+</li>
+<li>Payment Options:<ul>
+<li>all upfront</li>
+<li>partial upfront</li>
+<li>no upfront</li>
+</ul>
+</li>
+</ul>
+<p>【Amazon EC2 RI Types】</p>
+<ul>
+<li>Standard RIs: These provide the most significant discount (up to 72% off On-Demand) and are best suited for steady-state usage.</li>
+<li>Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to <strong>change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value</strong>. Like Standard RIs, Convertible RIs are best suited for steady-state usage.</li>
+<li>Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to <strong>match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month</strong>.</li>
+</ul>
+<h5 id="Dedicated-most-expensive"><a href="#Dedicated-most-expensive" class="headerlink" title="Dedicated (most expensive)"></a>Dedicated (most expensive)</h5><p>Don&#39;t share hardware</p>
+<ul>
+<li>designed to meet regulatory requirements<ul>
+<li>when you have strict server-bound licensing that won&#39;t support multi-tenancy or cloud deployments</li>
+</ul>
+</li>
+<li>multi-tenancy<ul>
+<li>multi-tenant<ul>
+<li>when multiple customers are running workloads on the same hardware</li>
+<li><strong>virtual isolation</strong> is what separate customers</li>
+</ul>
+</li>
+<li>single tenant<ul>
+<li>when a single customer has dedicated hardware</li>
+<li><strong>physical isolation</strong> is what separates customers</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ffered in both on-demand and reserved (70% off on-demand pricing)</li>
+<li>enterprises and large organization may have <strong>security concerns</strong> or obligations about against the same hardware with other AWS customers</li>
+</ul>
+<h4 id="Cheat-Sheet-Summary"><a href="#Cheat-Sheet-Summary" class="headerlink" title="Cheat Sheet (Summary)"></a><strong>Cheat Sheet (Summary)</strong></h4><ul>
+<li>EC2 has 4 pricing models On-Demand, Spot, Reserved Instances (RI) and Dedicated</li>
+<li>On-Demand (least commitment)<ul>
+<li>low cost and flexible</li>
+<li>nly pay per hour</li>
+<li>Use case: short-term, spiky, unpredictable workloads, first time apps</li>
+<li>ideal when your workloads cannot be interrupted</li>
+</ul>
+</li>
+<li>Reserved Instances up to 75% off (best long-term value)<ul>
+<li>Use case: steady state or predictable usage</li>
+<li>can resell unused reserved instances (reserved instance marketplace)</li>
+<li>reduced pricing is based on <strong>Term x Class Offering x Payment Option</strong></li>
+<li>Payment Terms:  year or 3 years</li>
+<li>Payment Options: All Upfront, Partial Upfront, and No Upfront</li>
+<li>Class Offerings<ul>
+<li>Standard: up to 75% reduced pricing compared to on-demand. Cannot change RI attributes</li>
+<li>Convertible: up to 54% reduced pricing compared to on-demand. Allows you to change RI attributes if greater or equal in value</li>
+<li>Scheduled: you reserve instances for specific time periods, eg. once a week for a few hours. Savings vary</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Spot pricing up to 90% off (biggest savings)<ul>
+<li>request spare computing capacity</li>
+<li>flexible start and end times</li>
+<li>use case:<ul>
+<li>can handle interruptions (server randomly stopping and starting)</li>
+<li>for non-critical background jobs</li>
+</ul>
+</li>
+<li>instances can be terminated by AWS at anytime</li>
+<li>if your instance is <strong>terminated by AWS</strong> , you don&#39;t get charged for a partial hour of usage</li>
+<li>if you terminate an instance you will still be charged for any hour it ran</li>
+</ul>
+</li>
+<li>Dedicated Hosting (most expensive)<ul>
+<li>dedicated servers</li>
+<li>can be on-demand or reserved (up to 70% off)</li>
+<li>use case<ul>
+<li>when you need a guarantee of isolate hardware (enterprise requirements)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Free-Services"><a href="#Free-Services" class="headerlink" title="Free Services"></a>Free Services</h3><ul>
+<li>certain services are free themselves, but the resources they setup will cost you<ul>
+<li>IAM - identity access management</li>
+<li>Amazon VPC</li>
+<li>services are free, but they can provision AWS services which cost money<ul>
+<li>Auto Scaling</li>
+<li>CloudFormation</li>
+<li>Elastic Beanstalk</li>
+<li>Opsworks</li>
+<li>Amplify</li>
+<li>AppSync</li>
+<li>CodeStar</li>
+</ul>
+</li>
+<li>Organizations &amp; Consolidated Billing</li>
+<li>AWS Cost Explorer</li>
+</ul>
+</li>
+</ul>
+<h3 id="AWS-Support-Plans-Important"><a href="#AWS-Support-Plans-Important" class="headerlink" title="AWS Support Plans (Important)"></a>AWS Support Plans (Important)</h3><ul>
+<li>Basic $0USD&#x2F;month<ul>
+<li>email support only for billing and account</li>
+<li>7 trusted advisor checks</li>
+</ul>
+</li>
+<li>Developer $20USD&#x2F;month<ul>
+<li>tech support via email ~24 hours until reply</li>
+<li>no third-party support</li>
+<li>general guidance: 24 hours</li>
+<li>system impaired: hours</li>
+<li>7 trusted advisor checks</li>
+</ul>
+</li>
+<li>Business $ 0USD&#x2F;month<ul>
+<li>tech support via email ~24 hours until reply</li>
+<li>tech support via chat, phone anytime 24&#x2F;7</li>
+<li>general guidance: 24 hours</li>
+<li>system impaired: hours</li>
+<li>production system impaired: 4 hours</li>
+<li>production system down: hours</li>
+<li>third-part support</li>
+<li>all trusted advisor checks</li>
+</ul>
+</li>
+<li>Enterprise $ ,000USD&#x2F;month<ul>
+<li>all that Business has</li>
+<li>business-critical system down: minutes</li>
+<li>Personal Concierge</li>
+<li>TAM (technique account manager)</li>
+<li>all trusted advisor checks</li>
+</ul>
+</li>
+</ul>
+<p>Example: how to create a support case</p>
+<ul>
+<li>technical support</li>
+<li>service limit increase</li>
+<li>account and billing support</li>
+</ul>
+<p>!!! free plan doesn’t have technique support !!!</p>
+<p>Web Chat Phone</p>
+<h3 id="AWS-Marketplace"><a href="#AWS-Marketplace" class="headerlink" title="AWS Marketplace"></a>AWS Marketplace</h3><ul>
+<li><p>a curated digital catalogue with thousands of software listings from independent software vendors</p>
+</li>
+<li><p>easily find, buy, test, and deploy software that already runs on AWS</p>
+</li>
+<li><p>the product can be <strong>free to use</strong> or can <strong>have an associated charge</strong></p>
+</li>
+<li><p>products can be offered as</p>
+<ul>
+<li>Amazon Machine Images (AMIs)</li>
+<li>AWS CloudFormation templates</li>
+<li>Software as a service (SaaS) offerings</li>
+<li>Web ACL</li>
+<li>AWS WAF rules</li>
+</ul>
+</li>
+</ul>
+<p>Example: AWS marketplace subscription</p>
+<p>Popular categories</p>
+<p>Usage information: EC2&#x2F;…</p>
+<p>Manage subscriptions</p>
+<h3 id="AWS-Trusted-Advisor"><a href="#AWS-Trusted-Advisor" class="headerlink" title="AWS Trusted Advisor"></a>AWS Trusted Advisor</h3><ul>
+<li><p><strong>Advise</strong> you on <strong>security, saving money, performance, service limits and fault tolerance</strong></p>
+</li>
+<li><p>Seven Category of Trusted Advisor: <strong>cost optimization, performance, service limits, fault tolerance, security</strong></p>
+</li>
+<li><p>AWS Basic Support and AWS Developer Support customers get access to <strong>6 security checks</strong> (S3 Bucket Permissions, Security Groups - Specific Ports Unrestricted, IAM Use, MFA on Root Account, EBS Public Snapshots, RDS Public Snapshots) and <strong>50 service limit checks</strong>.</p>
+</li>
+<li><p>Enterprise and business for all trusted advisor</p>
+</li>
+<li><p>Cost Optimization</p>
+<ul>
+<li>idle load balancers</li>
+<li>unassociated elastic IP addresses</li>
+</ul>
+</li>
+<li><p>Performance</p>
+<ul>
+<li>high utilization Amazon EC2 instances</li>
+</ul>
+</li>
+<li><p>Security</p>
+<ul>
+<li>MFA on Root Account</li>
+<li>IAM access key rotation</li>
+</ul>
+</li>
+<li><p>Fault Tolerance</p>
+<ul>
+<li>Amazon RDS backups</li>
+</ul>
+</li>
+<li><p>Service Limits</p>
+<ul>
+<li>VPC</li>
+</ul>
+</li>
+</ul>
+<p>Example: how trusted advisor works?</p>
+<p>Cost optimization</p>
+<h3 id="Consolidated-Billing"><a href="#Consolidated-Billing" class="headerlink" title="Consolidated Billing"></a>Consolidated Billing</h3><ul>
+<li><strong>one bill for all of your accounts</strong></li>
+<li>treat all the accounts in an organization as if they were one account (create AWS organization)</li>
+<li>you can designate one master account that pays the charges of all the other member accounts</li>
+<li>consolidated billing is offered at no additional cost</li>
+<li>volume discounts (for many services) &amp;lt;- motivation to use consolidate billing<ul>
+<li>the more you use, the more you save</li>
+<li>consolidated billing lets you take advantage of volume discounts</li>
+</ul>
+</li>
+</ul>
+<h3 id="AWS-Cost-Explorer"><a href="#AWS-Cost-Explorer" class="headerlink" title="AWS Cost Explorer"></a>AWS Cost Explorer</h3><ul>
+<li>let you <strong>visualize, understand,</strong> and <strong>manage</strong> your AWS costs and usage over time</li>
+<li>default reports help you gain insight into your cost drives and usage trends</li>
+</ul>
+<p>![](RackMultipart202 004-4- udwvv_html_6df6753e8ede89a7.png)</p>
+<p>Example: how to use cost explorer?</p>
+<p>![](RackMultipart202 004-4- udwvv_html_5dd444afca3d8 e.png)</p>
+<ul>
+<li>AWS Cost Explorer has an easy-to-use interface that lets you visualize, understand, and manage your AWS costs and usage over time.</li>
+<li>monthly costs by AWS service</li>
+<li>hourly and resource level granularity</li>
+<li>forecast future costs and usage</li>
+</ul>
+<h3 id="AWS-Budgets"><a href="#AWS-Budgets" class="headerlink" title="AWS Budgets"></a>AWS Budgets</h3><p>Like a billing alarms on steroids</p>
+<ul>
+<li><p>plan your <strong>service usage, service costs and instance reservations</strong></p>
+</li>
+<li><p>first two budges are free</p>
+</li>
+<li><p>each budget is $0.02 per day ~ 0.60 USD &#x2F; mo 20,000 budgets limit</p>
+</li>
+<li><p>give you the ability to setup alerts if you exceed or are approaching your defined budget</p>
+</li>
+<li><p>create <strong>Cost, Usage or Reservation budgets</strong></p>
+</li>
+<li><p>can be tracked at the monthly, quarterly, or yearly levels, with customizable start and end dates</p>
+</li>
+<li><p>alerts support <strong>EC2, RDS, Redshift, and ElastiCache</strong> reservations</p>
+</li>
+<li><p>can be easily manage from AWS Budgets dashboard or via the Budgets API</p>
+</li>
+<li><p>Get notified by providing an email or chatbot and threshold how close to the current or forecasted budget</p>
+</li>
+</ul>
+<h3 id="TCO-Calculator"><a href="#TCO-Calculator" class="headerlink" title="TCO Calculator"></a>TCO Calculator</h3><ul>
+<li>Total Cost of Ownership</li>
+<li>estimate how much you would save when moving to AWS from on-premise</li>
+<li>provides detailed set of <strong>reports that can be used in executive presentation</strong></li>
+<li>tool is for approximation purposes only!</li>
+</ul>
+<h3 id="AWS-Resource-Groups-and-Tagging"><a href="#AWS-Resource-Groups-and-Tagging" class="headerlink" title="AWS Resource Groups and Tagging"></a>AWS Resource Groups and Tagging</h3><p><strong>Tags</strong> are words or phrases that act as metadata for organizing your AWS resources</p>
+<p><strong>Resources Groups</strong> are a collection of resources that share one or more <strong>tags</strong></p>
+<p>RG can display details about a group of resource based on</p>
+<ul>
+<li>Metrics</li>
+<li>Alarms</li>
+<li>Configuration settings</li>
+</ul>
+<p>Help you to organize consolidate resource</p>
+<h3 id="AWS-Quick-Starts-AWS-CloudFormation"><a href="#AWS-Quick-Starts-AWS-CloudFormation" class="headerlink" title="AWS Quick Starts ( AWS CloudFormation )"></a>AWS Quick Starts ( <strong>AWS CloudFormation</strong> )</h3><p><strong>Prebuilt templates</strong> by AWS and AWS partners to help you deploy <strong>popular stacks</strong> on AWS</p>
+<p>Reduce hundreds of manual procedures into just few steps</p>
+<p>3 parts:</p>
+<ul>
+<li>A reference architecture for the deployment</li>
+<li><strong>AWS CloudFormation</strong> templates that automate and configure the deployment</li>
+<li>A deployment guide explaining the architecture and implementation in detail</li>
+</ul>
+<h3 id="AWS-Cost-and-Usage-Report"><a href="#AWS-Cost-and-Usage-Report" class="headerlink" title="AWS Cost and Usage Report"></a>AWS Cost and Usage Report</h3><p>Generate detailed spreadsheet, enabling you to better analyze and understand your AWS costs</p>
+<p>Example:</p>
+<p>A single location for accessing comprehensive information about your AWS costs and usage. (in hour or daily line items)</p>
+<h2 id="【Technology-Overview】"><a href="#【Technology-Overview】" class="headerlink" title="【Technology Overview】"></a>【Technology Overview】</h2><h3 id="Organizations-and-Accounts"><a href="#Organizations-and-Accounts" class="headerlink" title="Organizations and Accounts"></a>Organizations and Accounts</h3><p>A AWS organization have only one root account, and an account of this organization can only be in one Organization Unit (OU)</p>
+<ul>
+<li>Organizations<ul>
+<li>ffer policy-based management for multiple AWS accounts</li>
+<li>you can create group of accounts and then apply policies to those groups</li>
+<li>enable you to centrally manage policies across multiple accounts, without requiring custom scripts and manual processes</li>
+</ul>
+</li>
+<li>Root Account User</li>
+</ul>
+<p>A single sign-in identity that has complete access to all AWS services and resources in an account</p>
+<ul>
+<li>Organization Units</li>
+</ul>
+<p>A group of AWS accounts within an organization which can also contains other organizational units – creating a hierarchy</p>
+<ul>
+<li>Service Control Policies</li>
+</ul>
+<p>Give central control over the allowed permissions for all accounts in your organization, helping to ensure your accounts stay with your organization&#39;s guideline</p>
+<p>Example:</p>
+<p>Create organization</p>
+<p>Invite account &#x2F; create organization account</p>
+<p>Setup new account need to forget password…</p>
+<h3 id="AWS-Networking"><a href="#AWS-Networking" class="headerlink" title="AWS Networking"></a>AWS Networking</h3><ul>
+<li>Region<ul>
+<li>the geographical location of your network</li>
+</ul>
+</li>
+<li>AZ<ul>
+<li>the data center of your AWS resources</li>
+</ul>
+</li>
+<li>VPC<ul>
+<li>a logically isolated section of the AWS Cloud where you can launch AWS resources</li>
+</ul>
+</li>
+<li>Internet Gateway<ul>
+<li>enable access to the internet</li>
+</ul>
+</li>
+<li>Route Tables<ul>
+<li>determine where network traffic from your subnets are directed</li>
+</ul>
+</li>
+<li>NACLs<ul>
+<li>acts as a firewalls at the subnet level</li>
+</ul>
+</li>
+<li>Security Groups<ul>
+<li>acts as firewall at the instance level</li>
+</ul>
+</li>
+<li>Subnets<ul>
+<li>a logical partition of an IP network into multiple, smaller network segments</li>
+</ul>
+</li>
+</ul>
+<h3 id="Database-Services"><a href="#Database-Services" class="headerlink" title="Database Services"></a>Database Services</h3><ul>
+<li><p>DynamoDB</p>
+<ul>
+<li>NoSQL key&#x2F;value database</li>
+<li>fully managed</li>
+<li>cassandra</li>
+</ul>
+</li>
+<li><p>DocumentDB</p>
+<ul>
+<li>NoSQL <strong>Document database</strong> that is MongoDB compatible</li>
+<li>mongoDB</li>
+</ul>
+</li>
+<li><p>RDS</p>
+<ul>
+<li>Relational Database Service</li>
+<li>support multiple engines</li>
+<li>MySQL, Postgres, MariaDB, Oracle, Microsoft SQL Server, Aurora</li>
+</ul>
+</li>
+<li><p>Aurora</p>
+<ul>
+<li>MySQL (5x faster) and PSQL (3x faster) database <strong>fully managed</strong></li>
+</ul>
+</li>
+<li><p>Aurora Serverless</p>
+<ul>
+<li>nly runs when you need it, like AWS <strong>Lambda</strong></li>
+</ul>
+</li>
+<li><p>Neptune</p>
+<ul>
+<li>Managed Graph Database</li>
+</ul>
+</li>
+<li><p>Redshift</p>
+<ul>
+<li>Columnar database, petabype warehouse ( b &#x3D;  00 tb)</li>
+<li>Work with huge amount of data</li>
+<li>Data Warehouse</li>
+</ul>
+</li>
+<li><p>ElastiCache</p>
+<ul>
+<li>Redis, or Memcached database</li>
+<li>a web service that makes it easy to deploy, operate, and scale an in-memory data store or cache in the cloud</li>
+<li>improve the performance of web applications by allowing you to retrieve information from fast, managed, in-memory data stores, instead of relying entirely on slower disk-based databases</li>
+</ul>
+</li>
+</ul>
+<h3 id="Provisioning-Services"><a href="#Provisioning-Services" class="headerlink" title="Provisioning Services"></a>Provisioning Services</h3><p>The allocation or creation of resources and services to a customer</p>
+<ul>
+<li><strong>Elastic Beanstalk</strong><ul>
+<li>service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker</li>
+<li>upload code and work</li>
+</ul>
+</li>
+<li><strong>OpsWorks</strong><ul>
+<li>configuration management service that provides managed instances of Chef and Puppet (automatic)</li>
+</ul>
+</li>
+<li>CloudFormation<ul>
+<li>infrastructure as code, JSON or YAML</li>
+<li>define by JSON and automatic generate code, flexible</li>
+</ul>
+</li>
+<li>AWS QuickStart<ul>
+<li>pre-made packages that can launch and configure your AWS compute, network, storage, and other services required to deploy a workload on AWS</li>
+</ul>
+</li>
+<li>AWS Marketplace<ul>
+<li>a digital catalogue of <strong>thousands of</strong> software listings from independent software vendors you can use to find, buy, test, and deploy software</li>
+<li>managed EC2 instance</li>
+</ul>
+</li>
+</ul>
+<h3 id="AWS-Computing"><a href="#AWS-Computing" class="headerlink" title="AWS Computing"></a>AWS Computing</h3><ul>
+<li>EC2: Elastic Compute Cloud, highly configurable server eg. CPU, memory, network, OS<ul>
+<li><p>ECS: Elastic Container Service</p>
+<ul>
+<li>Docker as a Service</li>
+<li>highly scalable, high-performance container orchestration service that supports Docker containers, pay for EC2 instances</li>
+</ul>
+</li>
+<li><p>Fargate</p>
+<ul>
+<li>microservices where you don&#39;t think about the infrastructure</li>
+<li>pay per task</li>
+<li>like lambda</li>
+</ul>
+</li>
+<li><p>EKS</p>
+<ul>
+<li>Kubernetes as a Service</li>
+<li>easy to <strong>deploy, manage, and scale</strong> containerized applications using Kubernetes</li>
+</ul>
+</li>
+<li><p>Lambda</p>
+<ul>
+<li>serverless functions</li>
+<li>run code without provisioning or managing servers</li>
+<li>pay only for the compute time you consume</li>
+</ul>
+</li>
+<li><p>Elastic Beanstalk</p>
+<ul>
+<li>rchestrates various AWS services, including EC2, S3, SNS, CloudWatch, autoscaling, and Elastic load balancers</li>
+<li>just upload your code</li>
+</ul>
+</li>
+<li><p>AWS Batch (batch processing)</p>
+<ul>
+<li>plans, schedules, and executes your batch computing workloads across the full range of AWS compute services and features, such Amazon EC2 and Spot Instances</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Storage-Services-hard-drive-on-the-cloud"><a href="#Storage-Services-hard-drive-on-the-cloud" class="headerlink" title="Storage Services (hard drive on the cloud)"></a>Storage Services (hard drive on the cloud)</h3><ul>
+<li><p>S3: <strong>S</strong> imple <strong>S</strong> torage <strong>S</strong> ervice</p>
+<ul>
+<li>bject storage</li>
+</ul>
+</li>
+<li><p>S3 Glacier</p>
+<ul>
+<li>low cost storage for archiving and long-term backup</li>
+</ul>
+</li>
+<li><p>Storage Gateway</p>
+<ul>
+<li>hybrid cloud storage with local caching</li>
+<li>File Gateway, Volume Gateway, Tape Gateway</li>
+</ul>
+</li>
+<li><p>EBS: Elastic Block Storage</p>
+<ul>
+<li>hard drive in the cloud you attach to EC2 instances</li>
+<li>SSD, IOPS SSD, Throughput HHD, Cold HHD</li>
+<li>when you create an EBS volume in an Availability Zone, it is automatically replicated within that zone to prevent data loss due to failure of any single hardware component</li>
+</ul>
+</li>
+<li><p>EFS: Elastic File Storage</p>
+<ul>
+<li>file storage mountable to multiple EC2 instances at the same time</li>
+</ul>
+</li>
+<li><p>Snowball</p>
+<ul>
+<li>physically migrate lots of data via a computer suitcase (50-80 TB)</li>
+<li>Snowball Edge<ul>
+<li>a better version of Snowball ( 0 TB)</li>
+</ul>
+</li>
+<li>Snowmobile (cargo)<ul>
+<li>shipping container, pulled by a semi-trailer truck ( 0 PB)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Business-Centric-Services"><a href="#Business-Centric-Services" class="headerlink" title="Business Centric Services"></a>Business Centric Services</h3><ul>
+<li>Amazon Connect<ul>
+<li>call center</li>
+<li>Cloud-based call center service you can setup in just a few clicks</li>
+<li>based on the same proven system used by the Amazon customer service teams</li>
+</ul>
+</li>
+<li>WorkSpaces<ul>
+<li>virtual remote desktop</li>
+<li>secure managed service for provisioning either Windows or Linux desktops in just a few minutes which quickly scales up to thousands of desktops</li>
+</ul>
+</li>
+<li>WorkDocs<ul>
+<li>a content creation and collaboration service</li>
+<li>easily create, edit, and share content saved centrally in AWS</li>
+<li>(the AWS version of Sharepoint)</li>
+</ul>
+</li>
+<li>Chime<ul>
+<li>AWS platform for <strong>online meetings, video conferencing, and business calling</strong> which elastically scales to meet your capacity needs</li>
+</ul>
+</li>
+<li>WorkMail<ul>
+<li>managed business email, contacts, and calendar service with support for existing desktop and mobile email client applications (IMAP)</li>
+<li>like Gmail on AWS</li>
+</ul>
+</li>
+<li>Pinpoint<ul>
+<li>marketing campaign management system you can use for sending targeted email, SMS, push notifications, and voice messages</li>
+</ul>
+</li>
+<li>SES<ul>
+<li>Simple Email Service</li>
+<li>a cloud-based email sending service designed for marketers and application developers to send marketing, notification, and emails</li>
+<li>advertisement email</li>
+<li>html component</li>
+</ul>
+</li>
+<li>QuickSight<ul>
+<li>a Business Intelligence (BI) service</li>
+<li>connect multiple data source and quickly visualize data in the form of graphs with little to no programming knowledge</li>
+</ul>
+</li>
+</ul>
+<h3 id="Enterprise-Integration"><a href="#Enterprise-Integration" class="headerlink" title="Enterprise Integration"></a>Enterprise Integration</h3><ul>
+<li>Direct Connect<ul>
+<li>dedicated Gigabit network connection from your premises to AWS</li>
+<li>imagine having a direct fiber optic cable running straight to AWS</li>
+<li>no latency, dedicated connection</li>
+</ul>
+</li>
+<li>VPN<ul>
+<li>establish a <strong>secure</strong> connection to your AWS network</li>
+<li>site-to-site VPN<ul>
+<li>connecting your on-premise to your AWS network</li>
+</ul>
+</li>
+<li>client VPN<ul>
+<li>connecting a client (a laptop) to your AWS network</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Storage Gateway<ul>
+<li>a hybrid storage service that enables your <strong>on-premise applications</strong> to use AWS cloud storage (S3)</li>
+<li>you can use this for backup and archiving, disaster recovery, cloud data processing, storage tiering, and migration</li>
+</ul>
+</li>
+<li>Active Directory<ul>
+<li>the AWS directory service for Microsoft Active Directory also known as AWS Managed Microsoft AD</li>
+<li>enable your directory-aware workloads and AWS resources to use managed Active Directory in the AWS Cloud</li>
+</ul>
+</li>
+</ul>
+<h3 id="Logging-Services-记录服务"><a href="#Logging-Services-记录服务" class="headerlink" title="Logging Services (记录服务)"></a>Logging Services (记录服务)</h3><ul>
+<li>CloudTrail<ul>
+<li>logs all API calls (SDK, CLI) between AWS services (who we can blame)<ul>
+<li>who created this bucket?</li>
+<li>who spun up that expensive EC2 instance?</li>
+<li>who launched the SageMaker Notebook?</li>
+</ul>
+</li>
+<li>detect developer misconfiguration</li>
+<li>detect malicious actors</li>
+<li>automate responses</li>
+</ul>
+</li>
+<li>CloudWatch: a collection of multiple services<ul>
+<li>CloudWatch <strong>Logs</strong><ul>
+<li>performance data about AWS Services<ul>
+<li>CPU utilization, memory, network</li>
+</ul>
+</li>
+<li>application logs</li>
+<li>lambda logs</li>
+</ul>
+</li>
+<li>CloudWatch <strong>Metrics</strong><ul>
+<li>represent a time-ordered set of data points</li>
+<li>a variable to monitor</li>
+</ul>
+</li>
+<li>CloudWatch <strong>Events</strong><ul>
+<li>trigger an event based on a condition</li>
+<li>every hour take a snapshot of server</li>
+</ul>
+</li>
+<li>CloudWatch <strong>Alarms</strong><ul>
+<li>trigger notifications based on metrics</li>
+</ul>
+</li>
+<li>CloudWatch <strong>Dashboard</strong><ul>
+<li>create visualizations based on metrics</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="【Security-and-Compliance】"><a href="#【Security-and-Compliance】" class="headerlink" title="【Security and Compliance】"></a>【Security and Compliance】</h2><p>What is Compliance?</p>
+<p>Compliance with something, such as law, treaty or agreement</p>
+<h3 id="Identity-and-Access-Management-IAM"><a href="#Identity-and-Access-Management-IAM" class="headerlink" title="Identity and Access Management (IAM)"></a>Identity and Access Management (IAM)</h3><p>AWS Identity and Access Management (IAM) 是一种 Web 服务，可以帮助您安全地控制对 AWS 资源的访问。您可以使用 IAM 控制对哪个用户进行身份验证 (登录) 和授权 (具有权限) 以使用资源。</p>
+<p>当您首次创建 AWS 账户时，最初使用的是一个对账户中所有 AWS 服务和资源有完全访问权限的单点登录身份。此身份称为 AWS 账户 根用户，可使用您创建账户时所用的电子邮件地址和密码登录来获得此身份。强烈建议您不使用 根用户 执行日常任务，即使是管理任务。</p>
+<p>![](RackMultipart202 004-4- udwvv_html_64b 48e3076ec9e.png)</p>
+<p>![](RackMultipart202 004-4- udwvv_html_524000e4397dca8e.png)</p>
+<p>  IAM Policies are JSON documents used to describe permissions within AWS<br>2. Three steps of using IAM:</p>
+<ul>
+<li><p>Create IAM group</p>
+</li>
+<li><p>Create IAM policies</p>
+</li>
+<li><p>Add IAM users</p>
+<p>MFA 多重验证：您可以向您的账户和各个用户添加双重身份验证以实现更高安全性。借助 MFA，您或您的用户不仅必须提供使用账户所需的密码或访问密钥，还必须提供来自经过特殊配置的设备的代码。</p>
+</li>
+</ul>
+<ol start="2">
+<li>IAM role: An IAM role is an IAM entity that defines a set of <a target="_blank" rel="noopener" href="https://aws.amazon.com/iam/details/manage-permissions/">permissions</a> for making AWS service requests. IAM roles <strong>are not associated with a specific user or group</strong>. Instead, trusted entities assume roles, such as IAM users, applications, or AWS services such as EC2.</li>
+</ol>
+<p>IAM group: easy way to grant &#x2F;revoke&#x2F;manage permissions on collection of IAM users</p>
+<p>IAM tag: adding custom attributes to IAM users and roles, IAM tags uses key-value pair</p>
+<p>IAM users: assign them individual security credentials (access key, passwords and MFA), or request temporary security credentials.</p>
+<h3 id="Shared-Responsibility-Model-very-important-one-of-key-point"><a href="#Shared-Responsibility-Model-very-important-one-of-key-point" class="headerlink" title="Shared Responsibility Model (very important, one of key point)"></a>Shared Responsibility Model (very important, one of key point)</h3><h5 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h5><ul>
+<li>customers are responsible for security in the Cloud<ul>
+<li>data</li>
+<li>configuration</li>
+</ul>
+</li>
+<li>AWs is responsible for security of the Cloud<ul>
+<li>hardware</li>
+<li>operation of managed services</li>
+<li>global infrastructure</li>
+</ul>
+</li>
+</ul>
+<h5 id="full-model"><a href="#full-model" class="headerlink" title="full model"></a>full model</h5><h5 id="Shared-Controls-Controls-which-apply-to-both-the-infrastructure-layer-and-customer-layers-but-in-completely-separate-contexts-or-perspectives-In-a-shared-control-AWS-provides-the-requirements-for-the-infrastructure-and-the-customer-must-provide-their-own-control-implementation-within-their-use-of-AWS-services"><a href="#Shared-Controls-Controls-which-apply-to-both-the-infrastructure-layer-and-customer-layers-but-in-completely-separate-contexts-or-perspectives-In-a-shared-control-AWS-provides-the-requirements-for-the-infrastructure-and-the-customer-must-provide-their-own-control-implementation-within-their-use-of-AWS-services" class="headerlink" title="Shared Controls - Controls which apply to both the infrastructure layer and customer layers, but in completely separate contexts or perspectives. In a shared control, AWS provides the requirements for the infrastructure and the customer must provide their own control implementation within their use of AWS services."></a><strong>Shared Controls</strong> - Controls which apply to both the infrastructure layer and customer layers, but in completely separate contexts or perspectives. In a shared control, AWS provides the requirements for the infrastructure and the customer must provide their own control implementation within their use of AWS services.</h5><ul>
+<li>Patch Management – AWS is responsible for patching and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.</li>
+<li>Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.</li>
+<li>Awareness &amp; Training - AWS trains AWS employees, but a customer must train their own employees.</li>
+</ul>
+<h3 id="Compliance-Programs"><a href="#Compliance-Programs" class="headerlink" title="Compliance Programs"></a>Compliance Programs</h3><ul>
+<li><strong>a set of internal policies</strong> and procedures of a company to comply with laws, rules, and regulations or to uphold business reputation</li>
+<li>example<ul>
+<li>HIPAA<ul>
+<li>Health Insurance Portability and Accountability Act</li>
+<li>United States legislation that provides <strong>data privacy and security provisions</strong> for safeguarding medical information</li>
+</ul>
+</li>
+<li>PCI DSS<ul>
+<li>The Payment Card Industry Data Security Standard</li>
+<li>when you want to sell things online and you need to handle credit card information</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Artifact"><a href="#Artifact" class="headerlink" title="Artifact"></a>Artifact</h3><p>Generate report to meet compliance</p>
+<p>A comprehensive resource center for access to AWS&#39; auditor issued reports as well as security and compliance documentation from several renowned independent standards organizations.</p>
+<ul>
+<li>how do we prove AWS meets a compliance<ul>
+<li>no cost, self-service portal for on-demand access to AWS&#39; compliance reports</li>
+<li>n-demand <strong>access to AWS&#39; security and compliance reports</strong> and select online agreements</li>
+<li>these checks are based on <strong>global compliance</strong> frameworks</li>
+</ul>
+</li>
+</ul>
+<h3 id="Amazon-Inspector"><a href="#Amazon-Inspector" class="headerlink" title="Amazon Inspector"></a>Amazon Inspector</h3><ul>
+<li>how do we prove an EC2 instance is harden<ul>
+<li>hardening: the act of <strong>eliminating as many security risks</strong> as possible</li>
+<li>AWS Inspector runs a security benchmark against specific EC2 instances</li>
+<li>you can run a variety of security benchmarks, for Center for Internet Security (CIS), <strong>699 checks</strong></li>
+<li>can perform both Network and Host Assessments<ul>
+<li>install the AWS agent on your EC2 instances</li>
+<li>run an assessment for your assessment target</li>
+<li>review your findings and remediate security issues</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="AWS-WAF-web-application"><a href="#AWS-WAF-web-application" class="headerlink" title="AWS WAF (web application)"></a>AWS WAF (web application)</h3><ul>
+<li><strong>Web Application Firewall</strong><ul>
+<li>protect your <strong>web applications</strong> from common web exploits</li>
+<li>write your own rules to ALLOW or DENY traffic based on the contents of an HTTP requests</li>
+<li>use a <strong>ruleset</strong> from a trusted AWS security partner in the AWS WAF Rules Marketplace</li>
+<li>WAF can be attached to either <strong>CloudFront</strong> (distributed edge server)or an <strong>Application Load Balancer</strong></li>
+</ul>
+</li>
+</ul>
+<p>Protect web applications from attack covered in the OWASP Top   most dangerous attacks:</p>
+<p>  Injection<br>2. Broken authentication<br>3. Sensitive data exposure<br>4. XML external entities (XXE)<br>5. Broken access control<br>6. Security misconfiguration<br>7. Cross Site Scripting (XSS)<br>8. Insecure deserialization<br>9. Using components with known vulnerabilities<br> . Insufficient logging and monitoring</p>
+<ul>
+<li>WAF includes Shield</li>
+</ul>
+<h3 id="AWS-Shield"><a href="#AWS-Shield" class="headerlink" title="AWS Shield"></a>AWS Shield</h3><ul>
+<li>a managed <strong>DDoS</strong> protection service that safeguards applications running on AWS</li>
+</ul>
+<p>what is DDOS attack?</p>
+<p>A malicious attempt to disrupt normal traffic by flooding a website a large amount of fake traffic</p>
+<ul>
+<li><p>all AWS customers benefit from the automatic protections of AWS Shield Standard, at no additional charge</p>
+</li>
+<li><p>when you route your traffic through Route53 or CloudFront, your are using AWS Shield Standard</p>
+</li>
+<li><p>protect you against Layer 3, 4, and 7 attacks</p>
+<ul>
+<li>7 application</li>
+<li>4 transport</li>
+<li>3 network</li>
+</ul>
+</li>
+<li><p>Shield Standard</p>
+<ul>
+<li>free</li>
+<li>for protection against most common DDoS attacks</li>
+</ul>
+</li>
+<li><p>Shield Advanced</p>
+<ul>
+<li>$3000 &#x2F; year</li>
+<li>for <strong>additional protection against larger and more sophisticated attacks</strong></li>
+<li>visibility into attacks</li>
+<li>24x7 access to DDoS experts for complex cases</li>
+<li>available on<ul>
+<li>Route 53</li>
+<li>CloudFront</li>
+<li>ELB</li>
+<li>Global Accelerator</li>
+<li>Elastic IP (Amazon Elastic Compute Cloud and Network Load Balancer)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="DDoS-Mitigate"><a href="#DDoS-Mitigate" class="headerlink" title="DDoS Mitigate"></a>DDoS Mitigate</h5><h3 id="Penetration-Testing"><a href="#Penetration-Testing" class="headerlink" title="Penetration Testing"></a>Penetration Testing</h3><ul>
+<li>PenTesting<ul>
+<li>an authorized simulated cyberattack on a computer system</li>
+<li>performed to evaluate the security of the system</li>
+</ul>
+</li>
+</ul>
+<p>need approval from AWS, can be done by cusomer</p>
+<ul>
+<li>we can perform PenTesting on AWS</li>
+<li>permitted services<ul>
+<li>EC2 intances, NAT gateways, and ELB</li>
+<li>RDS</li>
+<li>CloudFront</li>
+<li>Aurora</li>
+<li>API gateways</li>
+<li>Lambda and Lambda@Edge functions</li>
+<li>Lightsail resources</li>
+<li>Elastic Beanstalk environments</li>
+</ul>
+</li>
+<li>Prohibited Activities<ul>
+<li>DNS zone walking via Amazon <strong>Route 53</strong> Hosted Zones</li>
+<li>Denial of Service (DoS), Distributed Denial of Service (DDoS), simulated DoS, simulated DDoS</li>
+<li>Port flooding</li>
+<li>Protocol flooding</li>
+<li>Request flooding (login request flooding, API request flooding)</li>
+</ul>
+</li>
+<li>for some simulated events, you need to submit a request to AWS. A replay could take up to 7 days</li>
+</ul>
+<h3 id="GuardDuty"><a href="#GuardDuty" class="headerlink" title="GuardDuty"></a>GuardDuty</h3><ul>
+<li>a threat detection service that <strong>continuously</strong> monitors for malicious, suspicious activity and unauthorized behavior</li>
+<li>IDS&#x2F;IPS</li>
+<li>it uses Machine Learning to analyze the following AWS logs<ul>
+<li>CloudTrail logs</li>
+<li>VPC flow logs</li>
+<li>DNS logs</li>
+</ul>
+</li>
+<li>it will alert you of Findings which you can automate an incident response via CloudWatch Events or with 3rd Party Services</li>
+</ul>
+<h3 id="Key-Management-Service-KMS"><a href="#Key-Management-Service-KMS" class="headerlink" title="Key Management Service (KMS)"></a>Key Management Service (KMS)</h3><ul>
+<li>a managed service that makes it easy for you to create and control the encryption keys used to encrypt your data<ul>
+<li>KMS is a multi-tenant HMS (hardware security module)</li>
+<li>many AWS services are integrated to use KMS to encrypt your data with a simple checkbox</li>
+<li>KMS uses Envelope Encryption</li>
+</ul>
+</li>
+</ul>
+<p>Envelope Encryption:</p>
+<p>When you encrypt your data, your data is protected, but you have to protect your encryption key. When you encrypt your data key with a master key as an additional layer of security.</p>
+<h3 id="Amazon-Macie"><a href="#Amazon-Macie" class="headerlink" title="Amazon Macie"></a>Amazon Macie</h3><ul>
+<li>a fully managed service that continuously monitors <strong>S3 data access</strong> activity for anomalies, and generates detailed alerts when it detects risk of unauthorized access or inadvertent data leaks</li>
+<li>use <strong>Machine Learning</strong> to analyze CloudTrail logs</li>
+</ul>
+<p>![](RackMultipart202 004-4- udwvv_html_d3fad5cecb93899.png)</p>
+<p>Macie&#39;s will identify your <strong>most at-risk users</strong> which could lead to a compromise</p>
+<h3 id="Security-Groups-vs-NACLs"><a href="#Security-Groups-vs-NACLs" class="headerlink" title="Security Groups vs NACLs"></a>Security Groups vs NACLs</h3><ul>
+<li>Security Groups<ul>
+<li>act as a firewall at the instance level</li>
+<li>implicitly deny all traffic, you create allow rules</li>
+<li>allow an EC2 instance access on port 22 for SSH</li>
+</ul>
+</li>
+<li>Network Access Control Lists (NACLs)<ul>
+<li>act as a firewall at the subnet level</li>
+<li>you create allow and deny rules</li>
+<li>block a specific IP address known for abuse</li>
+</ul>
+</li>
+</ul>
+<h3 id="AWS-VPN"><a href="#AWS-VPN" class="headerlink" title="AWS VPN"></a>AWS VPN</h3><ul>
+<li>let you establish a secure and <strong>private tunnel</strong> from your network or device to the AWS global network</li>
+<li>AWS Site-to-Site VPN</li>
+</ul>
+<p>Securely connect on-premises network or branch office site to VPC</p>
+<ul>
+<li>AWS Client VPN</li>
+</ul>
+<p>Securely connect users to AWS or on-premises networks</p>
+<h3 id="AWS-Secrets-Manager-用户证书管理"><a href="#AWS-Secrets-Manager-用户证书管理" class="headerlink" title="AWS Secrets Manager (用户证书管理)"></a>AWS Secrets Manager (用户证书管理)</h3><p>Helps in securely storing encrypted credentials and ensures retrieval when required. Use ASM eliminates the need of hard-coding credentials in the application.</p>
+<h3 id="AWS-Security-Hub"><a href="#AWS-Security-Hub" class="headerlink" title="AWS Security Hub"></a>AWS Security Hub</h3><p>Gives you a comprehensive view of your high-priority security alerts and security posture across your AWS accounts.</p>
+<h3 id="AWS-Encryption-SDK"><a href="#AWS-Encryption-SDK" class="headerlink" title="AWS Encryption SDK"></a>AWS Encryption SDK</h3><p>The encryption library that makes client-side encryption best-practice easier. The encryption libraries facilitate cryptographic services and <strong>do not require</strong> AWS or any AWS service.</p>
+<h3 id="AWS-Certificate-Manager-ACM"><a href="#AWS-Certificate-Manager-ACM" class="headerlink" title="AWS Certificate Manager (ACM)"></a>AWS Certificate Manager (ACM)</h3><p>AWS Certificate Manager is a service that lets you easily provision, manage, and d <strong>eploy public and private Secure Sockets Layer&#x2F;Transport Layer Security</strong> (SSL&#x2F;TLS) certificates for use with AWS services and your internal connected resources. SSL&#x2F;TLS certificates are used to secure network communications and establish the identity of websites over the Internet as well as resources on private networks. AWS Certificate Manager removes the time-consuming manual process of purchasing, uploading, and renewing SSL&#x2F;TLS certificates.</p>
+<h3 id="AWS-Directory-Service"><a href="#AWS-Directory-Service" class="headerlink" title="AWS Directory Service"></a>AWS Directory Service</h3><ul>
+<li>AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft AD, enables your <strong>directory-aware workloads</strong> and AWS resources to use managed Active Directory in the AWS Cloud. AWS Managed Microsoft AD is built on actual <a target="_blank" rel="noopener" href="https://aws.amazon.com/directoryservice/active-directory/">Microsoft Active Directory</a> and does not require you to synchronize or replicate data from your existing Active Directory to the cloud. You can use standard Active Directory administration tools and take advantage of built-in Active Directory features, such as Group Policy and single sign-on (SSO).</li>
+<li>With AWS Managed Microsoft AD, you can easily join <a target="_blank" rel="noopener" href="https://aws.amazon.com/ec2/">Amazon EC2</a> and <a target="_blank" rel="noopener" href="https://aws.amazon.com/rds/sqlserver/">Amazon RDS for SQL Server</a> instances to your domain, and use <a target="_blank" rel="noopener" href="https://aws.amazon.com/enterprise-applications/">AWS Enterprise IT applications</a> such as <a target="_blank" rel="noopener" href="https://aws.amazon.com/workspaces/">Amazon WorkSpaces</a> with Active Directory users and groups.</li>
+</ul>
+<h3 id="IAM-Identity-Federation"><a href="#IAM-Identity-Federation" class="headerlink" title="IAM Identity Federation"></a>IAM Identity Federation</h3><ul>
+<li>allow access to the AWS environment using a central SSO set of credentials from third-party or corporate active directory</li>
+<li>use open standards such as SAML2.0 to transact identity information between identity provider (IdP)</li>
+</ul>
+<h3 id="AWS-CloudHSM-hardware"><a href="#AWS-CloudHSM-hardware" class="headerlink" title="AWS CloudHSM (hardware)"></a>AWS CloudHSM (hardware)</h3><ul>
+<li>Cloud-based Hardware Security Mode (HSM)</li>
+<li>Easily generate and use your own encryption security key on AWS</li>
+<li>CloudHSM is standards-compliant and enables you to export all of your keys to most other commercially-available HSMs, subject to your configurations.</li>
+</ul>
+<h2 id="【Variation-Study】Other-Stuff"><a href="#【Variation-Study】Other-Stuff" class="headerlink" title="【Variation Study】Other Stuff"></a>【Variation Study】Other Stuff</h2><h3 id="Cloud-Services"><a href="#Cloud-Services" class="headerlink" title="Cloud* Services"></a>Cloud* Services</h3><p>Similar names, completely different services</p>
+<ul>
+<li><p>CloudFormation</p>
+<ul>
+<li><strong>infrastructure as code</strong> , set up services via templating script</li>
+</ul>
+</li>
+<li><p>CloudTrail</p>
+<ul>
+<li>logs all API calls between AWS services</li>
+</ul>
+</li>
+<li><p>CloudFront</p>
+<ul>
+<li>content distribution network</li>
+<li>create a cached copy of your website and copy to servers located near people trying download website</li>
+</ul>
+</li>
+<li><p>CloudWatch</p>
+<ul>
+<li>a collection of CloudWatch Logs&#x2F;Metrics&#x2F;Events&#x2F;Alarms&#x2F;Dashboard</li>
+</ul>
+</li>
+<li><p>CloudSearch</p>
+<ul>
+<li>search engine</li>
+<li>you have an ecommerce website and you want to add a search bar</li>
+</ul>
+</li>
+</ul>
+<h3 id="Connect-Services"><a href="#Connect-Services" class="headerlink" title="Connect Services"></a>Connect Services</h3><ul>
+<li><strong>Direct Connect</strong><ul>
+<li>dedicated fiber optics connections from datacenter to AWS</li>
+<li>a large enterprise has their own datacenter and they need an insanely fast connection directly to AWS. If you need security, you can apply a VPN connect on top of Direct Connect</li>
+</ul>
+</li>
+<li><strong>Amazon Connect</strong><ul>
+<li><strong>call center service</strong></li>
+<li>get a toll free number, accept inbound and outbound calls, setup automated phone systems</li>
+</ul>
+</li>
+<li><strong>Media Connect</strong><ul>
+<li>new version of elastic transcoder, converts videos to different video types</li>
+<li>example: you have  00 of videos you and you need to transcode them into different videos format, maybe you need to apply watermarks, or insert introduction video in front of every video</li>
+</ul>
+</li>
+</ul>
+<h3 id="Elastic-Transcoder-vs-Media-Convert"><a href="#Elastic-Transcoder-vs-Media-Convert" class="headerlink" title="Elastic Transcoder vs Media Convert"></a>Elastic Transcoder vs Media Convert</h3><ul>
+<li>both services <strong>transcodes</strong> videos</li>
+<li>Elastic Transcoder (the old way)<ul>
+<li>transcode videos to streaming formats</li>
+</ul>
+</li>
+<li>AWS Elemental Media Convert (the new way)<ul>
+<li>transcode videos to streaming formats</li>
+<li>verlay images</li>
+<li>insert videos clips</li>
+<li>extract captions data</li>
+<li>robust UI</li>
+</ul>
+</li>
+</ul>
+<h3 id="SNS-vs-SQS"><a href="#SNS-vs-SQS" class="headerlink" title="SNS vs SQS"></a>SNS vs SQS</h3><p>Both <strong>connect apps</strong> via Messages</p>
+<ul>
+<li>Simple Notifications Service (SNS)<ul>
+<li>pass along messages</li>
+<li>send notifications to <strong>subscribers of topics</strong> via multiple protocol (HTTP, email, SQS, SMS)</li>
+<li>is generally used for sending <strong>plain text emails</strong> , which is triggered via other AWS services</li>
+<li>can retry sending in case of failure for <strong>HTTPS</strong></li>
+<li>really good for webhooks, simple internal emails, triggering lambda functions</li>
+</ul>
+</li>
+<li>Simple Queue Service (SQS)<ul>
+<li>queue up messages, guaranteed delivery</li>
+<li>place messages into a <strong>queue</strong></li>
+<li>applications pull queue using <strong>AWS SDK</strong></li>
+<li>can retain a message for up to   days</li>
+<li>can send them in sequential order or in parallel</li>
+<li>can ensure only one message is sent</li>
+<li>can ensure messages are delivered at least once</li>
+<li>really good for delayed task, queueing up emails</li>
+</ul>
+</li>
+</ul>
+<h3 id="Inspector-vs-Trusted-Advisor"><a href="#Inspector-vs-Trusted-Advisor" class="headerlink" title="Inspector vs Trusted Advisor"></a>Inspector vs Trusted Advisor</h3><ul>
+<li>both are <strong>security tools</strong> and both perform audits</li>
+<li>Inspector (for security)<ul>
+<li>audit <strong>a single EC2 instance</strong> that you have selected</li>
+<li>generate a report form a long list of security checks (699 checks)</li>
+</ul>
+</li>
+<li>Trusted Advisor (multiple things, according to five pillars)<ul>
+<li><strong>doesn&#39;t generate a PDF report</strong></li>
+<li>give you a <strong>holistic view</strong> of recommendations across multiple services and best practices</li>
+<li>You have open ports on these security groups &#x2F; you should enable MFA on your root account when using trusted advisor</li>
+</ul>
+</li>
+</ul>
+<h3 id="ALB-vs-NLB-vs-CLB-Elastic-Load-Balancer"><a href="#ALB-vs-NLB-vs-CLB-Elastic-Load-Balancer" class="headerlink" title="ALB vs NLB vs CLB (Elastic Load Balancer)"></a>ALB vs NLB vs CLB (Elastic Load Balancer)</h3><p>Three types of load balancer</p>
+<ul>
+<li><p>all can attach Amazon Certification Manager (ACM) SSL Certificate</p>
+</li>
+<li><p>Application</p>
+<ul>
+<li><strong>Layer 7</strong> requests</li>
+<li><strong>HTTP and HTTPS</strong> traffic</li>
+<li>routing rules, more usability from one load balancer</li>
+<li>can attach WAF</li>
+</ul>
+</li>
+<li><p>Network</p>
+<ul>
+<li><strong>Layer 4</strong> IP protocol data</li>
+<li><strong>TCP and TLS</strong> traffic where extreme performance is required</li>
+<li>capable of handling millions of requests per second while maintaining <strong>ultra-low latencies</strong></li>
+<li>ptimized for <strong>sudden and volatile</strong> traffic patterns while using a single static IP address per Availability Zone</li>
+</ul>
+</li>
+<li><p>Classic</p>
+<ul>
+<li>ld</li>
+<li>Intended for applications that were built within the <strong>EC-2 classical network</strong></li>
+<li>Doesn&#39;t use target groups</li>
+</ul>
+</li>
+</ul>
+<h3 id="SNS-vs-SES"><a href="#SNS-vs-SES" class="headerlink" title="SNS vs SES"></a>SNS vs SES</h3><ul>
+<li>both send emails</li>
+<li>SNS<ul>
+<li>practical and internal</li>
+<li>send notifications to subscribers of topics via multiple protocol</li>
+<li>is generally used for sending <strong>plain text emails</strong> which is triggered via other AWS services</li>
+<li>you need to know what are <strong>Topics</strong> and <strong>Subscriptions</strong> regarding <strong>SNS</strong></li>
+</ul>
+</li>
+<li>SES<ul>
+<li><strong>professional</strong> , marketing emails</li>
+<li>a cloud based email service (eg. SendGrid)</li>
+<li>send <strong>html emails</strong></li>
+<li>can receive inbound emails</li>
+<li>can create email templates</li>
+<li>custom domain name email</li>
+<li>monitor your email reputation</li>
+</ul>
+</li>
+</ul>
+<h3 id="Artifact-vs-Inspector"><a href="#Artifact-vs-Inspector" class="headerlink" title="Artifact vs Inspector"></a>Artifact vs Inspector</h3><p>Both <strong>compile out PDFs</strong></p>
+<ul>
+<li>Artifact<ul>
+<li>why should an enterprise trust AWS</li>
+<li>generate a security report that&#39;s based on <strong>global compliance frameworks</strong></li>
+</ul>
+</li>
+<li>Inspector<ul>
+<li>how do we know this EC2 instance is secure</li>
+<li>run a script that analyzes your EC2 instance, then generate a PDF report telling you which security checks passed</li>
+<li><strong>audit tool for security of EC2 instances</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="The-Five-Pillars-of-the-Framework"><a href="#The-Five-Pillars-of-the-Framework" class="headerlink" title="The Five Pillars of the Framework"></a>The Five Pillars of the Framework</h3><p>Incorporating these pillars into your architecture will help you produce stable and efficient systems. This will allow you to focus on the other aspects of design, such as functional requirements.</p>
+<ul>
+<li><strong>Operational Excellence</strong></li>
+</ul>
+<p>【Design Principles】</p>
+<p>Perform operations as code</p>
+<p>Make frequent small reversible changes</p>
+<p>Refine operations procedures frequently</p>
+<p>Anticipate failure</p>
+<p>Learn from all operational failures</p>
+<ul>
+<li><strong>Security</strong></li>
+</ul>
+<p>【Design Principles】</p>
+<p>Implement a strong identity foundation</p>
+<p>Enable traceability</p>
+<p>Apply security best practices</p>
+<p>Protect data in transit and at rest</p>
+<p>Keep people away from data</p>
+<p>Prepare for security events</p>
+<ul>
+<li><strong>Reliability</strong></li>
+</ul>
+<p>【Design Principles】</p>
+<p>Automatically recover from failure</p>
+<p>Test recovery procedures</p>
+<p>Scale horizontally to increase aggregate availability</p>
+<p>Stop guessing capacity</p>
+<p>Manage change in automation</p>
+<ul>
+<li><strong>Performance Efficiency</strong></li>
+</ul>
+<p>【Design Principles】</p>
+<p>Democratize advanced technologies</p>
+<p>Go global in minutes</p>
+<p>Use serverless architectures</p>
+<p>Experiment more often</p>
+<p>Consider mechanical sympathy</p>
+<ul>
+<li><strong>Cost Optimization</strong></li>
+</ul>
+<p>【Design Principles】</p>
+<p>Implement cloud financial management</p>
+<p>Adopt a consumption model</p>
+<p>Measure overall efficiency</p>
+<p>Stop spending money on undifferentiated heavy lifting</p>
+<p>Analyze and attribute expenditure</p>
+<h3 id="Serverless-Service"><a href="#Serverless-Service" class="headerlink" title="Serverless Service"></a>Serverless Service</h3><ul>
+<li>Serverless computing is a cloud computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources.</li>
+<li>Pricing is based on the actual amount of resources consumed by an application, rather than on pre-purchased units of capacity</li>
+</ul>
+<p>Summary:</p>
+<ul>
+<li>AWS Lambda</li>
+<li>Amazon API Gateway</li>
+<li>Amazon DynamoDB</li>
+<li>Amazon S3</li>
+<li>Amazon Kinesis</li>
+<li>Amazon Aurora</li>
+<li>AWS Fargate</li>
+<li>Amazon SNS</li>
+<li>Amazon SQS</li>
+<li>Amazon EFS</li>
+<li>Amazon RDS Proxy</li>
+<li>AWS AppSync</li>
+<li>AWS Step Function</li>
+<li>Lambda@Edge</li>
+<li>Amazon Athena</li>
+<li>Amazon EventBridge</li>
+</ul>
+<h3 id="Stateless-Service"><a href="#Stateless-Service" class="headerlink" title="Stateless Service"></a>Stateless Service</h3><ul>
+<li>Stateless Service is a design principle that is applied within the <strong>service-orientation</strong> design paradigm, in order to design scalable services by separating them from their state data whenever possible</li>
+</ul>
+<h3 id="Data-Warehouse-System-Architecture"><a href="#Data-Warehouse-System-Architecture" class="headerlink" title="Data Warehouse System Architecture"></a>Data Warehouse System Architecture</h3><ul>
+<li>leader node<ul>
+<li>manage communications with client programs and all communication with compute nodes</li>
+<li>parse and develop execution plans to carry out database operations, in particular, the series of steps necessary to obtain results for complex queries</li>
+<li>based on the execution plan, the leader node complies code, distributes the compiled code to the compute nodes, and assigns a portion of the data to each compute node</li>
+<li>the leader node distributes SQL statements to the compute nodes only when a query references tables that are stored on the compute nodes. All other queries run exclusively on the leader node</li>
+</ul>
+</li>
+<li>compute nodes<ul>
+<li>the leader node compiles code for individual elements of the execution plan and assigns the code to individual compute nodes. The compute nodes execute the compiled code and send intermediate results back to t he leader node for final aggregation</li>
+</ul>
+</li>
+</ul>
+<h3 id="AWS-Resource-Access-Manager-AWS-RAM"><a href="#AWS-Resource-Access-Manager-AWS-RAM" class="headerlink" title="AWS Resource Access Manager (AWS RAM)"></a>AWS Resource Access Manager (AWS RAM)</h3><ul>
+<li>allow users to share resources with other AWS accounts or via AWS Organizations</li>
+<li>can be used to collate a set of AWS resources across multiple AWS accounts in order to share capacity</li>
+</ul>
+<h3 id="AWS-Tagging-Strategies"><a href="#AWS-Tagging-Strategies" class="headerlink" title="AWS Tagging Strategies"></a>AWS Tagging Strategies</h3><ul>
+<li>Amazon Web Services (AWS) allows customers to assign <strong>metadata to their AWS resources in the form of</strong> _ <strong>tags</strong> _ <strong>.</strong> (configuration of instances)</li>
+<li>Each tag is a simple label consisting of a customer-defined key and an optional value that can make it easier to manage, search for, and filter resources. Although there are no inherent types of tags, they enable customers to categorize resources by purpose, owner, environment, or other criteria. This webpage describes commonly used tagging categories and strategies to help AWS customers implement a consistent and effective tagging strategy. The following sections assume basic knowledge of AWS resources, tagging, detailed billing, and AWS Identity and Access Management (IAM).</li>
+<li>placement groups does not support tags</li>
+</ul>
+<h3 id="AWS-Multi-Region-Disaster-Recovery"><a href="#AWS-Multi-Region-Disaster-Recovery" class="headerlink" title="AWS Multi Region (Disaster Recovery)"></a>AWS Multi Region (Disaster Recovery)</h3><ul>
+<li>from slow to fast:<ul>
+<li>backup &amp; restore</li>
+<li>pilot light</li>
+<li>warm standby</li>
+<li>multi site</li>
+</ul>
+</li>
+</ul>
+<h3 id="AWS-AMI"><a href="#AWS-AMI" class="headerlink" title="AWS AMI"></a>AWS AMI</h3><ul>
+<li>provide the information required to launch an instance, which is a virtual server in the cloud</li>
+<li>you can specify an AMI when you launch an instance, and you can launch as many instances from the AMI as you need</li>
+<li>you can also launch instances from as many different AMIs as you need</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/Linux-C-Interview-Question/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux C++ 面试问题合集</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Cloud-Management-CloudFormation-CloudWatch-Cloud/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Cloud Management: CloudFormation, CloudWatch, CloudTrail, ConfigRule</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/AWS-CP-Study-Note/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/AWS-CP-Study-Note/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

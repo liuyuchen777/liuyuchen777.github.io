@@ -1,0 +1,930 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="VPCVirtual Private Cloud provision a logically isolated section of AWS cloud where you can launch AWS resources in a virtual network that you define Core Componentsthink AWS VPS as your own personal d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Security: VPC, IAM, NACLs, WAF">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Security/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="VPCVirtual Private Cloud provision a logically isolated section of AWS cloud where you can launch AWS resources in a virtual network that you define Core Componentsthink AWS VPS as your own personal d">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2022.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2023.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2024.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2025.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2026.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2027.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2028.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2029.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2030.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2031.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2032.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2033.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2034.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2035.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2036.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2037.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2038.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2039.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2040.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2041.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2042.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2043.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2044.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2045.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2046.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2047.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2048.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2049.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2050.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2051.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2052.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2053.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2054.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2055.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2056.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2057.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2058.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2059.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2060.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2061.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2062.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2063.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2064.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2065.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2066.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2067.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled%2068.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.659Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Security/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Security: VPC, IAM, NACLs, WAF - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Security: VPC, IAM, NACLs, WAF">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      13k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Security: VPC, IAM, NACLs, WAF</h1>
+            
+            <div class="markdown-body">
+              <h1 id="VPC"><a href="#VPC" class="headerlink" title="VPC"></a>VPC</h1><p>Virtual Private Cloud</p>
+<p>provision a <strong>logically isolated section of AWS cloud</strong> where you can launch AWS resources in a <strong>virtual network</strong> that you define</p>
+<h2 id="Core-Components"><a href="#Core-Components" class="headerlink" title="Core Components"></a>Core Components</h2><p>think AWS VPS as your own personal data center</p>
+<p>gives you complete cointrol over your virtual networking environment</p>
+<p><img src="/img/AWS/Security/Untitled.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled.png"></p>
+<ul>
+<li>Internet Gateway (IGW)</li>
+<li>VPN Gateway</li>
+<li>Routing Tables</li>
+<li>Network Access Control Lists (NACLs) - Sateless</li>
+<li>Security Group (SG) Stateful</li>
+<li>Public Subnets</li>
+<li>Private Subnets</li>
+<li>Nat Gateway</li>
+<li>Customer Gateway</li>
+<li>VPC Endpoints</li>
+<li>VPC Peering</li>
+</ul>
+<h2 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h2><p><img src="/img/AWS/Security/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%201.png"></p>
+<h2 id="Default-VPC"><a href="#Default-VPC" class="headerlink" title="Default VPC"></a>Default VPC</h2><p><img src="/img/AWS/Security/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%202.png"></p>
+<p>0.0.0.0&#x2F;0 </p>
+<p>it represents all possible IP address</p>
+<h2 id="VPC-Peering"><a href="#VPC-Peering" class="headerlink" title="VPC Peering"></a>VPC Peering</h2><p>allows you to connect one VPC with another over a direct network route using private IP address</p>
+<p><img src="/img/AWS/Security/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%203.png"></p>
+<ul>
+<li><p>instance on peered VPCs behave just like they are on the same network</p>
+</li>
+<li><p>connect VPCs across sma e or different AWS account and regions</p>
+</li>
+<li><p>peering uses Star Configuration: 1 central VPC - 4 other VPCs</p>
+</li>
+<li><p>no transitive peering (peer must take place directly between VPCs)</p>
+<p>  needs a one to one connect to immediate VPC</p>
+</li>
+<li><p>No Overlapping CIDR (Classless Inter-Domain Routing、CIDR) Blocks</p>
+</li>
+</ul>
+<h3 id="Transit-Gateway-TGW"><a href="#Transit-Gateway-TGW" class="headerlink" title="Transit Gateway (TGW)"></a>Transit Gateway (TGW)</h3><p>somehow a upgrade version of AWS Direct Connect and VPC Peering</p>
+<p>!!!To deal with inter-VPC connection in more complex situation!!!</p>
+<p><img src="/img/AWS/Security/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%204.png"></p>
+<p>Process of Extablishing a VPC Peering</p>
+<p><img src="/img/AWS/Security/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%205.png"></p>
+<p><img src="/img/AWS/Security/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%206.png"></p>
+<p><img src="/img/AWS/Security/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%207.png"></p>
+<h2 id="Route-Tables"><a href="#Route-Tables" class="headerlink" title="Route Tables"></a>Route Tables</h2><ul>
+<li>route table are used to determine where network traffic is directed</li>
+<li>each subnet in your VPC must be associated with a route table</li>
+<li>a subnet can only be associated with one route table at a time, but you can associate multiple subnets with the same route table</li>
+</ul>
+<h2 id="IGW"><a href="#IGW" class="headerlink" title="IGW"></a>IGW</h2><p>IGW allows your VPC access to Internet</p>
+<ol>
+<li>provide a target in your VPC route tables for internet-routable traffic</li>
+<li>perform network access address translation (NAT) for instances that you have been assigned public IPv4 addresses</li>
+</ol>
+<p><img src="/img/AWS/Security/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%208.png"></p>
+<h2 id="Bastion-x2F-Jumpbox"><a href="#Bastion-x2F-Jumpbox" class="headerlink" title="Bastion&#x2F;Jumpbox"></a>Bastion&#x2F;Jumpbox</h2><p>Bastion are EC2 instances which are security harden. They are designed to help you gain access to your EC2 instances via SSH or RCP that are in a <strong>private subnet</strong>.</p>
+<p><img src="/img/AWS/Security/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%209.png"></p>
+<p>They are also known as jumpbox, beacuse you jump from one box to access another.</p>
+<p>NATs cannot&#x2F;should not be used as Bastions.</p>
+<p>! Bastion could be replaced by session manager</p>
+<h2 id="AWS-Direct-Connect"><a href="#AWS-Direct-Connect" class="headerlink" title="AWS Direct Connect"></a>AWS Direct Connect</h2><p>establishing dedicated network connections from on-premises locations to AWS</p>
+<p>very fast network Lower Bandwidth 50M-500M or Higher Bandwidth 1GB or 10GB</p>
+<p><img src="/img/AWS/Security/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2010.png"></p>
+<ul>
+<li>helps reduce network costs and increase bandwidth throughput</li>
+<li>provides a more consistent network experience that a typeical internet-based connection</li>
+</ul>
+<p><img src="/img/AWS/Security/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2011.png"></p>
+<h3 id="Dierct-Connect-Example"><a href="#Dierct-Connect-Example" class="headerlink" title="Dierct Connect Example"></a>Dierct Connect Example</h3><p><img src="/img/AWS/Security/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2012.png"></p>
+<p>Diect Connect work with TGW</p>
+<p><img src="/img/AWS/Security/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2013.png"></p>
+<h2 id="VPC-Example"><a href="#VPC-Example" class="headerlink" title="VPC Example"></a>VPC Example</h2><p><img src="/img/AWS/Security/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2014.png"></p>
+<p>use NAT</p>
+<p>NAR route rule: 0.0.0.0&#x2F;0 </p>
+<p>inbound and outbound</p>
+<p><img src="/img/AWS/Security/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2015.png"></p>
+<h2 id="VPC-CheatSheet"><a href="#VPC-CheatSheet" class="headerlink" title="VPC CheatSheet"></a>VPC CheatSheet</h2><p>Amazon VPC lets you provision a logically isolated section of the Amazon Web Services (AWS) cloud where you can launch AWS resources in a virtual network that you define.</p>
+<p>Analogous to having your own DC inside AWS.</p>
+<p>Provides complete control over the virtual networking environment including selection of IP ranges, creation of subnets, and configuration of route tables and gateways.</p>
+<p>A VPC is logically isolated from other VPCs on AWS.</p>
+<p>Possible to connect the corporate data centre to a VPC using a hardware VPN (site-to-site).</p>
+<p>VPCs are region wide.</p>
+<p>A default VPC is created in each region with a subnet in each AZ.</p>
+<p>By default you can create up to 5 VPCs per region.</p>
+<p>You can define dedicated tenancy for a VPC to ensure instances are launched on dedicated hardware (overrides the configuration specified at launch).</p>
+<p>A default VPC is automatically created for each AWS account the first time Amazon EC2 resources are provisioned.</p>
+<p>The default VPC has all-public subnets.</p>
+<p>Public subnets are subnets that have:</p>
+<ul>
+<li>“Auto-assign public IPv4 address” set to “Yes”.</li>
+<li>The subnet route table has an attached Internet Gateway.</li>
+</ul>
+<p>Instances in the default VPC always have both a public and private IP address.</p>
+<p>AZs names are mapped to different zones for different users (i.e. the AZ “ap-southeast-2a” may map to a different physical zone for a different user).</p>
+<p>Components of a VPC:</p>
+<ul>
+<li><strong>A Virtual Private Cloud:</strong> A logically isolated virtual network in the AWS cloud. You define a VPC’s IP address space from ranges you select.</li>
+<li><strong>Subnet:</strong> A segment of a VPC’s IP address range where you can place groups of isolated resources (maps to an AZ, 1:1).</li>
+<li><strong>Internet Gateway:</strong> The Amazon VPC side of a connection to the public Internet.</li>
+<li><strong>NAT Gateway:</strong> A highly available, managed Network Address Translation (NAT) service for your resources in a private subnet to access the Internet.</li>
+<li><strong>Hardware VPN Connection:</strong> A hardware-based VPN connection between your Amazon VPC and your datacenter, home network, or co-location facility.</li>
+<li><strong>Virtual Private Gateway:</strong> The Amazon VPC side of a VPN connection.</li>
+<li><strong>Customer Gateway:</strong> Your side of a VPN connection.</li>
+<li><strong>Router:</strong> Routers interconnect subnets and direct traffic between Internet gateways, virtual private gateways, NAT gateways, and subnets.</li>
+<li><strong>Peering Connection:</strong> A peering connection enables you to route traffic via private IP addresses between two peered VPCs.</li>
+<li><strong>VPC Endpoints:</strong> Enables private connectivity to services hosted in AWS, from within your VPC without using an an Internet Gateway, VPN, Network Address Translation (NAT) devices, or firewall proxies.</li>
+<li><strong>Egress-only Internet Gateway:</strong> A stateful gateway to provide egress only access for IPv6 traffic from the VPC to the Internet.</li>
+</ul>
+<p>Options for connecting to a VPC are:</p>
+<ul>
+<li>Hardware based VPN.</li>
+<li>Direct Connect.</li>
+<li>VPN CloudHub.</li>
+<li>Software VPN.</li>
+</ul>
+<h1 id="VPC-Endpoints"><a href="#VPC-Endpoints" class="headerlink" title="VPC Endpoints"></a>VPC Endpoints</h1><p><img src="/img/AWS/Security/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2016.png"></p>
+<p>Allow you to privately connect your VPC to other AWS services, and VPC endpoint services.</p>
+<ul>
+<li>Eliminates the need for IGW, NAT, VPN or AWS Direct Connect</li>
+<li>Instances in the VPC do not require a pubic IP address to communicate with service resources</li>
+<li>Traffic between your VPC and other services does not leave the AWS network</li>
+<li>Horizontally scaled, redundant and highly available VPC component</li>
+<li>allows secure communication between instances and services - without adding availability risks or bandwidth contraints on your traffic</li>
+</ul>
+<p>2 Types of VPC Endpoints:</p>
+<h2 id="Interface-Endpoints"><a href="#Interface-Endpoints" class="headerlink" title="Interface Endpoints"></a>Interface Endpoints</h2><p>Elastic Network Interfaces (ENI) with a private IP address</p>
+<p>serve as an entry point for traffic foing to a supported service</p>
+<p>IE are powered by AWS PrivateLink (keep traffic within AWS network)</p>
+<p>[Pricing] </p>
+<p>Pricing per VPC endpoint per AZ 0.01 $&#x2F;hour</p>
+<p>Pricing per GB data processed 0.01$</p>
+<p>~$7.5&#x2F;month</p>
+<p><img src="/img/AWS/Security/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2017.png"></p>
+<h2 id="Gateway-Endpoints"><a href="#Gateway-Endpoints" class="headerlink" title="Gateway Endpoints"></a>Gateway Endpoints</h2><p>Free</p>
+<p>GE is a gateway that is a target for a specific route in your route table</p>
+<ul>
+<li>to create a gatewat endpoint, you must sepcify the VPC in which you want to create the endpoint, and the service to which you want to establish the connection</li>
+</ul>
+<p>!!! Only supports 2 services (S3 and DynamoDB) !!!</p>
+<h2 id="VPC-Endpoint-CheatSheet"><a href="#VPC-Endpoint-CheatSheet" class="headerlink" title="VPC Endpoint CheatSheet"></a>VPC Endpoint CheatSheet</h2><p><img src="/img/AWS/Security/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2018.png"></p>
+<h1 id="VPC-Flow-Logs"><a href="#VPC-Flow-Logs" class="headerlink" title="VPC Flow Logs"></a>VPC Flow Logs</h1><p><img src="/img/AWS/Security/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2019.png"></p>
+<p>allow yout to capture IP traffic information in-and-out of Network Interfaces within your VPC</p>
+<p>Three levels:</p>
+<ol>
+<li>VPC</li>
+<li>Subnets</li>
+<li>Network Interface</li>
+</ol>
+<p>All log data is stored using Amazon CloudWatch Logs.</p>
+<h2 id="FLow-Logs-Breakdown"><a href="#FLow-Logs-Breakdown" class="headerlink" title="FLow Logs Breakdown"></a>FLow Logs Breakdown</h2><p><img src="/img/AWS/Security/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2020.png"></p>
+<h2 id="FL-CheatSheet"><a href="#FL-CheatSheet" class="headerlink" title="FL CheatSheet"></a>FL CheatSheet</h2><p><img src="/img/AWS/Security/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2021.png"></p>
+<h1 id="Network-Access-Control-Lists-NACLs"><a href="#Network-Access-Control-Lists-NACLs" class="headerlink" title="Network Access Control Lists (NACLs)"></a>Network Access Control Lists (NACLs)</h1><p>an optional layer of security that acts as a <strong>firewall</strong> for controlling traffic in and out of subnets</p>
+<p>virtual firework at subnet level</p>
+<p><img src="/img/AWS/Security/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2022.png"></p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>suppose there is a malicious actor at a specific IP address is trying to access our instances so we block their IP</p>
+<p>we never need to SSH into instances so we add a DENY for these subnets.</p>
+<p><img src="/img/AWS/Security/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2023.png"></p>
+<h2 id="NACLs-Cheat-Sheet"><a href="#NACLs-Cheat-Sheet" class="headerlink" title="NACLs Cheat Sheet"></a>NACLs Cheat Sheet</h2><p><img src="/img/AWS/Security/Untitled%2024.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2024.png"></p>
+<h1 id="Security-Group"><a href="#Security-Group" class="headerlink" title="Security Group"></a>Security Group</h1><p>virtual firewall at the instance level</p>
+<p>security group are assocated with EC2 instances</p>
+<p><img src="/img/AWS/Security/Untitled%2025.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2025.png"></p>
+<p>Multiple Instances across multiple subnets can belong to a Security Group</p>
+<p><img src="/img/AWS/Security/Untitled%2026.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2026.png"></p>
+<h2 id="Use-Case"><a href="#Use-Case" class="headerlink" title="Use Case"></a>Use Case</h2><p><img src="/img/AWS/Security/Untitled%2027.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2027.png"></p>
+<p>you can specify the source to be an IP address or a specific ip (&#x2F;32 is and IP address)</p>
+<p>you can sepcify the source to be another security group</p>
+<p>An instance can belong to multiple security groups, and rules are permissive (instead of restrictive). One SG which has no Allow and you add an allow to another than it will allow.</p>
+<h2 id="SG-Limits"><a href="#SG-Limits" class="headerlink" title="SG Limits"></a>SG Limits</h2><p><img src="/img/AWS/Security/Untitled%2028.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2028.png"></p>
+<h2 id="SG-CheatSheet"><a href="#SG-CheatSheet" class="headerlink" title="SG CheatSheet"></a>SG CheatSheet</h2><p><img src="/img/AWS/Security/Untitled%2029.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2029.png"></p>
+<h1 id="NACLs-vs-SG-vs-WAF"><a href="#NACLs-vs-SG-vs-WAF" class="headerlink" title="NACLs vs. SG vs. WAF"></a>NACLs vs. SG vs. WAF</h1><p><img src="/img/AWS/Security/Untitled%2030.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2030.png"></p>
+<ul>
+<li>WAF</li>
+</ul>
+<p>api gateway (non-private)</p>
+<p>cloudfront distributions</p>
+<p>load balancers (where you want additional rules&#x2F;checks such as OWASP, cross-site-scripting etc)</p>
+<ul>
+<li>NACL</li>
+</ul>
+<p>whitelisting specific IP’s&#x2F;CIDR’s to a subnet, i.e. allowing only application tier subnet(s) to access database tier subnet(s).</p>
+<h1 id="WAF"><a href="#WAF" class="headerlink" title="WAF"></a>WAF</h1><p>W<strong>eb Application Firewall (WAF)</strong></p>
+<p>WAF ACL</p>
+<p>AWS WAF is a web application firewall that helps protect your web applications or APIs against common web exploits and bots that may affect availability, compromise security, or consume excessive resources. </p>
+<p>AWS WAF gives you control over how traffic reaches your applications by enabling you to create security rules that control bot traffic and block common attack patterns, such as <strong>SQL injection</strong> or <strong>cross-site scripting</strong>. </p>
+<h2 id="Rules"><a href="#Rules" class="headerlink" title="Rules"></a>Rules</h2><p>predefined and customer</p>
+<p>You can also customize rules that filter out specific traffic patterns. You can get started quickly using Managed Rules for AWS WAF, a pre-configured set of rules managed by AWS or AWS Marketplace Sellers to address issues like the OWASP Top 10 security risks and automated bots that consume excess resources, skew metrics, or can cause downtime. These rules are regularly updated as new issues emerge. AWS WAF includes a full-featured API that you can use to automate the creation, deployment, and maintenance of security rules.</p>
+<p><img src="/img/AWS/Security/Untitled%2031.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2031.png"></p>
+<h1 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h1><p>Networl Address Translation</p>
+<p>method of remapping one IP address space into another</p>
+<p><img src="/img/AWS/Security/Untitled%2032.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2032.png"></p>
+<p>If you have a private network and need to help gain outbound access to the Internet you would need to use a NAT gateway to remap the Private IPs.</p>
+<p>If you have two networks which have conflicting network address you can use a NAT to make the addresses more agreeable.</p>
+<h2 id="NAT-Instances-vs-NAT-Gateway"><a href="#NAT-Instances-vs-NAT-Gateway" class="headerlink" title="NAT Instances vs. NAT Gateway"></a>NAT Instances vs. NAT Gateway</h2><p>NATs have to run with Public Subnet</p>
+<p><img src="/img/AWS/Security/Untitled%2033.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2033.png"></p>
+<h2 id="NAT-Cheat-Sheet"><a href="#NAT-Cheat-Sheet" class="headerlink" title="NAT Cheat Sheet"></a>NAT Cheat Sheet</h2><p><img src="/img/AWS/Security/Untitled%2034.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2034.png"></p>
+<h1 id="IAM"><a href="#IAM" class="headerlink" title="IAM"></a>IAM</h1><p>Identity Access Management</p>
+<p>manage access of AWS users and resources</p>
+<h2 id="IAM-Core-Componets"><a href="#IAM-Core-Componets" class="headerlink" title="IAM Core Componets"></a>IAM Core Componets</h2><ul>
+<li>IAM Users</li>
+</ul>
+<p>End users who log into the console or interact with AWS resource programmatically</p>
+<ul>
+<li>IAM Groups</li>
+</ul>
+<p>Group up your Users so they all share permission levels of the group</p>
+<p>ex. Administrators, Developers, Auditors</p>
+<ul>
+<li>IAM Roles</li>
+</ul>
+<p>Associate permissions to a Role and then assign this to an Users or Groups</p>
+<ul>
+<li>IAM Policies</li>
+</ul>
+<p>JSON documents which grant permissions for a specific user, group or role to access service. Policies are attached to IAM identities</p>
+<p><img src="/img/AWS/Security/Untitled%2035.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2035.png"></p>
+<p>A user can belong to a group, roles can be applied to groups</p>
+<p>A user can have a role directly attached, a policy can be directly attached to a user (inline policy)</p>
+<p>Roles can have many policeies attached</p>
+<p>Various AWS resources allow you attach roles directly to them</p>
+<h2 id="Types-of-Policies"><a href="#Types-of-Policies" class="headerlink" title="Types of Policies"></a>Types of Policies</h2><ul>
+<li>Managed Policies</li>
+</ul>
+<p>a policy which is managed bu AWS, which you can not edit. Manahed policies are labeld with an orange box</p>
+<ul>
+<li>Customer Managed Policies</li>
+</ul>
+<p>a policy created by the customer which is editable. Customer policies have no symnol beside them</p>
+<ul>
+<li>Inline Policies</li>
+</ul>
+<p>a policy which is directly attached to the user</p>
+<h2 id="Policy-Structure"><a href="#Policy-Structure" class="headerlink" title="Policy Structure"></a>Policy Structure</h2><p><img src="/img/AWS/Security/Untitled%2036.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2036.png"></p>
+<p>Version: </p>
+<p>Statement: container for the policy element, you are allowed to have multiples</p>
+<p>Sid (Optional)</p>
+<p>Effect: allow or deny</p>
+<p>Principal: account, user, role or federated user</p>
+<p>Action: list or actions that the policy allows or denies</p>
+<p>Resource: the resources to which the actions applies</p>
+<p>Condition (optional): circumstances</p>
+<h2 id="Password-Policy-User"><a href="#Password-Policy-User" class="headerlink" title="Password Policy (User)"></a>Password Policy (User)</h2><p>In IAM you can set a Password Policy to set minimum requirements of a password and rotate passwards so users have to update their password periodically.</p>
+<p><img src="/img/AWS/Security/Untitled%2037.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2037.png"></p>
+<h2 id="Access-Keys"><a href="#Access-Keys" class="headerlink" title="Access Keys"></a>Access Keys</h2><p>allow users to interact with AWS service programmatically via the AWS CLI or AWS SDK</p>
+<p>you are allowed two access key per user</p>
+<p><img src="/img/AWS/Security/Untitled%2038.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2038.png"></p>
+<h2 id="MFA"><a href="#MFA" class="headerlink" title="MFA"></a>MFA</h2><p>multiple factor authentication</p>
+<p>can be turned on per user</p>
+<p>user can turn on MFA, and root user can enforce users to have MFA</p>
+<p>admin account could create policy requiring MFA to access certain resources</p>
+<p><img src="/img/AWS/Security/Untitled%2039.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2039.png"></p>
+<h2 id="IAM-CheatSheet"><a href="#IAM-CheatSheet" class="headerlink" title="IAM CheatSheet"></a>IAM CheatSheet</h2><p>!!!Free Service!!!</p>
+<p><img src="/img/AWS/Security/Untitled%2040.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2040.png"></p>
+<h1 id="Cognito"><a href="#Cognito" class="headerlink" title="Cognito"></a>Cognito</h1><p>decentrailzed managed authentication.</p>
+<p>sign-up, sign-in integration for your apps.</p>
+<p>socail identity provider eg. FB, Google</p>
+<p><img src="/img/AWS/Security/Untitled%2041.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2041.png"></p>
+<h2 id="Web-Identity-Federation"><a href="#Web-Identity-Federation" class="headerlink" title="Web Identity Federation"></a>Web Identity Federation</h2><p><strong>WIF</strong></p>
+<p>to exchange identity and security information between an identity provider (IdP) and an application</p>
+<p><strong>Identity Provider (IdP)</strong></p>
+<p>a trusted provider of your user identity that lets you use authenticate to access other services.</p>
+<p>like: FB, Amazon, Google, Twitter, Github or LinkedIn</p>
+<p><strong>Types of Identity Providers</strong></p>
+<p>he technology that behind the identity providers </p>
+<ul>
+<li>Security Assertion Markup Language (SAML)</li>
+<li>Signle Sign On (SSO)</li>
+<li>OpenID Connect (OIDC) OAuth</li>
+</ul>
+<h2 id="User-Pools"><a href="#User-Pools" class="headerlink" title="User Pools"></a>User Pools</h2><p>user directory with auth to IpD to grant access to your app</p>
+<ul>
+<li>sign-up</li>
+<li>sign-in</li>
+<li>account recovery</li>
+<li>account confirmation</li>
+</ul>
+<p><img src="/img/AWS/Security/Untitled%2042.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2042.png"></p>
+<p>allows user to sign-in directly to UP, or using web identity federation</p>
+<p>AWS Congito as the identity broker between AWS and the identity provider</p>
+<p>sucessful user auth generates JWTs</p>
+<p>UP can be thought of as the account used to access the system</p>
+<p><img src="/img/AWS/Security/Untitled%2043.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2043.png"></p>
+<p>functions:</p>
+<ul>
+<li>choose what attributes</li>
+<li>choose password requirements</li>
+<li>apply MFA</li>
+<li>restrict whether users are allowed to sign up their own or need admin verification</li>
+<li>analytics with PinPoint for user campaigns</li>
+<li>trigger custom log via Lambdas after actions such as after signup</li>
+</ul>
+<h2 id="Identity-Pools"><a href="#Identity-Pools" class="headerlink" title="Identity Pools"></a>Identity Pools</h2><p>provide temporary credentials for users to access AWS services, eg. S3, DynamoDB</p>
+<p>tmp AWS credentials</p>
+<p><img src="/img/AWS/Security/Untitled%2044.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2044.png"></p>
+<p><img src="/img/AWS/Security/Untitled%2045.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2045.png"></p>
+<h2 id="Sync"><a href="#Sync" class="headerlink" title="Sync"></a>Sync</h2><p>syncs user data and preferences across all devices with one line of code</p>
+<p>cognito uses <strong>push synchronization</strong> to push updates and synchronize data uses SNS to send notifications to all user devices when data in the cloud changes</p>
+<p><img src="/img/AWS/Security/Untitled%2046.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2046.png"></p>
+<h2 id="Cognito-CheatSheet"><a href="#Cognito-CheatSheet" class="headerlink" title="Cognito CheatSheet"></a>Cognito CheatSheet</h2><p><img src="/img/AWS/Security/Untitled%2047.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2047.png"></p>
+<h1 id="AWS-Security"><a href="#AWS-Security" class="headerlink" title="AWS Security"></a>AWS Security</h1><p><img src="/img/AWS/Security/Untitled%2048.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2048.png"></p>
+<ul>
+<li>Control your cloud infrastructure: AWS IAM</li>
+<li>Control your data: AWS KMS</li>
+<li>Control your network: Amazon VPC</li>
+</ul>
+<h2 id="IAM-1"><a href="#IAM-1" class="headerlink" title="IAM"></a>IAM</h2><p>Every AWS service uses IAM to authenticate and authorize API calls</p>
+<ol>
+<li>for human callers:</li>
+</ol>
+<p>IAM users</p>
+<p>federated identities</p>
+<p><img src="/img/AWS/Security/Untitled%2049.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2049.png"></p>
+<ol>
+<li>for non-human callers</li>
+</ol>
+<p><img src="/img/AWS/Security/Untitled%2050.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2050.png"></p>
+<p>creating a role in the AWS management console</p>
+<p><img src="/img/AWS/Security/Untitled%2051.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2051.png"></p>
+<p>How an authentication works in AWS</p>
+<p><img src="/img/AWS/Security/Untitled%2052.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2052.png"></p>
+<p>AWS-managed policies for common sets of permissions</p>
+<p>orange box</p>
+<p><img src="/img/AWS/Security/Untitled%2053.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2053.png"></p>
+<p>cross-account auth → managing multi-account environments with AWS organizations</p>
+<h2 id="KMS"><a href="#KMS" class="headerlink" title="KMS"></a>KMS</h2><p>key management service</p>
+<p>AWS-managed encryption and decryption service</p>
+<p><img src="/img/AWS/Security/Untitled%2054.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2054.png"></p>
+<p>For encrypting data, use envelope encryption</p>
+<ul>
+<li>KMS.GenerateDataKey → symmetric data key (plaintext and encrypted)</li>
+<li>Use plaintext data key to encrypt your data, then discard</li>
+<li>Store encrypted data key alongside your data</li>
+<li>To decrypted<ul>
+<li>KMS.Decrypt(encryptedDataKey) → plaintextDataKey</li>
+<li>Then decrypt the data with the plaintext symmetric key</li>
+</ul>
+</li>
+</ul>
+<p>ex. KMS with S3</p>
+<p><img src="/img/AWS/Security/Untitled%2055.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2055.png"></p>
+<p>IAM permissions for AWS KMS key</p>
+<p><img src="/img/AWS/Security/Untitled%2056.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2056.png"></p>
+<p>won’t work</p>
+<p><img src="/img/AWS/Security/Untitled%2057.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2057.png"></p>
+<h2 id="VPC-1"><a href="#VPC-1" class="headerlink" title="VPC"></a>VPC</h2><p>network</p>
+<p>VPC provides connectivity to and from that infrastructure</p>
+<p><strong>What builders need to know?</strong></p>
+<ul>
+<li>VPC core concepts: subnets and security groups</li>
+<li>routing basics</li>
+<li>private connectivity capabilities</li>
+</ul>
+<p><strong>subnets</strong></p>
+<p><img src="/img/AWS/Security/Untitled%2058.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2058.png"></p>
+<p><strong>security group</strong></p>
+<p>like firewall</p>
+<p><img src="/img/AWS/Security/Untitled%2059.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2059.png"></p>
+<p>inbound rules, outbound rules</p>
+<p><strong>IGW</strong> </p>
+<p><img src="/img/AWS/Security/Untitled%2060.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2060.png"></p>
+<p>AWS resources not in your VPC</p>
+<p>endpoints!</p>
+<p><img src="/img/AWS/Security/Untitled%2061.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2061.png"></p>
+<p><img src="/img/AWS/Security/Untitled%2062.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2062.png"></p>
+<h1 id="Placement-Group"><a href="#Placement-Group" class="headerlink" title="Placement Group"></a>Placement Group</h1><p>When you launch a new EC2 instance, the EC2 service attempts to place the instance in such a way that all of your instances are spread out across underlying hardware to minimize correlated failures. You can use <strong>placement groups to influence the placement of a group of interdependent instances to meet the needs of your workload.</strong> Depending on the type of workload, you can create a placement group using one of the following placement strategies:</p>
+<h2 id="Three-Types-from-small-to-large"><a href="#Three-Types-from-small-to-large" class="headerlink" title="Three Types (from small to large):"></a>Three Types (from small to large):</h2><h2 id="Cluster"><a href="#Cluster" class="headerlink" title="Cluster"></a>Cluster</h2><p>packs instances close together <strong>inside an Availability Zone</strong>. This strategy enables workloads to achieve the low-latency network performance necessary for tightly-coupled node-to-node communication that is typical of HPC applications.</p>
+<p>A cluster placement group can span peered VPCs in the same Region.</p>
+<p>high-performance, high-risk</p>
+<p>on same rack</p>
+<p><img src="/img/AWS/Security/Untitled%2063.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2063.png"></p>
+<p><img src="/img/AWS/Security/Untitled%2064.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2064.png"></p>
+<h2 id="Partition-new"><a href="#Partition-new" class="headerlink" title="Partition (new)"></a>Partition (new)</h2><p>spreads your instances <strong>across logical partitions</strong> such that groups of instances in <strong>one partition do not share the underlying hardware</strong> with groups of instances in different partitions. This strategy is typically used by large distributed and replicated workloads, such as Hadoop, Cassandra, and Kafka.</p>
+<p>Amazon EC2 ensures that each partition within a placement group has its own set of racks.</p>
+<p>partition are set of racks</p>
+<p>up to 100+ instances per group</p>
+<p><img src="/img/AWS/Security/Untitled%2065.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2065.png"></p>
+<p><img src="/img/AWS/Security/Untitled%2066.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2066.png"></p>
+<h2 id="Spread"><a href="#Spread" class="headerlink" title="Spread"></a>Spread</h2><p>strictly places a small group of instances <strong>across distinct underlying hardware</strong> to reduce correlated failures.</p>
+<p>on distinct rack, each rack having its own network and power source</p>
+<p>max 7 instances per AZ per group</p>
+<p><img src="/img/AWS/Security/Untitled%2067.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2067.png"></p>
+<p><img src="/img/AWS/Security/Untitled%2068.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Security/Untitled%2068.png"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/S3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] S3 & Snowball</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Serverless/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Serverless: Lambda, SQS, SNS, API Gateway, Fargate</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Security/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Security/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

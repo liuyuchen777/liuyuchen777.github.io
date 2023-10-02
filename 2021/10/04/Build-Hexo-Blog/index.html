@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="这篇教程针对没有任何编程经验的人，甚至是不怎么用电脑的人，使用Hexo搭建属于自己的静态博客。 GitHub + Hexo + fluid 构建自己的个人博客我觉得能在互联网上拥有一块能够由自己掌控（不受审核和格式所限制），且能让所有人都访问到的空间是一件让人身心愉悦的事情。  个人博客能极大增加生活的幸福感。 — 我  诚然目前各种UGC社区都能够让我们发布自己的内容，一些社区进一步提供了自定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="猴子也能做到的Hexo个人建站指南">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/Build-Hexo-Blog/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="这篇教程针对没有任何编程经验的人，甚至是不怎么用电脑的人，使用Hexo搭建属于自己的静态博客。 GitHub + Hexo + fluid 构建自己的个人博客我觉得能在互联网上拥有一块能够由自己掌控（不受审核和格式所限制），且能让所有人都访问到的空间是一件让人身心愉悦的事情。  个人博客能极大增加生活的幸福感。 — 我  诚然目前各种UGC社区都能够让我们发布自己的内容，一些社区进一步提供了自定义">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004201237592.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f666c7569642d6465762f737461746963406d61737465722f6865786f2d7468656d652d666c7569642f73637265656e73686f74732f696e6465782e706e67.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004203916223.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004203931833.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004204517900.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004204626455.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004204700797.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004204819769.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004210407950.png">
+<meta property="article:published_time" content="2021-10-04T08:12:00.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.660Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="Technology">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/Build-Hexo-Blog/image-20211004201237592.png">
+  
+  
+  <title>猴子也能做到的Hexo个人建站指南 - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="猴子也能做到的Hexo个人建站指南">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 17:12" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">猴子也能做到的Hexo个人建站指南</h1>
+            
+            <div class="markdown-body">
+              <p>这篇教程针对没有任何编程经验的人，甚至是不怎么用电脑的人，使用Hexo搭建属于自己的静态博客。</p>
+<h1 id="GitHub-Hexo-fluid-构建自己的个人博客"><a href="#GitHub-Hexo-fluid-构建自己的个人博客" class="headerlink" title="GitHub + Hexo + fluid 构建自己的个人博客"></a>GitHub + Hexo + fluid 构建自己的个人博客</h1><p>我觉得能在互联网上拥有一块能够由自己掌控（不受审核和格式所限制），且能让所有人都访问到的空间是一件让人身心愉悦的事情。</p>
+<blockquote>
+<p>个人博客能极大增加生活的幸福感。</p>
+<p>— 我</p>
+</blockquote>
+<p>诚然目前各种UGC社区都能够让我们发布自己的内容，一些社区进一步提供了自定义个人空间的选项（比如：花哨的QQ空间）。但完全掌控一个属于自己的个人空间还是十足具有吸引力的。</p>
+<p>通常搭建个人博客需要购买服务器，购买域名， 备案网站，设置后端服务器，编写自己好看的前端等诸多步骤。对于一个有经验的程序员也会非常劝退。好在现代化的开发工具几乎省去了我们所有的烦恼，搭配本节小标题的几个工具，能够0经验者在30分钟内搭建完全属于自己的个人空间。</p>
+<p>个人博客属于一个非常简单的网站系统，网站大体可以分为静态和动态两种。这个概念很好理解，如果一个网站可以根据访问者的不同而呈现出不同的内容，这个网站就是动态的。比如你打开知乎首页，不同用户的推荐内容显然是不同。静态网站则是固定的资源，不同用户访问同样一个链接得到的必然是同样的资源。</p>
+<p>大部分场景下的个人博客都会是静态资源，一个人面对不同的人展现出的自己也应该是一样的。本教程的所有内容，也是教你如何搭建一个静态博客。如果你有需求想搞一个动态网页，那就超出了本教程的范围。</p>
+<div class="code-wrapper"><pre><code class="hljs">GitHub：提供网站文件托管+域名
+Hexo：由markdown文件和配置主动生成网页静态文件
+fluid：一个我非常喜欢的Hexo主题</code></pre></div>
+
+
+
+<h1 id="让我们开始吧"><a href="#让我们开始吧" class="headerlink" title="让我们开始吧"></a>让我们开始吧</h1><p>如果你真的是完全0经验者，可能会在流程中出现种种问题。遇到问题不要慌，把命令行或者弹窗中的报错信息直接贴在谷歌&#x2F;百度中进行搜索，90%的情况下你都能在第一条搜索结果中找出解决方案。</p>
+<h2 id="创建GitHub账号"><a href="#创建GitHub账号" class="headerlink" title="创建GitHub账号"></a>创建GitHub账号</h2><p>GitHub想必大家都听过，本次GitHub承担了托管我们的网站静态文件，以及提供免费域名服务的任务。</p>
+<p>如果自己购买，一个域名一年需要100～∞人民币不等。GitHub会提供给每个用户<code>&lt;user-id&gt;.github.io</code> (无尖括号)的免费域名，如果你没有那么高的要求可以直接使用这个域名。</p>
+<p>如果想要拥有自己的域名也可以重新定向，我们后面再说。</p>
+<p>直接在这个网址注册账号：<a target="_blank" rel="noopener" href="https://github.com/">GitHub</a></p>
+<p>创建好账号之后，你应该会在如下界面（如果GitHub没改版的话）：</p>
+<p><img src="/img/Build-Hexo-Blog/image-20211004201237592.png" srcset="/img/loading.gif" lazyload alt="image-20211004201237592"></p>
+<p>点击左上角的<code>Create repository</code>新建一个名为<code>&lt;user-id&gt;.github.io</code>的目录，创建的时候一定要新建<code>README.md</code>文件，保证不是一个空的repo。</p>
+<h2 id="安装Node-js和npm"><a href="#安装Node-js和npm" class="headerlink" title="安装Node.js和npm"></a>安装Node.js和npm</h2><p>由于帮助我们生成网页文件的工具Hexo是基于Javascript的，因此我们需要先安装相关工具。</p>
+<p>首先你需要根据你的系统谷歌&#x2F;百度Node.js的安装，npm是包管理工具，是和Node.js一起的，不需要额外安装。</p>
+<p>OK！假设你现在已经安装好了，我们现在用命令行测试一下安装，确保没有问题。</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ node -v
+v16.3.0
+$ npm -v
+7.15.1</code></pre></div>
+
+<p><code>-v</code>	表示查看工具版本，如果你能看到输出的版本号，说明这一步已经成功完成了。</p>
+<h2 id="用npm安装Hexo"><a href="#用npm安装Hexo" class="headerlink" title="用npm安装Hexo"></a>用npm安装Hexo</h2><p>接下来安装Hexo，在命令行中输入如下命令</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ npm install hexo-cli -g</code></pre></div>
+
+<p>安装以后，可以使用以下两种方式执行 Hexo：</p>
+<ol>
+<li><code>npx hexo &lt;command&gt;</code></li>
+<li>将 Hexo 所在的目录下的 <code>node_modules</code> 添加到环境变量之中即可直接使用 <code>hexo &lt;command&gt;</code>：</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;PATH=&quot;$PATH:./node_modules/.bin&quot;&#x27;</span> &gt;&gt; ~/.profile</code></pre></div>
+
+<p>如下的所有命令假设你已经把Hexo加入环境变量了，若是你懒得处理环境变量，每次<code>hexo</code>之前老老实实加上<code>npx</code>吧。</p>
+<p>Hexo的官方指南在这里：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">https://hexo.io/zh-cn/</a></p>
+<h2 id="初始化和配置Hexo、fluid"><a href="#初始化和配置Hexo、fluid" class="headerlink" title="初始化和配置Hexo、fluid"></a>初始化和配置Hexo、fluid</h2><p>现在新建一个文件夹，如果你懒得想名字，我建议直接叫<code>hexo-archieve</code>。</p>
+<p>在这个<code>hexo-archieve</code>的外面使用命令行初始化hexo。</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo init hexo-archieve</code></pre></div>
+
+<p>这一步可能需要很长的时间，别着急，倒杯牛奶慢慢等吧。</p>
+<p>注意如果文件夹不为空这一步可能失败。</p>
+<p>新建完成后，指定文件夹的目录如下：</p>
+<div class="code-wrapper"><pre><code class="hljs sqf">.
+├── <span class="hljs-variable">_config</span>.yml
+├── package.json
+├── scaffolds
+├── source
+|   ├── <span class="hljs-variable">_drafts</span>
+|   └── <span class="hljs-variable">_posts</span>
+└── themes</code></pre></div>
+
+<p>其中<code>_config.yml</code>是Hexo的配置文件；<code>source</code>存放你的博客原稿，用markdown写成，如果你还不会markdown，花30分钟去学一下再回来吧；<code>scaffolds</code>是博客文章的模板文件，我们并不用管他；<code>packgae.json</code>是Node.js相关包管理文件。</p>
+<p>现在让我们来下载fluid，fluid是Hexo的一个主题，长这个样子：</p>
+<p><img src="/img/Build-Hexo-Blog/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f666c7569642d6465762f737461746963406d61737465722f6865786f2d7468656d652d666c7569642f73637265656e73686f74732f696e6465782e706e67.png" srcset="/img/loading.gif" lazyload alt="ScreenShot"></p>
+<p>fluid的GitHub链接在这里：<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">https://github.com/fluid-dev/hexo-theme-fluid</a></p>
+<p>让我们首先进入<code>hexo-archieve</code>，用以下命令下载这个主题：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ npm install --save hexo-theme-fluid</code></pre></div>
+
+<p>然后在博客目录下创建 <code>_config.fluid.yml</code>，将主题的 <a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a> 内容复制进去。</p>
+<p>接下来，修改 Hexo 博客目录中的 <code>_config.yml</code>：</p>
+<div class="code-wrapper"><pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> fluid  <span class="hljs-meta"># 指定主题</span>
+
+<span class="hljs-symbol">language:</span> <span class="hljs-built_in">zh</span>-CN  <span class="hljs-meta"># 指定语言，会影响主题显示的语言。默认为en，英文</span></code></pre></div>
+
+<p>现在一切准备就绪，我们可以现在本地快速验证一下我们的博客长什么样子了。由于Hexo会帮我们自动新建一个Hello World的博客，所以我们的博客并不是空空如也。</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo server                                          
+INFO  Validating config
+INFO  Start processing
+INFO  [Fluid] Merge theme config from theme_config <span class="hljs-keyword">in</span> _config.yml
+INFO  
+------------------------------------------------
+|                                              |
+|     ________  __            _        __      |
+|    |_   __  |[  |          (_)      |  ]     |
+|      | |_ \_| | | __   _   __   .--.| |      |
+|      |  _|    | |[  | | | [  |/ /<span class="hljs-string">&#x27;`\&#x27;</span> |      |
+|     _| |_     | | | \_/ |, | || \__/  |      |
+|    |_____|   [___]<span class="hljs-string">&#x27;.__.&#x27;</span>_/[___]<span class="hljs-string">&#x27;.__.;__]     |</span>
+<span class="hljs-string">|                                              |</span>
+<span class="hljs-string">|       Thank you for using Fluid theme !      |</span>
+<span class="hljs-string">|   Docs: https://hexo.fluid-dev.com/docs/en/  |</span>
+<span class="hljs-string">|                                              |</span>
+<span class="hljs-string">------------------------------------------------</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span></code></pre></div>
+
+<p>点击<a href="http://localhost:4000，你就可以看到你的个人博客啦！">http://localhost:4000，你就可以看到你的个人博客啦！</a></p>
+<p><img src="/img/Build-Hexo-Blog/image-20211004203916223.png" srcset="/img/loading.gif" lazyload alt="image-20211004203916223"></p>
+<p><img src="/img/Build-Hexo-Blog/image-20211004203931833.png" srcset="/img/loading.gif" lazyload alt="会有一篇自动生成的Hello World"></p>
+<h2 id="一键部署"><a href="#一键部署" class="headerlink" title="一键部署"></a>一键部署</h2><p>现在你的博客仅仅只能在你的本地浏览，这显然不是我们的初衷。这一环节我们将会把博客文件部署到GitHub上去，更具体，是我们一开始建立的repo中去。</p>
+<p>首先我们需要GitHub的access token，获取这个我们需要回到GitHub操作一下，我希望前面的步骤没有长到让你忘记账号和密码。</p>
+<p>点击右上角你的头像，选择setting&#x2F;设置</p>
+<p><img src="/img/Build-Hexo-Blog/image-20211004204517900.png" srcset="/img/loading.gif" lazyload alt="image-20211004204517900"></p>
+<p>进入setting后选择Developer settings：</p>
+<p><img src="/img/Build-Hexo-Blog/image-20211004204626455.png" srcset="/img/loading.gif" lazyload alt="image-20211004204626455"></p>
+<p>在personal access token中生成新的token：</p>
+<p><img src="/img/Build-Hexo-Blog/image-20211004204700797.png" srcset="/img/loading.gif" lazyload alt="image-20211004204700797"></p>
+<p>如果没问题的话，应该会出来如下界面，复制token（图里的token已经被我删掉了，别试了）：</p>
+<p><img src="/img/Build-Hexo-Blog/image-20211004204819769.png" srcset="/img/loading.gif" lazyload alt="image-20211004204819769"></p>
+<p>现在回到我们的<code>hexo-archieve</code>，修改<code>_config.yml</code>中的Deployment（部署部分）为如下：</p>
+<div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment"># Deployment</span>
+<span class="hljs-comment">## Docs: https://hexo.io/docs/one-command-deployment</span>
+<span class="hljs-attr">deploy:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span>
+  <span class="hljs-attr">repo:</span> <span class="hljs-string">&lt;repository</span> <span class="hljs-string">url&gt;</span> <span class="hljs-comment"># https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io</span>
+  <span class="hljs-attr">branch:</span> [<span class="hljs-string">branch</span>]
+  <span class="hljs-attr">token:</span> [<span class="hljs-string">message</span>]</code></pre></div>
+
+<p><code>repo</code>是你刚才新家的repo的URL；<code>branch</code>是repo的主分支，默认为main；<code>token	</code>处复制刚才生成的token。</p>
+<p>npm安装git插件</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ npm install hexo-deployer-git --save</code></pre></div>
+
+<p>现在一切准备工作就绪，让我们部署自己的网站吧！！！</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo clean
+$ hexo deploy</code></pre></div>
+
+<p>注：第一次不需要<code>hexo clean</code>来清理之前生成的文件，但保险起介，我建议你这么做。</p>
+<p>命令行一通输出之后，你的网站文件已经被推送到github上了。现在通过URL来访问你的网站吧！</p>
+<p><img src="/img/Build-Hexo-Blog/image-20211004210407950.png" srcset="/img/loading.gif" lazyload alt="image-20211004210407950"></p>
+<h2 id="创建About-Me"><a href="#创建About-Me" class="headerlink" title="创建About Me"></a>创建About Me</h2><p>首次使用主题的「关于页」需要手动创建：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo new page about</code></pre></div>
+
+<p>创建成功后，编辑博客目录下 <code>/source/about/index.md</code>，添加 <code>layout</code> 属性。</p>
+<p>修改后的文件示例如下：</p>
+<div class="code-wrapper"><pre><code class="hljs markdown">---
+title: about
+date: 2020-02-23 19:20:33
+<span class="hljs-section">layout: about</span>
+<span class="hljs-section">---</span>
+
+这里写关于页的正文，支持 Markdown, HTML</code></pre></div>
+
+<h2 id="新建文章和一些常用操作"><a href="#新建文章和一些常用操作" class="headerlink" title="新建文章和一些常用操作"></a>新建文章和一些常用操作</h2><p>当我们每次需要增加新的文章时，我们在hexo的文件夹内使用如下命令：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;my-article-title&quot;</span></code></pre></div>
+
+<p>这会在<code>./source/_posts</code>中新建一个以<code>my-article-title.md</code>为名字的markdown文件，编辑这个文件之后再一次部署，过几分钟就可以看到博客的更新了。</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo clean
+$ hexo deploy</code></pre></div>
+
+<h1 id="进阶操作"><a href="#进阶操作" class="headerlink" title="进阶操作"></a>进阶操作</h1><h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>(Under Construct)</p>
+<h2 id="托管在AWS-S3上"><a href="#托管在AWS-S3上" class="headerlink" title="托管在AWS S3上"></a>托管在AWS S3上</h2><p>(Under Construct)</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Technology/">Technology</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/09/How-to-study-C/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何学习C++</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/Intern-in-Bosch-Japan/">
+                        <span class="hidden-mobile">Intern in Bosch Japan</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/Build-Hexo-Blog/';
+          this.page.identifier = '/2021/10/04/Build-Hexo-Blog/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

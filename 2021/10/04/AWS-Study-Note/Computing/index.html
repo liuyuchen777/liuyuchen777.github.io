@@ -1,0 +1,724 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="EC2Elastic Computing Cloud Cloud Computing Service: choose your OS, storage, memory, network throughput. launch and SSH into your server within minutes.  Instance Types Supplement: Spot FleetA Spot Fl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Computing: EC2, ELB, AMI, ASG">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Computing/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="EC2Elastic Computing Cloud Cloud Computing Service: choose your OS, storage, memory, network throughput. launch and SSH into your server within minutes.  Instance Types Supplement: Spot FleetA Spot Fl">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2022.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2023.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2024.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2025.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2026.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2027.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2028.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2029.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2030.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2031.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2032.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2033.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2034.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2035.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2036.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2037.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2038.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2039.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2040.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2041.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2042.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2043.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2044.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2045.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2046.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2047.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2048.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2049.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2050.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2051.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2052.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2053.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2054.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled%2055.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.658Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Computing/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Computing: EC2, ELB, AMI, ASG - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Computing: EC2, ELB, AMI, ASG">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Computing: EC2, ELB, AMI, ASG</h1>
+            
+            <div class="markdown-body">
+              <h1 id="EC2"><a href="#EC2" class="headerlink" title="EC2"></a>EC2</h1><p>Elastic Computing Cloud</p>
+<p>Cloud Computing Service: choose your OS, storage, memory, network throughput. launch and SSH into your server within minutes.</p>
+<p><img src="/img/AWS/Computing/Untitled.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Instance-Types"><a href="#Instance-Types" class="headerlink" title="Instance Types"></a>Instance Types</h2><p><img src="/img/AWS/Computing/Untitled%201.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Supplement-Spot-Fleet"><a href="#Supplement-Spot-Fleet" class="headerlink" title="Supplement: Spot Fleet"></a>Supplement: Spot Fleet</h2><p>A Spot Fleet is set of Spot Instances and optionally On-Demand Instances that is launched based on criteria that you specify. </p>
+<p>The Spot Fleet <strong>selects the Spot capacity pools that meet your needs and launches Spot Instances to meet the target capacity for the fleet.</strong> </p>
+<p>By default, Spot Fleets are set to maintain target capacity by launching replacement instances after Spot Instances in the fleet are terminated. You can submit a Spot Fleet as a one-time request, which does not persist after the instances have been terminated. You can include On-Demand Instance requests in a Spot Fleet request.</p>
+<h2 id="Instance-Size"><a href="#Instance-Size" class="headerlink" title="Instance Size"></a>Instance Size</h2><p><img src="/img/AWS/Computing/Untitled%202.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Instance-Profiles"><a href="#Instance-Profiles" class="headerlink" title="Instance Profiles"></a>Instance Profiles</h2><p>Attach a role to an instance via an Instance Profile</p>
+<p>Always avoid embedding your AWS credentials when possible</p>
+<p><img src="/img/AWS/Computing/Untitled%203.png" srcset="/img/loading.gif" lazyload></p>
+<p>An Instance Profile holds a reference to a role. The EC2 instance is associated with the Instance Profile. When you select an IAM role when lauching an EC2 isntance, AWS will automatically creeate the Instance Profile for you.</p>
+<p><img src="/img/AWS/Computing/Untitled%204.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Placement-Group"><a href="#Placement-Group" class="headerlink" title="Placement Group"></a>Placement Group</h2><p>PG let you choose the logical placement of your instances to optimize for communication, performance or durability.</p>
+<p>free service</p>
+<p><img src="/img/AWS/Computing/Untitled%205.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="UserData"><a href="#UserData" class="headerlink" title="UserData"></a>UserData</h2><p>You can provide an EC2 with UserData which is a script that will automatically run when lauching an EC2 instance. You could install package, apply updates or anything you like.</p>
+<p><img src="/img/AWS/Computing/Untitled%206.png" srcset="/img/loading.gif" lazyload></p>
+<p>Within EC2 instance, if you were to SSH in and CURL this special URL, you can see the UserData script</p>
+<div class="code-wrapper"><pre><code class="hljs bash">curl http://169.254.169.254/latest/user-data</code></pre></div>
+
+<h2 id="MetaData"><a href="#MetaData" class="headerlink" title="MetaData"></a>MetaData</h2><p>Within EC2 instance, you can access information about the EC2 via a special URL endpoint</p>
+<p><img src="/img/AWS/Computing/Untitled%207.png" srcset="/img/loading.gif" lazyload></p>
+<div class="code-wrapper"><pre><code class="hljs bash">curl http://169.254.169.254/latest/meta-data</code></pre></div>
+<p>&#x2F;public-ipv4 get the current public IPv4 address<br>&#x2F;ami-id the AMI ID used to luanch this EC2 instance<br>&#x2F;instance-type the Instace Type of this EC2 instance</p>
+<div class="code-wrapper"><pre><code class="hljs"></code></pre></div>
+
+<h2 id="EC2-Cheat-Sheet"><a href="#EC2-Cheat-Sheet" class="headerlink" title="EC2 Cheat Sheet"></a>EC2 Cheat Sheet</h2><p><img src="/img/AWS/Computing/Untitled%208.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="EC2-Pricing"><a href="#EC2-Pricing" class="headerlink" title="EC2 Pricing"></a>EC2 Pricing</h1><h2 id="Pricing-Model"><a href="#Pricing-Model" class="headerlink" title="Pricing Model"></a>Pricing Model</h2><p><img src="/img/AWS/Computing/Untitled%209.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="On-Demand"><a href="#On-Demand" class="headerlink" title="On-Demand"></a>On-Demand</h2><p>when you launch EC2 instance, it is default by using On-Demand Pricing</p>
+<p>On-Demand has <strong>no up-front payment</strong> and <strong>no long-term commitment</strong></p>
+<p>you are charged by hour or by the minute (varies based on EC2 Instance Types)</p>
+<p>On-Demand is for applications where the workload is for short-term, spikey or unpredictable</p>
+<p>ex. new app for deployment</p>
+<h2 id="Reserved-Instance"><a href="#Reserved-Instance" class="headerlink" title="Reserved Instance"></a>Reserved Instance</h2><p>steady-state, predictable usage, or require reserved cpacity</p>
+<p>term * class offering * payment option</p>
+<p><img src="/img/AWS/Computing/Untitled%2010.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>Standard Up to 75% reduced pricing compared to on-demand (Cannot Change RI Attributes)</li>
+<li>Convertible Up to 54% reduced pricing compared to on-demand (Allows you to change RI Attributes if greater or equal in value)</li>
+<li>Scheduled You reserve instances for specific time periods (eg. once a week for a few hours)</li>
+</ul>
+<p>Terms</p>
+<p>commit to a 1 year or 3 year contract</p>
+<p>Payment Options</p>
+<p>All upfront, Partial Upfront, and No Upfront (The greater upfront the great savings)</p>
+<p>RIs can be shared between <strong>multiple accounts</strong> within an org Unused RIs can be sold in the <strong>Reserved Instance Marketplace</strong></p>
+<h2 id="EC2-Spot-Instances"><a href="#EC2-Spot-Instances" class="headerlink" title="EC2 Spot Instances"></a>EC2 Spot Instances</h2><p>AWS has unused compute capcity that they want to maximize the utility of their idle servers.</p>
+<p>Spot Instances provide a discount of 90% compared to On-Demand Pricing</p>
+<p><img src="/img/AWS/Computing/Untitled%2011.png" srcset="/img/loading.gif" lazyload></p>
+<p>Designed for applications that have flexible start and end times or applications that are only feasible at very low compute cost</p>
+<h3 id="AWS-Batch"><a href="#AWS-Batch" class="headerlink" title="AWS Batch"></a>AWS Batch</h3><p>an easy and convenient way to use Spot Pricing</p>
+<p>Termination Conditions</p>
+<p>Instances can be terminated by AWS at anytime</p>
+<p>If ypu instance is terminated by AWS, you don’t get charged for a partial hour of usage</p>
+<p>If you terminate an instance, you will still be charged for any hour that it ran</p>
+<h2 id="Dedicated-Host-Instances"><a href="#Dedicated-Host-Instances" class="headerlink" title="Dedicated Host Instances"></a>Dedicated Host Instances</h2><p>When you have strict server-bound licensing that won’t support for multi-tenancy or cloud deployments.</p>
+<p><img src="/img/AWS/Computing/Untitled%2012.png" srcset="/img/loading.gif" lazyload></p>
+<p>Offered in both On-Demand and Reserved (70% off on-demand pricing)</p>
+<p><img src="/img/AWS/Computing/Untitled%2013.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="EC2-Pricing-Cheat-Sheet"><a href="#EC2-Pricing-Cheat-Sheet" class="headerlink" title="EC2 Pricing Cheat Sheet"></a>EC2 Pricing Cheat Sheet</h2><p><img src="/img/AWS/Computing/Untitled%2014.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/img/AWS/Computing/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2015.png"></p>
+<h1 id="AMI"><a href="#AMI" class="headerlink" title="AMI"></a>AMI</h1><p>Amazon Machine Image</p>
+<p>provides the information required to launch an isnatnce</p>
+<p>you can turn your EC2 instances into AMIs so you can create copies of your servers</p>
+<p><img src="/img/AWS/Computing/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2016.png"></p>
+<p>! AMI is region specific</p>
+<p>An AMI holds following information:</p>
+<p><img src="/img/AWS/Computing/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2017.png"></p>
+<h2 id="AMI-Use-Case"><a href="#AMI-Use-Case" class="headerlink" title="AMI Use Case"></a>AMI Use Case</h2><p>AMIs help you keep incremental changes to your OS, application code and system package</p>
+<p><img src="/img/AWS/Computing/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2018.png"></p>
+<p><img src="/img/AWS/Computing/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2019.png"></p>
+<h2 id="AMI-Marketplace"><a href="#AMI-Marketplace" class="headerlink" title="AMI Marketplace"></a>AMI Marketplace</h2><p>purchased subscriptions to vendor maintained AMIs</p>
+<p><img src="/img/AWS/Computing/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2020.png"></p>
+<h2 id="Creating-an-AMI"><a href="#Creating-an-AMI" class="headerlink" title="Creating an AMI"></a>Creating an AMI</h2><p>You can create an AMI from an existing EC2 instance that’s either running or stopped.</p>
+<p><img src="/img/AWS/Computing/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2021.png"></p>
+<h2 id="Choosing-an-AMI"><a href="#Choosing-an-AMI" class="headerlink" title="Choosing an AMI"></a>Choosing an AMI</h2><p>Community AMI are free AMIs maintained by the community AWS marketplace free or paid AWS AMIs maintained by vendors</p>
+<p><img src="/img/AWS/Computing/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2022.png"></p>
+<p>AMIs can be selected based on:</p>
+<ul>
+<li>region</li>
+<li>operating system</li>
+<li>archiecture (32bit or 64bit)</li>
+<li>launch permissions</li>
+<li>root device volume (Instance Store or EBS Backed Volumes)</li>
+</ul>
+<h2 id="Copying-an-AMI"><a href="#Copying-an-AMI" class="headerlink" title="Copying an AMI"></a>Copying an AMI</h2><p>If you want to use an AMI from another region. You need to Copy the AMI and then select the destination region.</p>
+<p><img src="/img/AWS/Computing/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2023.png"></p>
+<h2 id="AMI-Cheat-Sheet"><a href="#AMI-Cheat-Sheet" class="headerlink" title="AMI Cheat Sheet"></a>AMI Cheat Sheet</h2><p><img src="/img/AWS/Computing/Untitled%2024.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2024.png"></p>
+<h1 id="Auto-Scaling-Group-ASG"><a href="#Auto-Scaling-Group-ASG" class="headerlink" title="Auto Scaling Group (ASG)"></a>Auto Scaling Group (ASG)</h1><p>set scaling rules which will automatically launch additional EC2 instance or shutdown instances to meet current demand</p>
+<p><img src="/img/AWS/Computing/Untitled%2025.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2025.png"></p>
+<p>Automatic scaling can occur via:</p>
+<ul>
+<li>Capacity Settings</li>
+<li>Health Check Replacement</li>
+<li>Scaling Policies</li>
+</ul>
+<h2 id="Capacity-Settings"><a href="#Capacity-Settings" class="headerlink" title="Capacity Settings"></a>Capacity Settings</h2><p>The isze of ASG is based on <strong>Min</strong>, <strong>Max</strong> and <strong>Desired Capacity</strong></p>
+<p><strong>Min</strong> is how many EC2 instances should at least be running</p>
+<p><strong>Max</strong> is number of EC2 instances allowed to be running</p>
+<p><strong>Desired Capacity</strong> is how many EC2 instances you want to ideally run</p>
+<p>ASG will always launch instances to meet minimum capacity</p>
+<p><img src="/img/AWS/Computing/Untitled%2026.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2026.png"></p>
+<h2 id="Health-Check-Replacment"><a href="#Health-Check-Replacment" class="headerlink" title="Health Check Replacment"></a>Health Check Replacment</h2><p>two types</p>
+<p><img src="/img/AWS/Computing/Untitled%2027.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2027.png"></p>
+<p>EC2 type</p>
+<p>ASG will perform a health check on EC2 instances to determine if there is a software or hardware issue. If an instance is considered unhealthy, ASG will terminate and launch a new instance.</p>
+<p><img src="/img/AWS/Computing/Untitled%2028.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2028.png"></p>
+<p>ELB type</p>
+<p>ASG will perform a health check based on the ELB health check. ELB can perform health checks by pinging an HTTP(S) endpoint with an expected response. If ELB determines a instance is unhealthy if forwards this information to ASG whcih will terminate the unhealthy instance.</p>
+<p><img src="/img/AWS/Computing/Untitled%2029.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2029.png"></p>
+<h2 id="Scaling-Polcies"><a href="#Scaling-Polcies" class="headerlink" title="Scaling Polcies"></a>Scaling Polcies</h2><p>Scaling Out: Adding More Instances</p>
+<p>Scaling In: Removing Instances</p>
+<h3 id="1-Target-Tracking-Scaling-Policy"><a href="#1-Target-Tracking-Scaling-Policy" class="headerlink" title="(1) Target Tracking Scaling Policy"></a>(1) Target Tracking Scaling Policy</h3><p>maintains a specific metric at a target value</p>
+<p>ex. If Averge CPU Utilization exceeds 75%, then add another server</p>
+<p><img src="/img/AWS/Computing/Untitled%2030.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2030.png"></p>
+<h3 id="2-Simple-Scaling-Policy"><a href="#2-Simple-Scaling-Policy" class="headerlink" title="(2) Simple Scaling Policy"></a>(2) Simple Scaling Policy</h3><p>Scales when an alarm is breached.</p>
+<p><img src="/img/AWS/Computing/Untitled%2031.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2031.png"></p>
+<p>not recommended, legacy scaling policy. use scaling policies with steps now</p>
+<h3 id="3-Scaling-Policies-with-Steps"><a href="#3-Scaling-Policies-with-Steps" class="headerlink" title="(3) Scaling Policies with Steps"></a>(3) Scaling Policies with Steps</h3><p>Scales when an alarm is breached, can escalates based on alarm value changing</p>
+<p><img src="/img/AWS/Computing/Untitled%2032.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2032.png"></p>
+<h2 id="ELB-Integration"><a href="#ELB-Integration" class="headerlink" title="ELB Integration"></a>ELB Integration</h2><p>ASG can be associated with ELB. When ASG is associated with ELB richer health checks can be set.</p>
+<p><img src="/img/AWS/Computing/Untitled%2033.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2033.png"></p>
+<h2 id="Usecase"><a href="#Usecase" class="headerlink" title="Usecase"></a>Usecase</h2><ol>
+<li>Burst of traffic from the Internet hits our domain.</li>
+<li>Route53 points that traffic to our load balancer.</li>
+<li>Load balancer passes the traffic to its target group.</li>
+<li>Target group is associated with ASG and sends the traffic to instances registered with ASG.</li>
+<li>The ASG Scaling Policy will check if our instances are near capcity.</li>
+<li>The Scaling Policy determines we need another instance, and it Launches an new EC2 instance with the associated Launch Configuration to our ASG.</li>
+</ol>
+<p><img src="/img/AWS/Computing/Untitled%2034.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2034.png"></p>
+<h2 id="Launch-Configuration"><a href="#Launch-Configuration" class="headerlink" title="Launch Configuration"></a>Launch Configuration</h2><p><img src="/img/AWS/Computing/Untitled%2035.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2035.png"></p>
+<h2 id="Step-Scaling-and-Target-Scaling-Scaling-Policy"><a href="#Step-Scaling-and-Target-Scaling-Scaling-Policy" class="headerlink" title="Step Scaling and Target Scaling (Scaling Policy)"></a>Step Scaling and Target Scaling (Scaling Policy)</h2><h3 id="Step-Scaling"><a href="#Step-Scaling" class="headerlink" title="Step Scaling"></a>Step Scaling</h3><p>CloudWatch Alarm</p>
+<p>With step scaling, you choose scaling metrics and threshold values for the <strong>CloudWatch alarms</strong> that trigger the scaling process as well as define how your scalable target should be scaled when a threshold is in breach for a specified number of evaluation periods.</p>
+<p>ex. </p>
+<p>When you create a step scaling policy, you add one or more step adjustments that enable you to scale based on the size of the alarm breach. Each step adjustment specifies the following:</p>
+<ul>
+<li>A lower bound for the metric value</li>
+<li>An upper bound for the metric value</li>
+<li>The amount by which to scale, based on the scaling adjustment type</li>
+</ul>
+<p><img src="/img/AWS/Computing/Untitled%2036.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2036.png"></p>
+<p><img src="/img/AWS/Computing/Untitled%2037.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2037.png"></p>
+<h3 id="Target-Scaling"><a href="#Target-Scaling" class="headerlink" title="Target Scaling"></a>Target Scaling</h3><p>Metrics on Target Value</p>
+<p>With target tracking scaling policies, you choose a scaling metric and set a target value. Application Auto Scaling creates and manages the CloudWatch alarms that trigger the scaling policy and calculates the scaling adjustment based on the metric and the target value.</p>
+<p>some predefined metrics on EC2 (CPU, Memory, etc)</p>
+<h2 id="Scaling-Cooldown"><a href="#Scaling-Cooldown" class="headerlink" title="Scaling Cooldown"></a>Scaling Cooldown</h2><p>A scaling cooldown helps you prevent your Auto Scaling group from launching or terminating additional instances before the <strong>effects of previous activities are visible</strong>.</p>
+<p>Ex. cooldown period &#x3D; 7 minute</p>
+<p>the first instance is launched after 3 minutes, the second instance is launched after 4 minutes, how many minutes after the first instance is launched will ASG accept another scaling acitivity</p>
+<p>1st → 3+7</p>
+<p>2nd → 4+7</p>
+<p>Thus, new activity after 11 minutes</p>
+<p><img src="/img/AWS/Computing/Untitled%2038.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2038.png"></p>
+<h2 id="ASG-Cheat-Sheet"><a href="#ASG-Cheat-Sheet" class="headerlink" title="ASG Cheat Sheet"></a>ASG Cheat Sheet</h2><p><img src="/img/AWS/Computing/Untitled%2039.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2039.png"></p>
+<h1 id="ELB"><a href="#ELB" class="headerlink" title="ELB"></a>ELB</h1><p>Elastic Load Banlancer</p>
+<p>Distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.</p>
+<p><img src="/img/AWS/Computing/Untitled%2040.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2040.png"></p>
+<h2 id="The-Rules-of-Traffic"><a href="#The-Rules-of-Traffic" class="headerlink" title="The Rules of Traffic"></a>The Rules of Traffic</h2><p><img src="/img/AWS/Computing/Untitled%2041.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2041.png"></p>
+<h3 id="Application-Load-Balancer-ALB-and-Network-Load-Balancer-NLB"><a href="#Application-Load-Balancer-ALB-and-Network-Load-Balancer-NLB" class="headerlink" title="Application Load Balancer (ALB) and Network Load Balancer (NLB)"></a>Application Load Balancer (ALB) and Network Load Balancer (NLB)</h3><p>traffic is sent to the Listeners when the port matches it then checks the rules what to do.</p>
+<p>The rules will forward the traffic to target group and target group will finally distribute the traffic to instances registered to that target group.</p>
+<p><img src="/img/AWS/Computing/Untitled%2042.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2042.png"></p>
+<p><img src="/img/AWS/Computing/Untitled%2043.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2043.png"></p>
+<h3 id="Classical-Load-Balancer-CLB"><a href="#Classical-Load-Balancer-CLB" class="headerlink" title="Classical Load Balancer (CLB)"></a>Classical Load Balancer (CLB)</h3><p>traffic is sent to Listeners. When the port matches it then it forwards the traffic to any EC2 instances that are registered to CLB. CLB does not allow you to apply any rules to listeners.</p>
+<p><img src="/img/AWS/Computing/Untitled%2044.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2044.png"></p>
+<h2 id="ALB"><a href="#ALB" class="headerlink" title="ALB"></a>ALB</h2><p><img src="/img/AWS/Computing/Untitled%2045.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2045.png"></p>
+<h2 id="NLB"><a href="#NLB" class="headerlink" title="NLB"></a>NLB</h2><p><img src="/img/AWS/Computing/Untitled%2046.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2046.png"></p>
+<h2 id="GLB"><a href="#GLB" class="headerlink" title="GLB"></a>GLB</h2><p>Gateway Load Balancer for IP</p>
+<p><img src="/img/AWS/Computing/Untitled%2047.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2047.png"></p>
+<h2 id="CLB"><a href="#CLB" class="headerlink" title="CLB"></a>CLB</h2><p><img src="/img/AWS/Computing/Untitled%2048.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2048.png"></p>
+<h2 id="Sticky-Session"><a href="#Sticky-Session" class="headerlink" title="Sticky Session"></a>Sticky Session</h2><p><img src="/img/AWS/Computing/Untitled%2049.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2049.png"></p>
+<p>mainly for cookie</p>
+<h2 id="X-Forward-For-XFF-Header"><a href="#X-Forward-For-XFF-Header" class="headerlink" title="X-Forward-For (XFF) Header"></a>X-Forward-For (XFF) Header</h2><p>If you need IPv4 address of a user, check the XFF header</p>
+<p>XFF header is a command method for identifying the originating IP address. of a client connecting to a web server through an HTTP proxy or a load balancer.</p>
+<p><img src="/img/AWS/Computing/Untitled%2050.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2050.png"></p>
+<p>standard header</p>
+<h2 id="Health-Checks"><a href="#Health-Checks" class="headerlink" title="Health Checks"></a>Health Checks</h2><p>Instances are monitored by the ELB report back Health Checks as InService, OutofService</p>
+<p>HC communicate directly with the instance to determine its state</p>
+<p>ELB does not terminate (kill) unhealthy instance. It will just redirect traffic to healthy instances.</p>
+<p><img src="/img/AWS/Computing/Untitled%2051.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2051.png"></p>
+<p>ALB and NLB HC are found on the target group</p>
+<p><img src="/img/AWS/Computing/Untitled%2052.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2052.png"></p>
+<h2 id="Cross-Zone-Load-Balancing"><a href="#Cross-Zone-Load-Balancing" class="headerlink" title="Cross-Zone Load Balancing"></a>Cross-Zone Load Balancing</h2><p>Only for CLB and NLB</p>
+<p>Cross AZ</p>
+<p><img src="/img/AWS/Computing/Untitled%2053.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2053.png"></p>
+<h2 id="Requesting-Routing"><a href="#Requesting-Routing" class="headerlink" title="Requesting Routing"></a>Requesting Routing</h2><p>Apply rules to incoming request and then forward or redirect traffic</p>
+<p><img src="/img/AWS/Computing/Untitled%2054.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2054.png"></p>
+<h2 id="ELB-Cheat-Sheet"><a href="#ELB-Cheat-Sheet" class="headerlink" title="ELB Cheat Sheet"></a>ELB Cheat Sheet</h2><p><img src="/img/AWS/Computing/Untitled%2055.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Computing/Untitled%2055.png"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Cloud-Management-CloudFormation-CloudWatch-Cloud/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Cloud Management: CloudFormation, CloudWatch, CloudTrail, ConfigRule</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/DNS/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Route53</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Computing/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Computing/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

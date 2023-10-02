@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="哈喽各位小伙伴们好，这是一个～～每天～～每周带你认识一个AWS服务的博文系列。 re:Invent今天我们不聊AWS service，聊一聊AWS一年一度的大型发布会兼workshop兼技术分享会——AWS re:Invent，刚好这个月末就是2022年的re:Invent，这次是第十一次re:Invent活动，可以期待一下AWS这次会整出什么新活。另外，最近Amazon传出了大规模layoff传">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日AWS（持续更新...）">
+<meta property="og:url" content="https://liuyuchen777.github.io/2022/11/17/aws-everyday/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="哈喽各位小伙伴们好，这是一个～～每天～～每周带你认识一个AWS服务的博文系列。 re:Invent今天我们不聊AWS service，聊一聊AWS一年一度的大型发布会兼workshop兼技术分享会——AWS re:Invent，刚好这个月末就是2022年的re:Invent，这次是第十一次re:Invent活动，可以期待一下AWS这次会整出什么新活。另外，最近Amazon传出了大规模layoff传">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-16T23:43:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.662Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>每日AWS（持续更新...） - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="每日AWS（持续更新...）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-11-17 08:43" pubdate>
+        November 17, 2022 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">每日AWS（持续更新...）</h1>
+            
+            <div class="markdown-body">
+              <p>哈喽各位小伙伴们好，这是一个～～每天～～每周带你认识一个AWS服务的博文系列。</p>
+<h2 id="re-Invent"><a href="#re-Invent" class="headerlink" title="re:Invent"></a>re:Invent</h2><p>今天我们不聊AWS service，聊一聊AWS一年一度的大型发布会兼workshop兼技术分享会——AWS re:Invent，刚好这个月末就是2022年的re:Invent，这次是第十一次re:Invent活动，可以期待一下AWS这次会整出什么新活。另外，最近Amazon传出了大规模layoff传闻，虽然集中在Alexa等device org，但不清楚对AWS org影响有多大，AWS码工差不多刚赶完re:Invent的DDL就听到这个消息，心估计有些凉。</p>
+<p>第一届re:Invent于2012年在拉斯维加斯举办，当时有来自60多个国家6000+的人现场参加了活动，主要是AWS生态的公司和一些初创公司。取re:Invent这个名字的大概意思是通过云计算重新invent一次原来的商业模式。2012年的Keynote是当时AWS SVP的Andy Jassy（现Amazon CEO）负责的，主要介绍了AWS的现有规模（彼时AWS仅有9个region），云计算的优势，以及如何在云上开发，当然也少不了用户（NASA，Netflix，SAP）登场来说明他们是如何使用AWS的。2012年基本属于云计算早期，概念都还没炒热，re:Invent定下的基调就是不仅是一场产品发布会，而是让潜在用户学习云计算这一新的概念，</p>
+<p>上一届re:Invent正好是re:Invent走过第十年，AWS差不多15年，AWS也从仅仅是小公司在用，逐渐大型跨国企业也都在使用了。re:Invent拿出了自产的云计算芯片Graviton3，privtae 5G等很酷的东西。</p>
+<p>今年的re:Invent会有超过1500个technical session面向IT的各个领域，现在可以搜索re:Invent免费注册线上观看，我至少会看Keynote和一些比较重要的leadership session。另外我也会关注Data相关的服务的新feature，从去年开始AWS Data的生态链都成了主打产品。</p>
+<h2 id="AWS服务命名-AWS前缀和Amazon前缀有什么区别"><a href="#AWS服务命名-AWS前缀和Amazon前缀有什么区别" class="headerlink" title="AWS服务命名 - AWS前缀和Amazon前缀有什么区别"></a>AWS服务命名 - AWS前缀和Amazon前缀有什么区别</h2><p>不知道你有没有注意到，在AWS多如牛毛的服务中，有一些是以Amazon为前缀的：包括Amazon S3，Amazon EC2等；也有一些是以AWS前缀的，包括AWS Batch，AWS Lambda等等。我之前一直对于AWS对于服务的命名机制很好奇，到底那些类型的服务会冠以AWS前缀，而为什么有一些又会冠以Amazon呢。</p>
+<p>我在外网上（指StackOverlfow和各种论坛）查到主要有两种说法：</p>
+<p>第一种是工具类服务普遍前缀AWS，而独立的运行的服务前缀Amazon。比如Amazon S3，Amazon EC2是可以脱离AWS平台，只要在创建之后仅通过SSH或者链接使用就可以了。RDS，Aurora等数据库服务也是全部以Amazon为前缀的；而AWS Elastic Beanstalk, AWS OpsWorks和AWS CloudFormation等负责lanuch其他服务，AWS Lambda是胶水服务，AWS Cloud9是一个AWS托管的云上IDE。工具类服务可以理解为服务其他服务的服务。</p>
+<p>第二种说法是IaaS以Amazon命名，PaaS甚至SaaS以AWS命名。这个说法乍看也很有道理，S3，EC2，Dynamo等作为AWS的基础建设，以Amazon命名。而依赖于这些服务包装出来的服务，如运行在EC2上的ECS，EKS都是以AWS命名的。</p>
+<p>第三种说法是AWS命名的服务以API为主，Amazon命名的服务以资源为主。</p>
+<p>这些说法对大部分服务的命名机制都解释得通，但也有例外。比如SQS，SNS，SES等消息服务应该属于工具类，但以Amazon命名。但可能因为SQS是最早一批的AWS服务，那时候还没有AWS，所以以Amazon命名。存储服务诸如Amazon EBS，AWS Snowball也是混用前缀。Translate，Forecast等API服务却是以Amazon为前缀的。</p>
+<p>不知道到底那种说法正确，大概率都不正确。如果有在AWS工作的大哥，拜托留言解答一下。</p>
+<h2 id="Kinesis"><a href="#Kinesis" class="headerlink" title="Kinesis"></a>Kinesis</h2><p>欢迎回到每日AWS，今天我们一起来看看AWS数据流解决方案——Amazon Kinesis。</p>
+<p>Kinesis实际是一套服务的组合，包括：</p>
+<ul>
+<li>Kinesis Data Streams (KDS)</li>
+<li>Kinesis Data Firehose (KDF)</li>
+<li>Kinesis Data Analytics (KDA)</li>
+<li>Kinesis Video Streams</li>
+</ul>
+<p>我们就拿小红书来举一个例子，来看看实时数据流如何在推荐系统中应用的。大家应该有体会，你在点赞、一定时间浏览某篇笔记或视频后，下一次刷新或下拉，就会出现类似相关内容的推荐。整个过程就是App中应用埋点将用户的浏览、点赞、关注等交互信息，发送至实时数据聚合服务，处理整合后输入实时数仓，推荐算法再调用这些整合的数据，提供最新的推荐。传统批处理系统在的延时会在十几分钟，几小时甚至天。而流处理能够提供亚秒级的实时推荐。</p>
+<p>KDS是一种可扩展且持久的实时数据流服务。提供了SDK、mobile SDK、Producer Library，在创建stream后，在应用中能直接调用put API将数据写入stream。EMR，KDA，EC2，Lambda等下游程序读取stream中的数据，处理后写入CloudWatch，ES等展示工具。</p>
+<p>KDA提供了Flink、Beam、Zeppelin、SDK和 AWS 服务集成， 开箱即用的分布式流处理工具集。如果尝试在几台虚拟机上尝试配过Hadoop生态和Flink，你就知道不用配环境，点几下按钮直接开始用是多幸福的事情了。</p>
+<p>KDF提供了一套ETL服务，直接将流式数据捕获、转换成Parquet&#x2F;ORC等格式输入到S3、Redshift等数据仓&#x2F;湖。相比于KDS，KDF具有zero admin的优势，如果你的目的地本身就是AWS上的存储服务，或是Splunk等原生支持的第三方，直接选择KDF是很好的选择。</p>
+<h2 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h2><p>serverless应该是这两年云计算提得比较多的一个概念了。好理解，干掉on-premise之后下一步就是把用服务器都干点，真正按照使用次数，以及精确到秒的运行时间来计费。也算是云计算哲学的一个演进。</p>
+<p>Lambda的使用逻辑是写好代码后，通过事件触发调用，按照每次调用计费。目前支持.NET，Go，Java，Python，Ruby，Node.js等运行时。如果以上不满足你的需求，还可以自定义EC2镜像来支持更多语言。所谓事件，可以是API Gateway的API调用，也可以是Kinesis之类的流消息，也可以是S3上传等等。</p>
+<p>下面描述几个典型应用场景让你对Lambda的应用有一些概念：</p>
+<ul>
+<li>用户上传头像或是背景图到S3，需要对上传的照片进行截取或是生成不同分辨率的图像，可以让S3上传时间触发Lambda进行处理后存储结果到S3。</li>
+<li>用户在浏览器或者移动端发起CRUD API操作，API Gateway接收到HTTP请求后触发Lambda，更新DynamoDB或者其他什么的持久化存储。</li>
+<li>智能音箱收到用户语音操作，将消息送到Kinesis Stream，触发Lambda进行处理。</li>
+</ul>
+<p>处理以上的一些基础操作，Lambda作为AWS平台的胶水服务，能够弥补很多现有服务的不足，提升开发体验。比如我用Step Functions (SFN)开发数据pipeline，SFN目前支持的计算函数很有限，就可以用Lambda做一些参数计算的工作。再比如CLI自动创建服务权限处理很麻烦，就可以IAM赋予Lambda相应权限，自动创建服务。再比如我们可以通过Lambda调用AWS服务，比如用Lambda启动Athena Query，就是一个简单的API的大数据服务。</p>
+<p>总之Lambda能玩出的花样非常多，欢迎分享你在工作中是怎么用Lambda的。</p>
+<h2 id="Step-Functions-SFN"><a href="#Step-Functions-SFN" class="headerlink" title="Step Functions (SFN)"></a>Step Functions (SFN)</h2><p>如果你之前有用过开源的解决方案，例如Apache Airflow，那你应该对workflow management platform这个概念不陌生，SFN不过是AWS平台上的Airflow罢了。什么叫工作流（workflow），我认为就是一连串需要执行的操作。比如你需要洗一个原始数据，第一步需要加载数据到S3，第二部用Spark来批处理，第三步送处理好的数据到SQS或者Kafka，第四步载入数据仓库，第五步载入完成后SNS（邮件）通知开发运维人员。过去如果我们不想重复这些手工的操作，我们会写一个long run的守护进程来，在每一步完成之后按照程序的返回值成功或者失败再调用下一步。而SFN则是一套造好的轮子，让我们直接写json来定义我们的工作流，而不是用自己的DSL或者硬编码在代码中。</p>
+<p>创建一个SFN工作流有两种方式，一种是如图2在一个可视化拖拽各个服务，连接后定义输入输出。第二个就是直接写Amazon State Language来定义工作流。说实话我从来没用过可视化的服务，每次还是写json。</p>
+<p>SFN支持200种以上的AWS服务，包括EMR，SNS，SQS等。但不足的一点是SFN对第三方的应用或者组件支持得不太好，甚至比较差。</p>
+<p>那我们能怎么用SFN来更好得帮助我们的开发流程呢？</p>
+<p>第一个我个人用得最多的就是用于data pipeline。一些批处理的data pipeline需要定时执行，我们可以用EventBridge定期invoke SFN，SFN内包含了多个ETL的AWS服务的步骤。我们可以在SFN的页面看我们ETL执行的成功率，以及各个状态。</p>
+<p>第二个是编排微服务，这个也是AWS serverless的一个重要实践。我们在Lambda那个post有讲过，结合API Gateway我们能创建无服务的应用。但仅限于非常简单诸如添加评论、留言等情况。如果是下单这样设计多个服务模块的应用，我们可以用SFN串联多个Lambda或是ECS。这个我只在workshop中做过例子，不知道实际有没有公司会采用。</p>
+<h2 id="EC2"><a href="#EC2" class="headerlink" title="EC2"></a>EC2</h2><p>这次我们鼓起勇气聊聊EC2，Elastic Cloud Computing，因为打头字母有一个E两个C，所以很简单就叫EC2。</p>
+<p>AWS现在已经是每季度营收超过200亿美金，持续为Amazon其他BU输血，的摩天大楼了。而这座摩天大楼的地基，就是这个可供用户按时间租赁的虚拟机服务。</p>
+<p>EC2在2006年8月推出的第一个Beta版本，当时仅有一种实例类型（instance type，简单来说就是配置不同的虚拟机），现如今，在2022年re:Invent之前，有超过400种不同的实例类型。并且AWS贯彻了eat your own dog food的精神，EC2为基础构建出了多种多样的IaaS，PaaS乃至SaaS服务。包括且不仅限于ECS，EKS，EMR等都是EC2的包装，还有其他计算类相关服务都是以EC2为基础的。</p>
+<p>EC2通过AMI（Amazon Machine Images）来加载虚拟机的镜像文件，2006年的时候EC2只支持Linux，现在Official提供数百种AMI。而AMI Marketplace中的第三方AMI更是数不胜数，很多公司&#x2F;个体甚至靠提供维护好的AMI吃饭。</p>
+<p>EBS提供独立于 EC2 实例生命周期的持久性存储，其作用类似于真实服务器上的硬盘驱动器，EC2的OS可以挂载该设备。用户可以设置和管理大小从 1GB 到 16TB 的存储卷。EBS 卷可以在实例运行时附加或分离，并从一个实例移动到另一个实例。</p>
+<p>Elastic IP addresses大幅减少了以往一线编程人员对于系统管理员的依赖。无需网络管理员的帮助，也无需等待 DNS 传播绑定，可以编程方式将弹性 IP 地址映射到任何虚拟机实例。</p>
+<p>现在EC2的feature已经非常多了，包括很重要的提供根据负载或规则自动扩容的Auto Scaling，以及事实监控实例运行状态的CloudWatch，等等。</p>
+<p>实际上我日常工作中已经很少直接使用EC2，更多时候是用一些PaaS的AWS service，不过始终感谢EC2把程序从和系统管理员扯皮配置开发机或者生产系统的工作中解放出来。</p>
+<h1 id="S3"><a href="#S3" class="headerlink" title="S3"></a>S3</h1><p>第一天我们从Simple Storage System（S3），分布式对象存储服务开始。</p>
+<p>S3于2006年推出，是和EC2一批推出的第一代AWS服务，甚至在AWS还不叫AWS，还是亚马逊为第三方卖家提供的网站托管SaaS开始就面市了。到今天，AWS已经拥有了超过200个服务，其中很大的一部分都建立在S3的基础之上。比如Glue用S3存储meta data，CloudWatch的记录都是存储在S3上的，甚至整个无服务Lambda的触发机制都绑在S3上。这里我们不长聊S3的重要性，以及之于整个AWS生态基础设施的意义，来看看到底什么是对象存储，以及实际开发过程中我们是如何用S3的。</p>
+<p>对象存储是相对于计算机最常见的文件系统的概念，传统文件系统将数据作为文件层次结构进行管理，而块存储则将数据作为扇区和轨道内的块进行管理。</p>
+<p>每个S3对象由bucket的名字和key唯一识别，甚至bucket的名字是全域唯一的，也就是说如果有人以my-bucket命名了自己的bucket，其他人再也不能用这个名字了。</p>
+<p>那我们实际开发中S3都用来干什么呢？</p>
+<p>你可以把一整个静态网站打包上传s3，开启静态网页托管，你就能获得一个自动生成的域名，作为自己个人网站的地址。</p>
+<p>如果你想用GitHub之类静态网站托管服务，又受限于repo存储图片的限制，你可以把图片上传到S3，设置好文件访问权限，把指向文件的链接复制到markdown或者html里。</p>
+<p>S3也是AWS大数据解决方案的重要一环，存在S3上的数据可以被Glue清洗后，Athena或者EMR读取，作为HDFS在AWS上的一种实现。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/18/japan-job-hunting-exp/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">日本就职2020-2022</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/16/toeic/">
+                        <span class="hidden-mobile">一个月速成托业950</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2022/11/17/aws-everyday/';
+          this.page.identifier = '/2022/11/17/aws-everyday/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

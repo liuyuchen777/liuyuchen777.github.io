@@ -1,0 +1,662 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="DNSThe phone book of Internet translate domain names to IP addresses allows your computer to find specific servers on the Intenet automatically depending what domain name you browse to  IPIP Addresses">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Route53">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/DNS/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="DNSThe phone book of Internet translate domain names to IP addresses allows your computer to find specific servers on the Intenet automatically depending what domain name you browse to  IPIP Addresses">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2022.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2023.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2024.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2025.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2026.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2027.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2028.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2029.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2030.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2031.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2032.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2033.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled%2034.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.659Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/DNS/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Route53 - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Route53">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Route53</h1>
+            
+            <div class="markdown-body">
+              <h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><p>The phone book of Internet</p>
+<p>translate domain names to IP addresses</p>
+<p>allows your computer to find specific servers on the Intenet automatically depending what domain name you browse to</p>
+<p><img src="/img/AWS/DNS/Untitled.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled.png"></p>
+<h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p>IP Addresses are what uniquely identifies each computer on a network, and allows communication between them using the IP</p>
+<p><img src="/img/AWS/DNS/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%201.png"></p>
+<p>IPv4, IPv6</p>
+<h2 id="Domian-Registrars"><a href="#Domian-Registrars" class="headerlink" title="Domian Registrars"></a>Domian Registrars</h2><p>DR are authorities who have the ability to assign domain names under one or more top-level domains</p>
+<p><img src="/img/AWS/DNS/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%202.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%203.png"></p>
+<p>after registration all domain names can be found publically in a central WhoIS database</p>
+<h2 id="Top-level-Domains"><a href="#Top-level-Domains" class="headerlink" title="Top-level Domains"></a>Top-level Domains</h2><p><img src="/img/AWS/DNS/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%204.png"></p>
+<p>top-level domain names are controlled by the Internet Assigned Numbers Authority (IANA)</p>
+<p>All available top-level domains are stored in a publically database at:</p>
+<p><a target="_blank" rel="noopener" href="http://www.iana.org/domains/root/db">http://www.iana.org/domains/root/db</a></p>
+<p>AWS’s top-level domain .aws</p>
+<p><img src="/img/AWS/DNS/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%205.png"></p>
+<h2 id="Start-of-Authority-SOA"><a href="#Start-of-Authority-SOA" class="headerlink" title="Start of Authority (SOA)"></a>Start of Authority (SOA)</h2><p>Every domain must have an SOA record.</p>
+<p>SOA is a way for the domain admins to provide information about the domain.</p>
+<p>A zone file can contain only one SOA record.</p>
+<p><img src="/img/AWS/DNS/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%206.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%207.png"></p>
+<h2 id="A-Records"><a href="#A-Records" class="headerlink" title="A Records"></a>A Records</h2><p>Address Records (A Records) are one of the fundamental types of DNS records</p>
+<p>An A Record allows you to convert the name of a domain directly into an IP address. They can also be used on the root (naked domain name) itself.</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+	<span class="hljs-attr">&quot;ResourceRecordSets&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+	<span class="hljs-punctuation">&#123;</span>
+		<span class="hljs-attr">&quot;TTL&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">300</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;Type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;A&quot;</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;testing-domain.com&quot;</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;ResourceRecords&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+			<span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;Value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;52.216.8.34&quot;</span> <span class="hljs-punctuation">&#125;</span>
+		<span class="hljs-punctuation">]</span>
+	<span class="hljs-punctuation">&#125;</span>
+	<span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<h2 id="CNAME-Records"><a href="#CNAME-Records" class="headerlink" title="CNAME Records"></a>CNAME Records</h2><p>CNAME are another fundamental DNS records used to resolve one domain name to another - rather than an IP address.</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+	<span class="hljs-attr">&quot;ResourceRecordSets&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+	<span class="hljs-punctuation">&#123;</span>
+		<span class="hljs-attr">&quot;TTL&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">300</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;Type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CNAME&quot;</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;testing-domain.com&quot;</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;ResourceRecords&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+			<span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;Value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;www.testing-domain.com&quot;</span> <span class="hljs-punctuation">&#125;</span>
+		<span class="hljs-punctuation">]</span>
+	<span class="hljs-punctuation">&#125;</span>
+	<span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>the advantages of CNAMES is they are unlikely to change where IP addresses can change over time (if its a dynamic IP address)</p>
+<h2 id="NS-Records"><a href="#NS-Records" class="headerlink" title="NS Records"></a>NS Records</h2><p>Name Server (NS) records are used by top-level domain servers to direct traffic to the DNS servers to direct traffic to the DNS server containing the authoritative DNS records. Typically multiple name servers are provided for redundancy.</p>
+<p><img src="/img/AWS/DNS/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%208.png"></p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+	<span class="hljs-attr">&quot;Type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;NS&quot;</span><span class="hljs-punctuation">,</span>
+	<span class="hljs-attr">&quot;ResourceRecordSets&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+	<span class="hljs-punctuation">&#123;</span>
+		<span class="hljs-attr">&quot;TTL&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">172800</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;testing-domain.com&quot;</span><span class="hljs-punctuation">,</span>
+		<span class="hljs-attr">&quot;ResourceRecords&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+			<span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;Value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ns-245.awsdns-30.com&quot;</span> <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+			<span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;Value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ns-523.awsdns-01.net&quot;</span> <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+			<span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;Value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ns-1586.awsdns-06.co.uk&quot;</span> <span class="hljs-punctuation">&#125;</span>
+		<span class="hljs-punctuation">]</span>
+	<span class="hljs-punctuation">&#125;</span>
+	<span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<h2 id="Time-To-Live-TTL"><a href="#Time-To-Live-TTL" class="headerlink" title="Time To Live (TTL)"></a>Time To Live (TTL)</h2><p>length of time that DNS record gets cached on the resolving server or the users own local machine.</p>
+<p>The lower TTL → The faster that changes to DNS records will propagate across Intenet</p>
+<p>unit of TTL is second in Ipv4</p>
+<h2 id="DNS-Cheat-Sheet"><a href="#DNS-Cheat-Sheet" class="headerlink" title="DNS Cheat Sheet"></a>DNS Cheat Sheet</h2><p><img src="/img/AWS/DNS/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%209.png"></p>
+<h1 id="Route53"><a href="#Route53" class="headerlink" title="Route53"></a>Route53</h1><p>Route53 is a DNS service (like Godaddy or NameCheap)</p>
+<p>you can:</p>
+<ul>
+<li>register and manage domains</li>
+<li>create various records sets on a domain</li>
+<li>implement complex traffic flows ex. Blue&#x2F;Green deploy, failovers</li>
+<li>continuously monitor records via health checks</li>
+<li>resolve VPC’s outside of AWS</li>
+</ul>
+<p><img src="/img/AWS/DNS/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2010.png"></p>
+<h2 id="Usecase"><a href="#Usecase" class="headerlink" title="Usecase"></a>Usecase</h2><p><img src="/img/AWS/DNS/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2011.png"></p>
+<ol>
+<li>income Internet traffic</li>
+<li>route traffic to our web-app backed by ALB</li>
+<li>route traffic to an istance we use to tweek our AMI</li>
+<li>route traffic to API gateway which powers our API</li>
+<li>route traffic to CloudFront which serves S3 static hosted website</li>
+<li>Route traffic to an Elastic IP (EIP) which is a static IP that hosts our company Minecraft server</li>
+</ol>
+<h2 id="Record-Sets"><a href="#Record-Sets" class="headerlink" title="Record Sets"></a>Record Sets</h2><p><img src="/img/AWS/DNS/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2012.png"></p>
+<p>AWS have their own special Alias record which extends DNS functionality</p>
+<p><img src="/img/AWS/DNS/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2013.png"></p>
+<h2 id="Routing-Policies"><a href="#Routing-Policies" class="headerlink" title="Routing Policies"></a>Routing Policies</h2><p>7 types of routing policies</p>
+<p><img src="/img/AWS/DNS/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2014.png"></p>
+<h3 id="Traffic-Flow"><a href="#Traffic-Flow" class="headerlink" title="Traffic Flow"></a>Traffic Flow</h3><p>a visual editor lets you create sophisticated routing configurations for your resources using existing routing types</p>
+<p>$50 per policy record &#x2F; month</p>
+<p><img src="/img/AWS/DNS/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2015.png"></p>
+<h3 id="1-Simple-Routing-Policy"><a href="#1-Simple-Routing-Policy" class="headerlink" title="1. Simple Routing Policy"></a>1. Simple Routing Policy</h3><p>default policy</p>
+<ul>
+<li>you have 1 record and provide multiple IP addresses</li>
+<li>when multiple values are specified for a record, Toute53 will return all values back to the user in a random order</li>
+</ul>
+<p><img src="/img/AWS/DNS/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2016.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2017.png"></p>
+<h3 id="2-Weighted-Routing-Policy"><a href="#2-Weighted-Routing-Policy" class="headerlink" title="2. Weighted Routing Policy"></a>2. Weighted Routing Policy</h3><p>split up traffic based on different “weights” assigned.</p>
+<p>allows you to send a certain percentage of overall traffic to one server.</p>
+<p>ex. ALB running experimental features you could test against a small amount of traffic at random to minimize the impact.</p>
+<p><img src="/img/AWS/DNS/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2018.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2019.png"></p>
+<h3 id="3-Latency-Based-Routing-Policy"><a href="#3-Latency-Based-Routing-Policy" class="headerlink" title="3. Latency Based Routing Policy"></a>3. Latency Based Routing Policy</h3><p>based on region</p>
+<p><img src="/img/AWS/DNS/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2020.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2021.png"></p>
+<h3 id="4-Failover-Routing-Policy"><a href="#4-Failover-Routing-Policy" class="headerlink" title="4. Failover Routing Policy"></a>4. Failover Routing Policy</h3><p>allow you to create active&#x2F;passive setups in situations where you want a primary site in one location, and a secondary data recovery site in another.</p>
+<p><img src="/img/AWS/DNS/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2022.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2023.png"></p>
+<p>Automatically monitors health-checks from your primary site to determine the health of end-points. If primary one is determined to be in a failed state, all traffic is automatically directed to the secondary location.</p>
+<h3 id="5-Geolocation-Routing-Policy"><a href="#5-Geolocation-Routing-Policy" class="headerlink" title="5. Geolocation Routing Policy"></a>5. Geolocation Routing Policy</h3><p>direct traffic based on the geographic location of where the request originated from.</p>
+<p><img src="/img/AWS/DNS/Untitled%2024.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2024.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2025.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2025.png"></p>
+<p>ex. let you route all traffic coming from north America to servers located in NA regions.</p>
+<h3 id="6-Geoproximity-Routing-Policy"><a href="#6-Geoproximity-Routing-Policy" class="headerlink" title="6. Geoproximity Routing Policy"></a>6. Geoproximity Routing Policy</h3><p>direct traffic based on the geograhic location of your users and your AWS resources</p>
+<p>!!! [difference] you can route more or less traffic to a specific resource by specifying a ‘Bias’ value.</p>
+<p>Bias values expand or shrink the size of the geographic region from which traffic is routed to. (You must use Route53 Traffic Flow to use this policy)</p>
+<p><img src="/img/AWS/DNS/Untitled%2026.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2026.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2027.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2027.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2028.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2028.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2029.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2029.png"></p>
+<h3 id="7-Multi-Value-Answer-Policy"><a href="#7-Multi-Value-Answer-Policy" class="headerlink" title="7. Multi-Value Answer Policy"></a>7. Multi-Value Answer Policy</h3><p>let you configure Route53 to return multiple values such as IP address for your web-server, in response to DNS queries.</p>
+<p>Route53 performs health-check on resources and only returns values of ones deemed healthy.</p>
+<p>&#x3D; Simple Route Policy + Health Check</p>
+<p><img src="/img/AWS/DNS/Untitled%2030.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2030.png"></p>
+<p><img src="/img/AWS/DNS/Untitled%2031.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2031.png"></p>
+<h2 id="Health-Checks"><a href="#Health-Checks" class="headerlink" title="Health Checks"></a>Health Checks</h2><ul>
+<li>Checks health every 30s by default. Could be reduced to every 10s</li>
+<li>A HC can initial a failover if status is returned unhealthy</li>
+<li>A CloudWatch Alarm can be created to alert you of status unhealthy</li>
+<li>A HC can monitor other health checks to create a chain of reactions</li>
+</ul>
+<p><img src="/img/AWS/DNS/Untitled%2032.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2032.png"></p>
+<h2 id="Resolver"><a href="#Resolver" class="headerlink" title="Resolver"></a>Resolver</h2><p>also known as .2 resolver</p>
+<p>A regional service that lets you route DNS queries between your VPCs and your network</p>
+<p>DNS solution for Hybrid Environments (On-Premise and Cloud)</p>
+<p><img src="/img/AWS/DNS/Untitled%2033.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2033.png"></p>
+<h2 id="Route53-Cheat-Sheet"><a href="#Route53-Cheat-Sheet" class="headerlink" title="Route53 Cheat Sheet"></a>Route53 Cheat Sheet</h2><p><img src="/img/AWS/DNS/Untitled%2034.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/DNS/Untitled%2034.png"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Computing/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Computing: EC2, ELB, AMI, ASG</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Database/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Database Service: RDS, Aurora, Redshift, DynamoDB, DMS</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/DNS/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/DNS/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="EFSElastic File System Scalable, elastic, cloud-native NFS file system attach single file system to multiple EC2 instances  $0.30GB&#x2F;month   like network file system: access file across instances">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Storage: EFS, EBS, FSx, Instance Store, Storage Gateway">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Storage/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="EFSElastic File System Scalable, elastic, cloud-native NFS file system attach single file system to multiple EC2 instances  $0.30GB&#x2F;month   like network file system: access file across instances">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2022.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2023.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2024.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2025.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2026.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled%2027.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.660Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Storage/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Storage: EFS, EBS, FSx, Instance Store, Storage Gateway - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Storage: EFS, EBS, FSx, Instance Store, Storage Gateway">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Storage: EFS, EBS, FSx, Instance Store, Storage Gateway</h1>
+            
+            <div class="markdown-body">
+              <h1 id="EFS"><a href="#EFS" class="headerlink" title="EFS"></a>EFS</h1><p>Elastic File System</p>
+<p>Scalable, elastic, cloud-native NFS file system</p>
+<p>attach single file system to multiple EC2 instances</p>
+<p><img src="/img/AWS/Storage/Untitled.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled.png"></p>
+<p>$0.30GB&#x2F;month </p>
+<ul>
+<li>like network file system: access file across instances</li>
+</ul>
+<h2 id="EFS-Cheat-Sheet"><a href="#EFS-Cheat-Sheet" class="headerlink" title="EFS Cheat Sheet"></a>EFS Cheat Sheet</h2><p><img src="/img/AWS/Storage/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%201.png"></p>
+<h1 id="EBS"><a href="#EBS" class="headerlink" title="EBS"></a>EBS</h1><p>!!!EBS can only be attached to one instance one time!!!</p>
+<p>Elastic Block Store</p>
+<p>A virtual hard drive in the cloud.</p>
+<p>create new volumes attach to EC2 instances, backup via snapshots and easy encryption</p>
+<p>when you launch EC2 instance, you need to select storage of EC2 instance</p>
+<p><img src="/img/AWS/Storage/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%202.png"></p>
+<h2 id="Intro-to-EBS"><a href="#Intro-to-EBS" class="headerlink" title="Intro to EBS"></a>Intro to EBS</h2><p><img src="/img/AWS/Storage/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%203.png"></p>
+<p><img src="/img/AWS/Storage/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%204.png"></p>
+<h2 id="Volume-Type-Usage"><a href="#Volume-Type-Usage" class="headerlink" title="Volume Type Usage"></a>Volume Type Usage</h2><p><img src="/img/AWS/Storage/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%205.png"></p>
+<h2 id="Storage-Volumes"><a href="#Storage-Volumes" class="headerlink" title="Storage Volumes"></a>Storage Volumes</h2><p>HDD</p>
+<p><img src="/img/AWS/Storage/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%206.png"></p>
+<p>SSD</p>
+<p><img src="/img/AWS/Storage/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%207.png"></p>
+<p>Magnetic Type</p>
+<p>cheap, durable, etc.</p>
+<p><img src="/img/AWS/Storage/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%208.png"></p>
+<h2 id="Moving-Volumes"><a href="#Moving-Volumes" class="headerlink" title="Moving Volumes"></a>Moving Volumes</h2><p>From one AZ to another</p>
+<ol>
+<li>take a Snapshot of the volume</li>
+<li>create an AMI from the Snapshot</li>
+<li>launch new EC2 instance in desired AZ</li>
+</ol>
+<p><img src="/img/AWS/Storage/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%209.png"></p>
+<p>From one region to another</p>
+<ol>
+<li>take a Snapshot of the volume</li>
+<li>create an AMI from the Snapshot</li>
+<li>copy the AMI to another region</li>
+<li>launch a new EC2 instance from the copied AMI</li>
+</ol>
+<p><img src="/img/AWS/Storage/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2010.png"></p>
+<h2 id="Encrypted-Root-Volume"><a href="#Encrypted-Root-Volume" class="headerlink" title="Encrypted Root Volume"></a>Encrypted Root Volume</h2><p><img src="/img/AWS/Storage/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2011.png"></p>
+<p>work with KMS</p>
+<h2 id="EBS-vs-Instance-Store-Volumes"><a href="#EBS-vs-Instance-Store-Volumes" class="headerlink" title="EBS vs. Instance Store Volumes"></a>EBS vs. Instance Store Volumes</h2><p>An EC2 instance can be backed (root device) by an EBS or Instance Store Volume</p>
+<p><img src="/img/AWS/Storage/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2012.png"></p>
+<h2 id="EBS-Cheat-Sheet"><a href="#EBS-Cheat-Sheet" class="headerlink" title="EBS Cheat Sheet"></a>EBS Cheat Sheet</h2><p><img src="/img/AWS/Storage/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2013.png"></p>
+<h1 id="FSx"><a href="#FSx" class="headerlink" title="FSx"></a>FSx</h1><p><img src="/img/AWS/Storage/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2014.png"></p>
+<p><img src="/img/AWS/Storage/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2015.png"></p>
+<p>Amazon FSx makes it easy and cost effective to launch and run <strong>popular file systems</strong> that are fully managed by AWS. With Amazon FSx, you can leverage the rich feature sets and fast performance of widely-used open source and commercially-licensed file systems, while avoiding time-consuming administrative tasks such as hardware provisioning, software configuration, patching, and backups. It provides cost-efficient capacity with high levels of reliability, and integrates with a broad portfolio of AWS services to enable faster innovation.</p>
+<p>Amazon FSx provides two file systems to choose from: Amazon FSx for <strong>Windows File Server for business applications</strong> and Amazon FSx for <strong>Lustre for compute-intensive workloads</strong>.</p>
+<h2 id="For-Windows-File-Server"><a href="#For-Windows-File-Server" class="headerlink" title="For Windows File Server"></a>For Windows File Server</h2><p>!!!when WINDOWS appear!!!</p>
+<p>Amazon FSx for Windows File Server provides fully managed, highly reliable, and scalable file storage that is accessible over the industry-standard <strong>Server Message Block (SMB)</strong> protocol. It is built on Windows Server, delivering a wide range of administrative features such as user quotas, end-user file restore, and Microsoft Active Directory (AD) integration. It offers single-AZ and multi-AZ deployment options, fully managed backups, and encryption of data at rest and in transit. You can optimize cost and performance for your workload needs with SSD and HDD storage options; and you can scale storage and change the throughput performance of your file system at any time. Amazon FSx file storage is accessible from Windows, Linux, and MacOS compute instances and devices running on AWS or on premises.</p>
+<h2 id="For-Lustre"><a href="#For-Lustre" class="headerlink" title="For Lustre"></a>For Lustre</h2><p>!!!when high performance appear!!!</p>
+<p>Amazon FSx for Lustre is a fully managed service that provides cost-effective, high-performance, scalable storage for compute workloads. Many workloads such as <strong>machine learning, high performance computing (HPC), video rendering, and financial simulations</strong> depend on compute instances accessing the same set of data through high-performance shared storage.</p>
+<p>Powered by Lustre, the world’s most popular high-performance file system, FSx for Lustre offers sub-millisecond latencies, up to hundreds of gigabytes per second of throughput, and millions of IOPS. It provides multiple deployment options and storage types to optimize cost and performance for your workload requirements.</p>
+<p>FSx for Lustre file systems can also be linked to Amazon S3 buckets, allowing you to access and process data concurrently from both a high-performance file system and from the S3 API.</p>
+<h1 id="EC2-Instance-Store"><a href="#EC2-Instance-Store" class="headerlink" title="EC2 Instance Store"></a>EC2 Instance Store</h1><p>An instance store provides <strong>temporary block-level storage</strong> for your instance. </p>
+<p>This storage is located on disks that are physically attached to the host computer. Instance store is ideal for temporary storage of information that changes frequently, such as buffers, caches, scratch data, and other temporary content, or for data that is replicated across a fleet of instances, such as a load-balanced pool of web servers.</p>
+<p><img src="/img/AWS/Storage/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h1 id="Storage-Gateway"><a href="#Storage-Gateway" class="headerlink" title="Storage Gateway"></a>Storage Gateway</h1><p>comment: aim to only use AWS Storage service, and run application on on-premise data center</p>
+<p>Extending, backing up on-premise storage to the cloud</p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>connects an <strong>on-premises software appliance with cloud-based storage</strong></p>
+<p>provides you seamless and secure integration between your organization’s on-premise IT environment and <strong>AWS’s storage infrastructure</strong></p>
+<p><img src="/img/AWS/Storage/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2017.png"></p>
+<p>!!! There are 3 types of Gateways</p>
+<p><img src="/img/AWS/Storage/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2018.png"></p>
+<ul>
+<li>File Gateway (NFS&#x2F;SMB): store you file in S3</li>
+<li>Volume Gateway (iSCSI): store copies of your hard disk drives in S3<ul>
+<li>storage volumes</li>
+<li>cached volumes</li>
+</ul>
+</li>
+<li>Tape Gateway (VTL): virtual tape library</li>
+</ul>
+<h2 id="File-Gateway-NFS-x2F-SMB"><a href="#File-Gateway-NFS-x2F-SMB" class="headerlink" title="File Gateway (NFS&#x2F;SMB)"></a>File Gateway (NFS&#x2F;SMB)</h2><p>your files are as objects insider your S3 buckets</p>
+<p>access your files through NFS or SMB mount point</p>
+<p><img src="/img/AWS/Storage/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2019.png"></p>
+<p><img src="/img/AWS/Storage/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2020.png"></p>
+<h2 id="Volume-Gateway-iSCSI"><a href="#Volume-Gateway-iSCSI" class="headerlink" title="Volume Gateway (iSCSI)"></a>Volume Gateway (iSCSI)</h2><p>Volume Gateway presents your applications with disk volumes using the Internet Small Computer System Interface (iSCSI)</p>
+<p><img src="/img/AWS/Storage/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2021.png"></p>
+<p>EBS</p>
+<p><img src="/img/AWS/Storage/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2022.png"></p>
+<h3 id="Stored-Volumes"><a href="#Stored-Volumes" class="headerlink" title="Stored Volumes"></a>Stored Volumes</h3><p>primary data is <strong>stored locally</strong>, while <strong>asynchronously backing up</strong> that data to AWS</p>
+<p>[Advantages] provide your on-premises applications with low-latency access to their entire datasets, while still providing durable off-site backups</p>
+<p><img src="/img/AWS/Storage/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2023.png"></p>
+<h3 id="Cached-Volumes"><a href="#Cached-Volumes" class="headerlink" title="Cached Volumes"></a>Cached Volumes</h3><p>Let you use AWS S3 as your primary data storage, while retaining <strong>frequently accessed data locally</strong> in your storage gateway.</p>
+<p>[Advantages] Minimizes the need to scale your on-premise storage infrastructure, while still providing your applications with low latency data access.</p>
+<p><img src="/img/AWS/Storage/Untitled%2024.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2024.png"></p>
+<h2 id="Tape-Gateway-VTL"><a href="#Tape-Gateway-VTL" class="headerlink" title="Tape Gateway (VTL)"></a>Tape Gateway (VTL)</h2><p>[Long Storage]</p>
+<p>A durable, cost-effective solution to archive your data in the AWS cloud</p>
+<p>The VTL interface it provides let you leverage existing tape-based backup application infrastructure</p>
+<p><img src="/img/AWS/Storage/Untitled%2025.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2025.png"></p>
+<p>store data on <strong>virtual tape cartridges</strong> that you create on your tape gateway</p>
+<p>Each tape gateway is <strong>pre-configured with a media changer</strong> and tape drives, which are available to your existing client backup applications as iSCSI devices</p>
+<p>You <strong>add tape cartridges</strong> as you need to archive your data.</p>
+<p>Supported by NetBackup, Backup Exec and Veeam (Tape Service).</p>
+<p><img src="/img/AWS/Storage/Untitled%2026.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2026.png"></p>
+<h2 id="Storage-Gateway-Cheat-Sheet"><a href="#Storage-Gateway-Cheat-Sheet" class="headerlink" title="Storage Gateway Cheat Sheet"></a>Storage Gateway Cheat Sheet</h2><p><img src="/img/AWS/Storage/Untitled%2027.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Storage/Untitled%2027.png"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Serverless/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Serverless: Lambda, SQS, SNS, API Gateway, Fargate</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Architecture/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Architecture</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Storage/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Storage/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

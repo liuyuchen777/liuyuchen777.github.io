@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="FargateAWS Fargate is a serverless compute engine for containers that works with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS). Fargate makes it easy for you">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Serverless: Lambda, SQS, SNS, API Gateway, Fargate">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Serverless/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="FargateAWS Fargate is a serverless compute engine for containers that works with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS). Fargate makes it easy for you">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2010.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2011.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2012.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2013.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2014.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2015.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2016.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2017.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2018.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2019.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2020.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2021.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2022.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2023.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2024.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2025.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2026.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2027.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2028.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2029.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2030.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2031.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2032.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2033.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2034.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2035.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2036.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2037.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2038.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled%2039.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.660Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Severless/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Serverless: Lambda, SQS, SNS, API Gateway, Fargate - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Serverless: Lambda, SQS, SNS, API Gateway, Fargate">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Serverless: Lambda, SQS, SNS, API Gateway, Fargate</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Fargate"><a href="#Fargate" class="headerlink" title="Fargate"></a>Fargate</h1><p>AWS Fargate is a serverless compute engine for <strong>containers</strong> that works with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS). Fargate makes it easy for you to focus on building your applications. Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design.</p>
+<p>!!! For Containers !!!</p>
+<h2 id="Benefits"><a href="#Benefits" class="headerlink" title="Benefits"></a>Benefits</h2><ul>
+<li>Deploy and manage applications, nit infrastructes</li>
+<li>Right-sized resources with flexible pricing opitions</li>
+<li>Secure isolation by design</li>
+<li>Rich observability of applications</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled.png"></p>
+<h1 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h1><p>Run code without provisioning or managing servers.</p>
+<p>Servers automatically start and stop when needed.</p>
+<p>Serverless Functions. Pay per invocation.</p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p><img src="/img/AWS/Severless/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%201.png"></p>
+<ul>
+<li>Lambda is Cheap</li>
+<li>Lambda is Serverless</li>
+<li>Lambda Scales Automatically</li>
+</ul>
+<p>Natively supports 7 runtimes languages:</p>
+<ol>
+<li>Ruby</li>
+<li>Python</li>
+<li>Java</li>
+<li>Go</li>
+<li>Powershell</li>
+<li>NodeJs</li>
+<li>C#</li>
+</ol>
+<p>You can also create your own custom runtime environments</p>
+<h2 id="Use-Cases"><a href="#Use-Cases" class="headerlink" title="Use Cases"></a>Use Cases</h2><p>Lambda is commonly used to glue different services together so the use cases are endless.</p>
+<ul>
+<li>Processing Thumbnails</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%202.png"></p>
+<ul>
+<li>Contact Email Form</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%203.png"></p>
+<h2 id="Triggers"><a href="#Triggers" class="headerlink" title="Triggers"></a>Triggers</h2><p>Lambda can be invoked via the AWS SDK or trigger from other AWS services</p>
+<p><img src="/img/AWS/Severless/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%204.png"></p>
+<p>Partner Event Sources</p>
+<p><img src="/img/AWS/Severless/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%205.png"></p>
+<h2 id="Pricing"><a href="#Pricing" class="headerlink" title="Pricing"></a>Pricing</h2><p>First 1 million requests per month are free</p>
+<p>There after $0.20 per additional 1 million requests</p>
+<p>400,000 GB seconds free per month</p>
+<p>There after $0.000016667 for every GB second</p>
+<p><img src="/img/AWS/Severless/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%206.png"></p>
+<h2 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h2><p><img src="/img/AWS/Severless/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%207.png"></p>
+<h2 id="Defaults-and-Limites"><a href="#Defaults-and-Limites" class="headerlink" title="Defaults and Limites"></a>Defaults and Limites</h2><p><img src="/img/AWS/Severless/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%208.png"></p>
+<h2 id="Cold-Starts"><a href="#Cold-Starts" class="headerlink" title="Cold Starts"></a>Cold Starts</h2><p>AWS has servers pre-configured (just sitting around turned off) for your runtime environment.</p>
+<p>When a Lambda is invoked these servers need to be turned on and your code needs to be copied over.</p>
+<p>During the time there will be a delay when the function will initially run which is called a cold start.</p>
+<p>If the same Lambda is invoked and the server is still running, it will use that server again, so there will be little to delay to run that function. This what we call a warm server.</p>
+<p><img src="/img/AWS/Severless/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%209.png"></p>
+<p>Tradeoff: cheap but cause delay in User Experience</p>
+<p>There are strategies around Cold Starts such as Pre Warming which keep servers continuously running. Cloud Providers are always looking for ways to reduce cold starts.</p>
+<h2 id="Invocation-Model"><a href="#Invocation-Model" class="headerlink" title="Invocation Model"></a>Invocation Model</h2><ul>
+<li>Synchronous</li>
+<li>Asynchronous</li>
+<li>Poll based</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Step-Functions"><a href="#Step-Functions" class="headerlink" title="Step Functions"></a>Step Functions</h2><p>AWS Step Functions is a low-code visual workflow service used to orchestrate AWS services, automate business processes, and build serverless applications. </p>
+<p>Workflows manage failures, retries, parallelization, service integrations, and observability so developers can focus on higher-value business logic.</p>
+<p><img src="/img/AWS/Severless/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Lambda-CheatSheet"><a href="#Lambda-CheatSheet" class="headerlink" title="Lambda CheatSheet"></a>Lambda CheatSheet</h2><p><img src="/img/AWS/Severless/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2012.png"></p>
+<h1 id="Simple-Queue-Service-SQS"><a href="#Simple-Queue-Service-SQS" class="headerlink" title="Simple Queue Service (SQS)"></a>Simple Queue Service (SQS)</h1><p><strong>Fully managed queuing services</strong> that enables you to decouple and scale microservices, distributed systems and serverless application.</p>
+<ul>
+<li>Any volume of messages</li>
+<li>“Poll” with consumers</li>
+<li>Messages processed in batches</li>
+<li>At-least once and exactly once delivery</li>
+<li>Visibility timeout allows handling failures</li>
+<li>Lambda service long-polls queues</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h2><p>what is queuing system?</p>
+<p>Used to provide asynchronous communication and decouple processes via messages &#x2F; events from a sender and receiver (producer and consumer)</p>
+<p><img src="/img/AWS/Severless/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2014.png"></p>
+<p>SQS is for Application Integration</p>
+<p>AWS SQS us a solution for the distributed queuing of messages generated by your application. It connects isolate applications together by passing along message to one another.</p>
+<p><img src="/img/AWS/Severless/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2015.png"></p>
+<p>A queue is a temporary repository for messages that are awaiting processing.</p>
+<p>Using AWS SDK, you write code which publishes messages onto the queue or you pull queue for messages.</p>
+<p>!!! SQS is pull based, Not push based !!!</p>
+<h2 id="USe-Case"><a href="#USe-Case" class="headerlink" title="USe Case"></a>USe Case</h2><p>an smartphone application and desktop application need to communicate with each other</p>
+<p><img src="/img/AWS/Severless/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2016.png"></p>
+<h2 id="Limits"><a href="#Limits" class="headerlink" title="Limits"></a>Limits</h2><p>Message Size: between 1 byte and 256 KB</p>
+<p>Amazon SQS extended client library for Java lets you send messages from 256 KB to 2 GB in size. The message will be stored in S3 and library will reference the S3 object.</p>
+<p><img src="/img/AWS/Severless/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2017.png"></p>
+<p>Message Rentention</p>
+<p>how long SQS will hold onto a message in the queue before dropping it from queue (delete it)</p>
+<p>4 days</p>
+<p>Message retention can be adjusted from a minimum of 60 s to a max of 14 days.</p>
+<h2 id="Queues-Types"><a href="#Queues-Types" class="headerlink" title="Queues Types"></a>Queues Types</h2><h3 id="Standard-Queues"><a href="#Standard-Queues" class="headerlink" title="Standard Queues"></a>Standard Queues</h3><p><img src="/img/AWS/Severless/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2018.png"></p>
+<p>Allow you a nearly-unlimited number of transactions per second.</p>
+<p>Guarantees that a message will be delivered AT LEAST once.</p>
+<p>More than one copy of a message could be potentially delivered out of order.</p>
+<p>Provides <strong>best-effort</strong> ordering that helps ensure a message is generally delivered in <strong>the same order</strong> that it was sent.</p>
+<h3 id="FIFO-Queues"><a href="#FIFO-Queues" class="headerlink" title="FIFO Queues"></a>FIFO Queues</h3><p>support multiple ordered message groups within a single queue.</p>
+<p>Limited to 300 transaction per second.</p>
+<p>SQS FIFO queues have all the same capabilities of a standard queue.</p>
+<h2 id="Message-retention-period"><a href="#Message-retention-period" class="headerlink" title="Message retention period"></a>Message retention period</h2><p>The message retention period is the amount of time that Amazon SQS retains a message that does not get deleted. </p>
+<p>Amazon SQS automatically deletes messages that have been in a queue for more than the maximum message retention period. The default retention period is 4 days. </p>
+<p>The retention period has a range of 60 seconds to 1,209,600 seconds (14 days).</p>
+<h2 id="Visibility-Timeout"><a href="#Visibility-Timeout" class="headerlink" title="Visibility Timeout"></a>Visibility Timeout</h2><p>Visibility timeout sets the length of time that a message received from a queue (by one consumer) <strong>will not be visible to the other message consumers.</strong> (不重复处理)</p>
+<ul>
+<li>Visible Again: The visibility timeout begins when Amazon SQS returns a message. If the consumer fails to process and delete the message before the visibility timeout expires, the message becomes visible to other consumers.</li>
+<li>Received Once: If a message must be received only once, your consumer must delete it within the duration of the visibility timeout.</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2019.png"></p>
+<h2 id="Short-vs-Long-Polling"><a href="#Short-vs-Long-Polling" class="headerlink" title="Short vs Long Polling"></a>Short vs Long Polling</h2><p>Polling is the method in which we retrieve messages from the queues</p>
+<ul>
+<li><strong>Short Polling</strong> (default)</li>
+</ul>
+<p>return message immediately, even if the messages queue being polled is empty</p>
+<p>when you need a message right away</p>
+<ul>
+<li><strong>Long Polling</strong></li>
+</ul>
+<p>waits util message arrives in the queue, or the long poll timeout expires</p>
+<p>makes it inexpensive to retrieve messages from your queues as soon as the messages are availbale</p>
+<p>Using long polling will reduce the cost because you can reduce number of empty receives</p>
+<p><img src="/img/AWS/Severless/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2020.png"></p>
+<h2 id="SQS-Cheat-Sheet"><a href="#SQS-Cheat-Sheet" class="headerlink" title="SQS Cheat Sheet"></a>SQS Cheat Sheet</h2><p><img src="/img/AWS/Severless/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2021.png"></p>
+<h1 id="Simple-Notification-Service"><a href="#Simple-Notification-Service" class="headerlink" title="Simple Notification Service"></a>Simple Notification Service</h1><p><strong>Subscribe and send notifications</strong> via text message email, webhooks, lambdas, SQS and mobile notifications.</p>
+<ul>
+<li>Publish&#x2F;subscribe messaging</li>
+<li>“Push” to subscreibers</li>
+<li>Messages are publish to a topic with multiple subscribers → “fan out”</li>
+<li>Messages can be filtered and only sent to certain subscribers</li>
+<li>Subscription protocols include: HTTP(s), Email, Amazon SQS, Lambda, SMS and mobile push</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h2><p><img src="/img/AWS/Severless/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2023.png"></p>
+<p>SNS is a highly available, durable, secure, fully managed pub&#x2F;sub messaging service that enables you to decouple microservices, distributed systems and serverless applications.</p>
+<p>Application integration!</p>
+<ul>
+<li>Publisher push events to an SNS Topic</li>
+<li>Subscribers subscribe to SNS Topic to have events pushed to them</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled%2024.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2024.png"></p>
+<p>AWS API → SNS → Subscribers</p>
+<h2 id="SNS-Topics"><a href="#SNS-Topics" class="headerlink" title="SNS Topics"></a>SNS Topics</h2><p><img src="/img/AWS/Severless/Untitled%2025.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2025.png"></p>
+<h2 id="Subscriptions"><a href="#Subscriptions" class="headerlink" title="Subscriptions"></a>Subscriptions</h2><p><img src="/img/AWS/Severless/Untitled%2026.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2026.png"></p>
+<h2 id="Application-as-Subscriber"><a href="#Application-as-Subscriber" class="headerlink" title="Application as Subscriber"></a>Application as Subscriber</h2><p>send push notification messages directly to apps on mobile devices</p>
+<p>Apple, Google, Microsoft (Desktop Application)</p>
+<p><img src="/img/AWS/Severless/Untitled%2027.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2027.png"></p>
+<h2 id="SNS-Cheat-Sheet"><a href="#SNS-Cheat-Sheet" class="headerlink" title="SNS Cheat Sheet"></a>SNS Cheat Sheet</h2><p><img src="/img/AWS/Severless/Untitled%2028.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2028.png"></p>
+<h1 id="SQS-SNS-with-Lambda"><a href="#SQS-SNS-with-Lambda" class="headerlink" title="SQS, SNS with Lambda"></a>SQS, SNS with Lambda</h1><h2 id="Topic-queue-Chaining"><a href="#Topic-queue-Chaining" class="headerlink" title="Topic-queue Chaining"></a>Topic-queue Chaining</h2><p><img src="/img/AWS/Severless/Untitled%2029.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="SNS-to-Lambda"><a href="#SNS-to-Lambda" class="headerlink" title="SNS to Lambda"></a>SNS to Lambda</h2><p>Subscriber and Filter</p>
+<p><img src="/img/AWS/Severless/Untitled%2030.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h1 id="API-Gateway"><a href="#API-Gateway" class="headerlink" title="API Gateway"></a>API Gateway</h1><p>Fully managed service to create, publish, maintain, monitor and secure APIs at any scale</p>
+<h2 id="Intro-3"><a href="#Intro-3" class="headerlink" title="Intro"></a>Intro</h2><p>API Gateway os a solution for creating secure APIs in your cloud environment at any scale.</p>
+<p>Create APIs that act as a front door for applications to access data, business logic or functionality from back-end service</p>
+<p><img src="/img/AWS/Severless/Untitled%2031.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2031.png"></p>
+<p>RESTful API?</p>
+<h2 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h2><p>API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls, including traffic management, authorization and monitoring.</p>
+<p><img src="/img/AWS/Severless/Untitled%2032.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2032.png"></p>
+<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><ul>
+<li>Resources</li>
+</ul>
+<p>When you create an API you need to also create multiple Resources. </p>
+<p>Resources are the URLs you define (ex. &#x2F;projects) </p>
+<p>Resources can have child resources (ex. &#x2F;projects&#x2F;-id-&#x2F;edit)</p>
+<ul>
+<li>Methods</li>
+</ul>
+<p>You need to define Methods on Resources</p>
+<p>You can define multiple Methods on a Resource</p>
+<p>Methods allow you to make API calls that resource URL with that protocol</p>
+<p>ex. GET &#x2F;projects&#x2F;-id-, POST &#x2F;projects&#x2F;-id-</p>
+<p><img src="/img/AWS/Severless/Untitled%2033.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2033.png"></p>
+<p><img src="/img/AWS/Severless/Untitled%2034.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2034.png"></p>
+<p>stages: versions of API</p>
+<p>invoke URL: where to make API calls</p>
+<p>deploy API: after making changes to API, you need to deploy it (when deployment, you need to choose stage)</p>
+<p><img src="/img/AWS/Severless/Untitled%2035.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2035.png"></p>
+<p>integration type</p>
+<h2 id="Caching"><a href="#Caching" class="headerlink" title="Caching"></a>Caching</h2><p>API Caching can be enabled to cache your endpoints response to API calls</p>
+<p><img src="/img/AWS/Severless/Untitled%2036.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2036.png"></p>
+<ul>
+<li>When enabled on a stage, API Gateway caches responses from your endpoint for a specified TTL period</li>
+<li>API Gateway responds to requests by looking up the response from the cache (instead of making a request to the endpoint)</li>
+</ul>
+<p>[Advantages]</p>
+<p><img src="/img/AWS/Severless/Untitled%2037.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2037.png"></p>
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><p>Cross-Origin Resource Sharing is a way that the server at the other end (not client code in the browser) can relax a same-origin policy</p>
+<ul>
+<li>Allow restricted resources (ex. Fonts) on a webpage to be requested from a different domain than the initial resource that it came from</li>
+<li>Should always be enabled if using JS&#x2F;AJAX that uses multiple domains with an API Gateway</li>
+</ul>
+<p><img src="/img/AWS/Severless/Untitled%2038.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2038.png"></p>
+<p>!!! CORS is always enforced by client !!!</p>
+<h2 id="Same-Origin-Policy"><a href="#Same-Origin-Policy" class="headerlink" title="Same Origin Policy"></a>Same Origin Policy</h2><p>SOP is a concept in the application security model, where a web browser permits <strong>scripts contained in a first web page</strong>, to access <strong>data in a second webpage</strong>.</p>
+<ul>
+<li>same origin policy are used to help prevent Cross-Site Scripting (XSS) attack</li>
+<li>They only works if both web pages have the same origin</li>
+<li>They are enforced at the web browser level</li>
+<li>They ignore tools such as postman or curl</li>
+</ul>
+<h2 id="API-Gateway-Cheat-Sheet"><a href="#API-Gateway-Cheat-Sheet" class="headerlink" title="API Gateway Cheat Sheet"></a>API Gateway Cheat Sheet</h2><p><img src="/img/AWS/Severless/Untitled%2039.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Severless/Untitled%2039.png"></p>
+<h1 id="Recap"><a href="#Recap" class="headerlink" title="Recap"></a>Recap</h1><ul>
+<li>API Gateway</li>
+<li>Lambda</li>
+<li>DynamoDB</li>
+<li>S3</li>
+<li>Kinesis</li>
+<li>Aurora</li>
+<li>SNS</li>
+<li>SQS</li>
+<li>Fargate: serverless compute engine for containers</li>
+<li>EFS</li>
+<li>RDS Proxy: high-available database proxy</li>
+<li>AppSync: simplifies application deployment</li>
+<li>Step Functions: makes it easy to coordinate the components of distributed applications and microservices using visual workflows</li>
+<li>Athena</li>
+<li>Lambda@Edge</li>
+<li>EventBridge: serverless event bus service that makes it easy to access application data</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Security/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Security: VPC, IAM, NACLs, WAF</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Storage/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Storage: EFS, EBS, FSx, Instance Store, Storage Gateway</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Serverless/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Serverless/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

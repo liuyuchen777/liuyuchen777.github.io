@@ -1,0 +1,581 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="High Availability (HA)The ability for a system to remain available.  Scale Up and Scale OutWhen utilization increases and we are reaching capacity we can:  You will generally want to scale out and the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Architecture">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Architecture/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="High Availability (HA)The ability for a system to remain available.  Scale Up and Scale OutWhen utilization increases and we are reaching capacity we can:  You will generally want to scale out and the">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled%2010.png">
+<meta property="article:published_time" content="2021-10-04T06:25:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.658Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Architecture/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Architecture - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Architecture">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:25" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Architecture</h1>
+            
+            <div class="markdown-body">
+              <h1 id="High-Availability-HA"><a href="#High-Availability-HA" class="headerlink" title="High Availability (HA)"></a>High Availability (HA)</h1><p>The ability for a system to remain available.</p>
+<p><img src="/img/AWS/Architecture/Untitled.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Scale-Up-and-Scale-Out"><a href="#Scale-Up-and-Scale-Out" class="headerlink" title="Scale Up and Scale Out"></a>Scale Up and Scale Out</h2><p>When utilization increases and we are reaching capacity we can:</p>
+<p><img src="/img/AWS/Architecture/Untitled%201.png" srcset="/img/loading.gif" lazyload></p>
+<p>You will generally want to scale out and then up to balance complexity and availability</p>
+<h1 id="Well-Architected-Framework"><a href="#Well-Architected-Framework" class="headerlink" title="Well-Architected Framework"></a>Well-Architected Framework</h1><p>Reference</p>
+<p>aws.amazon.com&#x2F;archiecture</p>
+<p>aws.amazon.com&#x2F;whitepapers</p>
+<p><strong>Five Pillars: security, reliability, performance efficiency, cost optimization, operational excellence</strong></p>
+<p><img src="/img/AWS/Architecture/Untitled%202.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>Design Principles</li>
+</ul>
+<p>general design principles → pillar-specific design principles</p>
+<p><img src="/img/AWS/Architecture/Untitled%203.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="General-Design-Principles"><a href="#General-Design-Principles" class="headerlink" title="General Design Principles"></a>General Design Principles</h2><ol>
+<li>Stop guessing your capacity needs</li>
+<li>Test systems at production scale</li>
+<li>Automate to make architectural experimentation easier</li>
+<li>Allow for evolutionary architectures</li>
+<li>Build data-driven architectures</li>
+<li>Improve through game days</li>
+</ol>
+<h2 id="Security-Pillar"><a href="#Security-Pillar" class="headerlink" title="Security Pillar"></a>Security Pillar</h2><p>Job 0, most important, first prority</p>
+<ol>
+<li>Apply security at all layers</li>
+<li>Enable traceability</li>
+<li>Implement a principle of least privilege</li>
+<li>Focus on securing your system</li>
+<li>Automate security best practices</li>
+</ol>
+<p><img src="/img/AWS/Architecture/Untitled%204.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Key-Service-for-Security"><a href="#Key-Service-for-Security" class="headerlink" title="Key Service for Security"></a>Key Service for Security</h3><p><img src="/img/AWS/Architecture/Untitled%205.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Reliability-Pillar"><a href="#Reliability-Pillar" class="headerlink" title="Reliability Pillar"></a>Reliability Pillar</h2><ol>
+<li>Test recovery procedures</li>
+<li>Automatically recover from failure</li>
+<li>Scale horizontally to increase aggregate system availability</li>
+<li>Stop guessing capacity</li>
+<li>Manage change in automation</li>
+</ol>
+<p><img src="/img/AWS/Architecture/Untitled%206.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Performance-amp-Efficiency-Pillar"><a href="#Performance-amp-Efficiency-Pillar" class="headerlink" title="Performance &amp; Efficiency Pillar"></a>Performance &amp; Efficiency Pillar</h2><p>Storage architecture, add caching, sometimes in conflict with Reliability Pillar</p>
+<ol>
+<li>Democratize advanced technologies</li>
+<li>Go global in minutes</li>
+<li>Use serverless architectures</li>
+<li>Experiment more often</li>
+<li>Mechanical sympathy</li>
+</ol>
+<p><img src="/img/AWS/Architecture/Untitled%207.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Cost-Optimization-Pillar"><a href="#Cost-Optimization-Pillar" class="headerlink" title="Cost Optimization Pillar"></a>Cost Optimization Pillar</h2><ol>
+<li>Adopt a consumption model</li>
+<li>Benefit from economies of scale</li>
+<li>Stop spending money on data center operations</li>
+<li>Analyze and attribute expenditure</li>
+<li>Use managed services (half-managed and full-managed) to reduce cost of ownership (focus more on productive task)</li>
+</ol>
+<p><img src="/img/AWS/Architecture/Untitled%208.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Operational-Excellence-Pillar"><a href="#Operational-Excellence-Pillar" class="headerlink" title="Operational Excellence Pillar"></a>Operational Excellence Pillar</h2><p>Topics explored in Operations Excellence</p>
+<ul>
+<li>What best practices for cloud operations are you using?</li>
+<li>How are you doing configuration management for your workload?</li>
+<li>How are you evolving your workload while minimizing the impact of change?</li>
+<li>How do you monitor your workload to ensure it is operating as expected?</li>
+<li>How do you respond to unplanned operational events?</li>
+<li>How is escalation managed when responding to unplanned operational events?</li>
+</ul>
+<p>Design Principles</p>
+<ol>
+<li>Align operations processes to business objectives</li>
+<li>Perform operations with code</li>
+<li>Make regular, small, incremental changes</li>
+<li>Test for responses to unexpected events</li>
+<li>Learn from operational events and failure</li>
+<li>Keep operations procedures current</li>
+</ol>
+<p>Key Services for Operational Excellence</p>
+<p><img src="/img/AWS/Architecture/Untitled%209.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Share-Responsibility-between-AWS-and-Customer"><a href="#Share-Responsibility-between-AWS-and-Customer" class="headerlink" title="Share Responsibility between AWS and Customer"></a>Share Responsibility between AWS and Customer</h2><p><img src="/img/AWS/Architecture/Untitled%2010.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="AWS-Trusted-Advisor"><a href="#AWS-Trusted-Advisor" class="headerlink" title="AWS Trusted Advisor"></a>AWS Trusted Advisor</h2><p>AWS Solution Architect advice service.</p>
+<h2 id="Benefit-of-Well-Architect"><a href="#Benefit-of-Well-Architect" class="headerlink" title="Benefit of Well-Architect"></a>Benefit of Well-Architect</h2><ul>
+<li><p>Think Cloud-Natively</p>
+</li>
+<li><p>Understand Potenial Impact</p>
+</li>
+<li><p>Visibility of Risks</p>
+</li>
+<li><p>Consistent Approach to Reviewing Architecture</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Storage/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Storage: EFS, EBS, FSx, Instance Store, Storage Gateway</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/AWS-CLI-&amp;-SDK/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] SDK & CLI</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Architecture/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Architecture/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

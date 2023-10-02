@@ -1,0 +1,528 @@
+
+
+<!DOCTYPE html>
+<html lang="en,zh-CN,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon/icon.webp">
+  <link rel="icon" href="/img/icon/icon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Liu Yuchen">
+  <meta name="keywords" content="blog">
+  
+    <meta name="description" content="Elastic CacheManaged caching service with either runs Redis or Memcached IntroWhat is in - Memory Data Store? Caching is the process of storing data in a cache. A cache is a temporary storage area. Ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AWS SAA-C02 Study Note] Other: Elastic Cache, Kinesis, AWS AD">
+<meta property="og:url" content="https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Other/index.html">
+<meta property="og:site_name" content="LiuYuchen HP">
+<meta property="og:description" content="Elastic CacheManaged caching service with either runs Redis or Memcached IntroWhat is in - Memory Data Store? Caching is the process of storing data in a cache. A cache is a temporary storage area. Ca">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%201.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%202.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%203.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%204.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%205.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%206.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%207.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%208.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%209.png">
+<meta property="og:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled%2010.png">
+<meta property="article:published_time" content="2021-10-04T06:33:45.000Z">
+<meta property="article:modified_time" content="2023-10-02T10:44:33.659Z">
+<meta property="article:author" content="Liu Yuchen">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liuyuchen777.github.io/img/AWS/Other/Untitled.png">
+  
+  
+  <title>[AWS SAA-C02 Study Note] Other: Elastic Cache, Kinesis, AWS AD - LiuYuchen HP</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liuyuchen777.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5894082980682572" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tokyo Life Style</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="[AWS SAA-C02 Study Note] Other: Elastic Cache, Kinesis, AWS AD">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 15:33" pubdate>
+        October 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[AWS SAA-C02 Study Note] Other: Elastic Cache, Kinesis, AWS AD</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Elastic-Cache"><a href="#Elastic-Cache" class="headerlink" title="Elastic Cache"></a>Elastic Cache</h1><p>Managed caching service with either runs Redis or Memcached</p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>What is in - Memory Data Store?</p>
+<p><strong>Caching</strong> is the process of storing data in a cache. A cache is a <strong>temporary storage</strong> area. Caches are optimized for fast retrieval with the trade off that data is not durable.</p>
+<p><strong>In-Memory Data store</strong>, the trade off is high volatility (low durability, risk of data loss) but access to data is very fast</p>
+<p>[Popular Cache Database]</p>
+<p>Deploy, run and scale popular open source compatible in-memory data stores</p>
+<p>Frequently identical queries are stored in the cache</p>
+<p>ElastiCache is only accessible to  resource operating with the same VPC to ensure low latency</p>
+<p>[Support Engine] Redis and Memcached</p>
+<p><img src="/img/AWS/Other/Untitled.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled.png"></p>
+<h2 id="Caching-Comparsion"><a href="#Caching-Comparsion" class="headerlink" title="Caching Comparsion"></a>Caching Comparsion</h2><p><strong>Memcached</strong> is generally preferred for caching <strong>HTML fragments</strong>. Memcache is a simple key-value store. The trade off it to being simple is that its very fast.</p>
+<p><strong>Redis</strong> can perform many different kinds of operations on your data. It’s very good for leaderboards, keep track of unread notification data. It’s very fast, but arguably not as fast as Memcached.</p>
+<p><img src="/img/AWS/Other/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%201.png"></p>
+<h2 id="ElastiCache-Cheat-Sheet"><a href="#ElastiCache-Cheat-Sheet" class="headerlink" title="ElastiCache Cheat Sheet"></a>ElastiCache Cheat Sheet</h2><p><img src="/img/AWS/Other/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%202.png"></p>
+<h1 id="Kinesis"><a href="#Kinesis" class="headerlink" title="Kinesis"></a>Kinesis</h1><p>comment: kind of like Splunk?</p>
+<p>Scalable and durable real-time data streaming service to ingest and analyze data in real-time from multiple source</p>
+<h2 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h2><p>Amazon Kinesis is the AWS fully managed solution for collecting, processing and analyzing streaming data in the cloud.</p>
+<p><img src="/img/AWS/Other/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%203.png"></p>
+<h2 id="Data-Streams"><a href="#Data-Streams" class="headerlink" title="Data Streams"></a>Data Streams</h2><p><img src="/img/AWS/Other/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%204.png"></p>
+<h2 id="Firehouses-Delivery-Stream"><a href="#Firehouses-Delivery-Stream" class="headerlink" title="Firehouses Delivery Stream"></a>Firehouses Delivery Stream</h2><p><img src="/img/AWS/Other/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%205.png"></p>
+<h2 id="Video-Streams"><a href="#Video-Streams" class="headerlink" title="Video Streams"></a>Video Streams</h2><p>only for video data</p>
+<p><img src="/img/AWS/Other/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%206.png"></p>
+<h2 id="Data-Analytics"><a href="#Data-Analytics" class="headerlink" title="Data Analytics"></a>Data Analytics</h2><p>You can specific Firehose or Data Streams as an input and output. Data that pass through <strong>Data Analytics</strong> is run through custom SQL. You provide and the results are then output. This allows for real-time analytics of your data.</p>
+<p><img src="/img/AWS/Other/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%207.png"></p>
+<h2 id="Kinesis-Cheat-Sheet"><a href="#Kinesis-Cheat-Sheet" class="headerlink" title="Kinesis Cheat Sheet"></a>Kinesis Cheat Sheet</h2><p><img src="/img/AWS/Other/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%208.png"></p>
+<p><img src="/img/AWS/Other/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%209.png"></p>
+<p><img src="/img/AWS/Other/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="/img/AWS/Other/Untitled%2010.png"></p>
+<h1 id="AWS-Directory-Service"><a href="#AWS-Directory-Service" class="headerlink" title="AWS Directory Service"></a>AWS Directory Service</h1><p>Managed Microsoft Active Directory in AWS</p>
+<h2 id="Microsoft-Active-Directory"><a href="#Microsoft-Active-Directory" class="headerlink" title="Microsoft Active Directory"></a>Microsoft Active Directory</h2><p>Active Directory (AD) is a directory service developed by Microsoft for Windows domain networks. It is included in most Windows Server operating systems as a set of processes and services.</p>
+<p>Initially, Active Directory was used only for centralized domain management. However, Active Directory eventually became an umbrella title for a broad range of directory-based identity-related services.</p>
+<h2 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h2><p>AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft Active Directory (AD), enables your directory-aware workloads and AWS resources to use managed Active Directory (AD) in AWS. </p>
+<p>AWS Managed Microsoft AD is built on actual Microsoft AD and does not require you to synchronize or replicate data from your existing Active Directory to the cloud. You can use the standard AD administration tools and take advantage of the built-in AD features, such as Group Policy and single sign-on. </p>
+<p>With AWS Managed Microsoft AD:</p>
+<ul>
+<li>You can easily join Amazon EC2 and Amazon RDS for SQL Server instances to your domain</li>
+<li>Use AWS End User Computing (EUC) services, such as Amazon WorkSpaces, with AD users and groups.</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AWS/">AWS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Database/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Database Service: RDS, Aurora, Redshift, DynamoDB, DMS</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/04/AWS-Study-Note/Quick-Deploy/">
+                        <span class="hidden-mobile">[AWS SAA-C02 Study Note] Container & Kubernetes</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://liuyuchen777.github.io/2021/10/04/AWS-Study-Note/Other/';
+          this.page.identifier = '/2021/10/04/AWS-Study-Note/Other/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <p>人比人得死，货比货得扔</p> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
